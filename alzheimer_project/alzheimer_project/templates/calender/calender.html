@@ -1,0 +1,22 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/calender/calender.css' %}">
+<div class="calendar">
+    <div class="header">
+        <button id="prevButton">&lt;</button>
+        <h2 id="monthYear"></h2>
+        <button id="nextButton">&gt;</button>
+    </div>
+    <div class="weekdays">
+        <div>Domingo</div>
+        <div>Lunes</div>
+        <div>Martes</div>
+        <div>Miércoles</div>
+        <div>Jueves</div>
+        <div>Viernes</div>
+        <div>Sábado</div>
+    </div>
+    <div class="days" id="calendarDays"></div>
+</div>
+
+<script src="{%static 'js/calender/calender.js'%}"></script>
+
