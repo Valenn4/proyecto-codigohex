@@ -1,5 +1,8 @@
 // script.js
 
+
+
+
 const months = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -13,6 +16,50 @@ const months = [
   
   document.getElementById("monthYear").innerText = `${months[currentMonth]} ${currentYear}`;
   
+  function renderCalendar() {
+    const calendarDays = document.getElementById("calendarDays");
+    calendarDays.innerHTML = "";
+    const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      const emptyDay = document.createElement("div");
+      calendarDays.appendChild(emptyDay);
+    }
+    for (let i = 1; i <= daysInMonth; i++) {
+      const day = document.createElement("div");
+      
+      fetch(`http://127.0.0.1:8000/api/activities/${document.getElementById("id_user").innerHTML}/${currentYear}/${currentMonth+1}/${i}`)
+      .then(response => response.json())
+      .then(json => {
+        let activity = ''
+        
+        if(json.length>0){
+          day.insertAdjacentHTML("beforeend", `<p>${i}</p>`)
+          for(a of json){
+            if(a.id_action!=null){
+              activity = a.id_action
+            } else if(a.id_music!=null){
+              activity = a.id_music
+            } else if(a.id_game!=null){
+              activity = a.id_game
+            } else if(a.id_object!=null){
+              activity = a.id_object
+            }
+            day.insertAdjacentHTML("beforeend", `<p>${a.time}${activity.name}</p>`)
+
+          }
+        } else {
+          day.insertAdjacentHTML("beforeend", `<p>${i}</p>`)
+        }
+      })
+      calendarDays.appendChild(day);
+
+    }
+  }
+  
+  renderCalendar();
+
   document.getElementById("prevButton").addEventListener("click", () => {
     currentMonth -= 1;
     if (currentMonth < 0) {
@@ -32,26 +79,4 @@ const months = [
     document.getElementById("monthYear").innerText = `${months[currentMonth]} ${currentYear}`;
     renderCalendar();
   });
-  
-  function renderCalendar() {
-    const calendarDays = document.getElementById("calendarDays");
-    calendarDays.innerHTML = "";
-  
-    const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  
-    for (let i = 0; i < firstDayOfMonth; i++) {
-      const emptyDay = document.createElement("div");
-      calendarDays.appendChild(emptyDay);
-    }
-  
-    for (let i = 1; i <= daysInMonth; i++) {
-      const day = document.createElement("div");
-      day.innerText = i;
-      calendarDays.appendChild(day);
-    }
-  }
-  
-  renderCalendar();
 
-  

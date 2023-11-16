@@ -6,10 +6,20 @@
 </head>
 <body>
     <main class="main">
+        
         <form method="POST">
+            {% csrf_token %}
             <div class="div_input">
                 <label>Usuario</label>
                 {{form.username}}
+            </div>
+            <div class="div_input">
+                <label>Nombre</label>
+                {{form.first_name}}
+            </div>
+            <div class="div_input">
+                <label>Apellido</label>
+                {{form.last_name}}
             </div>
             <div class="div_input">
                 <label>Correo electrónico</label>
@@ -25,7 +35,6 @@
             </div>
             <p>{{error}}</p>
             <input type="submit" value="Registrarse">
-            {% csrf_token %}
         </form>
     </main>
 </body>
