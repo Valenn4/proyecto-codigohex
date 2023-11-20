@@ -2,6 +2,43 @@
 
 {% block content %}
     {% load static %}
+    <div class="formActivity">
+        <ul>
+            <li id="option_action" onclick="clickOption('action')">Accion</li>
+            <li id="option_object" onclick="clickOption('object')">Objeto</li>
+            <li id="option_game" onclick="clickOption('game')">Juego</li>
+            <li id="option_music" onclick="clickOption('music')">Musica</li>
+        </ul>
+        <form method="POST" class="formAction">
+            {% csrf_token %}
+            <input type="date" name="date" id="id_date" required>
+            <input type="time" name="time" id="id_time" required>
+            {{formAction}}
+            <input type="submit" value="Enviar" name="formAction">
+        </form>
+        <form method="POST" class="formObject">
+            {% csrf_token %}
+            <input type="date" name="date" id="id_date" required>
+            <input type="time" name="time" id="id_time" required>
+            {{formObject}}
+            <input type="submit" value="Enviar" name="formObject">
+        </form>
+        <form method="POST" class="formGame">
+            {% csrf_token %}
+            <input type="date" name="date" id="id_date" required>
+            <input type="time" name="time" id="id_time" required>
+            {{formGame}}
+            <input type="submit" value="Enviar" name="formGame">
+        </form>
+        <form method="POST" class="formMusic">
+            {% csrf_token %}
+            <input type="date" name="date" id="id_date" required>
+            <input type="time" name="time" id="id_time" required>
+            {{formMusic}}
+            <input type="submit" value="Enviar" name="formMusic">
+        </form>
+        
+    </div>
     <link rel="stylesheet" href="{% static 'css/calender/calender.css' %}">
     <p id="id_user" style="display:none">{{request.user.id}}</p>
     <div class="calendar">
@@ -22,7 +59,7 @@
         <div class="days" id="calendarDays"></div>
     </div>
 
-    <script src="{%static 'js/calender/calender.js'%}"></script>
+    <script src="{%static 'js/calender/calenderr.js'%}"></script>
 
 {% endblock %}
 

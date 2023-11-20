@@ -1,7 +1,43 @@
 // script.js
 
+const formAction = document.querySelector(".formAction")
+const formObject = document.querySelector(".formObject")
+const formGame = document.querySelector(".formGame")
+const formMusic = document.querySelector(".formMusic")
 
+formObject.style.display = 'none'
+formMusic.style.display = 'none'
+formGame.style.display = 'none'
 
+function clickOption(option){
+  switch(option){
+    case 'action':
+      formAction.style.display = 'block'
+      formObject.style.display = 'none'
+      formGame.style.display = 'none'
+      formMusic.style.display = 'none'
+      break;
+    case 'object':
+      formAction.style.display = 'none'
+      formObject.style.display = 'block'
+      formGame.style.display = 'none'
+      formMusic.style.display = 'none'
+      break;
+    case 'game':
+      formAction.style.display = 'none'
+      formObject.style.display = 'none'
+      formGame.style.display = 'block'
+      formMusic.style.display = 'none'
+      break;
+    case 'music':
+      formAction.style.display = 'none'
+      formObject.style.display = 'none'
+      formGame.style.display = 'none'
+      formMusic.style.display = 'block'
+      break;
+  }
+}
+  
 
 const months = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
