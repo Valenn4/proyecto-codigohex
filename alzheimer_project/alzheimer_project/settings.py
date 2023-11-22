@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'social_django',
     'authentication',
     'calender',
     'api'
@@ -50,6 +51,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Add the following two
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -57,6 +62,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'alzheimer_project.wsgi.application'
 
+# AUTHENTICATION
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# social auth configs for google
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '983633124761-qm13rr0dq6mtv60h26fo236156snm5kn.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
