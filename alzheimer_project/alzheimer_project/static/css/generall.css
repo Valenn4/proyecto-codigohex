@@ -1,0 +1,60 @@
+
+
+
+/* ---GENERAL */
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+
+}
+img{
+    width: 100%;
+}
+#principal #oboutus #formu{
+    width: 100%;
+    margin: auto;
+}
+.fila{
+    display: flex;
+    flex-wrap: wrap;
+}
+.centrar-horizontal {
+    justify-content: center;
+}
+
+/* ---principal--- */
+#logo img{
+    width: 600px;
+    text-align: center;
+}
+#titulo{
+    text-align: center;
+    font-size: 40px;
+}
+
+/* ---Obout us--- */
+#obout{
+    text-align: center;
+    font-size: 40px;
+}
+#texto{
+    text-align: center;
+    font-size: 20px;
+    
+}
+
+/* ---Formulario--- */
+
+section {
+    padding: 20px 300px 20px 300px;
+    border:2px solid black;
+}
+#formu h3{
+        font-size: 28px;
+        text-align: center;
+}
