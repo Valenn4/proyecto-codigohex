@@ -1,4 +1,5 @@
 import datetime
+import requests
 from django.shortcuts import render
 from rest_framework import viewsets, status
 from .serializers import ActivitySerializer, ObjectSerializer, GameSerializer, ActionSerializer, MusicSerializer
@@ -69,6 +70,7 @@ class ActivityByUserDateView(viewsets.ViewSet):
     def list(self, request, id, year, month, day):
         if request.user.id == id:
             queryset = Activity.objects.filter(user=User.objects.get(id=id), date=datetime.date(year, month, day))
+            print(queryset.values().first())
             serializer = ActivitySerializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
@@ -95,3 +97,45 @@ class ActivityByUserView(viewsets.ViewSet):
             return Response('Actividad agregada correctamente', status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class GetMusicAPI(viewsets.ViewSet):
+    auth_url = "https://accounts.spotify.com/api/token"
+    client_id = "6f6a277ceb024282bd6b71a5ec18d995"
+    client_secret = "67038f5e05ec4e13873b3cc68ff2d52d"
+    auth_data = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        'grant_type': 'client_credentials',
+        'client_id': client_id,
+        'client_secret': client_secret,
+    }
+    auth_response = requests.post(auth_url, data=auth_data)
+    auth_token = auth_response.json().get('access_token')
+
+    def list(self, request, category, id):
+        api_url = f'https://api.spotify.com/v1/{category}/{id}'
+        headers = {'Authorization': f'Bearer {self.auth_token}'}
+        response = requests.get(api_url, headers=headers)
+        if response.status_code == 200:
+            spotify_data = response.json()
+            return Response(spotify_data)
+            
+class GetMusicsAPI(viewsets.ViewSet):
+    auth_url = "https://accounts.spotify.com/api/token"
+    client_id = "6f6a277ceb024282bd6b71a5ec18d995"
+    client_secret = "67038f5e05ec4e13873b3cc68ff2d52d"
+    auth_data = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        'grant_type': 'client_credentials',
+        'client_id': client_id,
+        'client_secret': client_secret,
+    }
+    auth_response = requests.post(auth_url, data=auth_data)
+    auth_token = auth_response.json().get('access_token')
+
+    def list(self, request, name):
+        api_url = f'https://api.spotify.com/v1/search?q={name}&type=album%2Cartist%2Cplaylist%2Ctrack&limit=4'
+        headers = {'Authorization': f'Bearer {self.auth_token}'}
+        response = requests.get(api_url, headers=headers)
+        if response.status_code == 200:
+            spotify_data = response.json()
+            return Response(spotify_data)
