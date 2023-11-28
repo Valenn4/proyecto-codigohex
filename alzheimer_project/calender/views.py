@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Activity
 from .forms import FormActivity, FormAction, FormObject,FormGame, FormMusic
@@ -39,6 +39,7 @@ def calender(request):
                                             date=formMusic.data["date"], 
                                             time=formMusic.data["time"],
                                             id_music=id)  
+                    return redirect('calender')
         formAction = FormAction()
         formObject = FormObject()
         formGame = FormGame()

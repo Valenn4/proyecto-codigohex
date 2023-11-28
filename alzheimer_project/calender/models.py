@@ -14,7 +14,9 @@ class Action(models.Model):
     description = models.TextField(null=False)
 
 class Music(models.Model):
-    name = models.CharField(max_length=200, null=False)
+    id_music = models.CharField(max_length=200, null=False)
+    name_music = models.CharField(max_length=200, null=False)
+    category_music = models.CharField(max_length=100, null=False)
 
 class Object(models.Model):
     name= models.CharField(max_length=100, null=False)
