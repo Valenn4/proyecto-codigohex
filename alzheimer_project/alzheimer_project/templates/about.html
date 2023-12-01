@@ -1,36 +1,44 @@
-{%load static%}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obout us</title>
-    <link rel="stylesheet" href="{% static 'css/generall.css' %}">
+    <title>RECUERDA ME/TE</title>
+    <link rel="stylesheet" href="../static/css/generall.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
 </head>
-<body">
+<body>
+    {% include 'core/header.html' %}
+
     <div id="oboutus">
         <!----titulo -->
-        <div class="fila centrar-horizontal" id="obout">
-            <h1><b>Obout us</b></h1>
+        <div class="text-center text-2xl">
+            <h1>Obout us</h1>
         </div>
-        <div class="fila centrar-horizontal" id="texto">
-            <p>Somos un equipo comprometidos a mejorar la calidad de vida de las personas con 
+        <div class="container mx-auto">
+            <div class="">
+                <p>Somos un equipo comprometidos a mejorar la calidad de vida de las personas con 
                 Alzheimer , tomando en cuenta cada una de las necesidades que pueden tener y 
                 facilitando la planificación de sus días con las diferentes actividades.
-                <br>
-                <br>
-                Enfrentando la realidad de las habilidades preservadas en la memoria de las personas 
+                </p>
+            </div>
+            <div>
+                <p>Enfrentando la realidad de las habilidades preservadas en la memoria de las personas 
                 con Alzheimer, como la capacidad de leer o escuchar libros, contar historias, compartir 
                 recuerdos, cantar, disfrutar de la música, bailar, dibujar, o participar en manualidades, 
                 nuestro proyecto tiene como misión enriquecer la vida diaria de estas personas.
-                <br>
-                <br>
+                </p>
+            </div>
+            <div>
+                <p>
                 Como objetivo mejorar la calidad de vida de estas personas mediante el desarrollo de 
                 un asistente virtual personalizado. Este asistente no solo ayuda a recordar las tareas 
                 diarias, sino que también tiene capacidades avanzadas, como la identificación facial para 
-                detectar emociones y brindar apoyo emocional.</p>
+                detectar emociones y brindar apoyo emocional.
+                </p>
+            </div>
         </div>
     </div>
 </body>
