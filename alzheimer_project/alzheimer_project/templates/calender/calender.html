@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
+
     <div class="formActivity">
         <ul>
             <li id="option_action" onclick="clickOption('action')">Accion</li>
@@ -49,9 +51,7 @@
 
             <input type="submit" value="Enviar" name="formMusic">
         </form>
-        <div class="reproductor"></div>
     </div>
-    <link rel="stylesheet" href="{% static 'css/calender/calender.css' %}">
     <p id="id_user" style="display:none">{{request.user.id}}</p>
     <div class="calendar">
         <div class="header">
@@ -69,9 +69,12 @@
             <div>Sábado</div>
         </div>
         <div class="days" id="calendarDays"></div>
+
     </div>
 
-    <script src="{%static 'js/calender/calenderrr.js'%}"></script>
+    <div class="reproductor"></div>
+
+    <script src="{%static 'js/calender/calender.js'%}"></script>
 
 {% endblock %}
 
