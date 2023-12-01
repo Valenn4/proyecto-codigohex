@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include("authentication.urls")),
     path('', include('calender.urls')),
     path('api/', include('api.urls')),
+    path('juegos/', include('games.urls')),
     path('sobre_nosotros/',about,name='about'),
     path('perfil/',profile,name='profile')
     

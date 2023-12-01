@@ -8,7 +8,6 @@ data.append("client_id", client_id);
 data.append("client_secret", client_secret);
 
 
-
 const formAction = document.querySelector(".formAction")
 const formObject = document.querySelector(".formObject")
 const formGame = document.querySelector(".formGame")
@@ -205,14 +204,11 @@ const months = [
           day.insertAdjacentHTML("beforeend", `<p>${i}</p>`)
           for(a of json){
             if(a.id_action!=null){
-              activity = a.id_action
+              let activity = a.id_action
               day.insertAdjacentHTML("beforeend", `<p>${a.time}${activity.name}</p>`)
             } else if(a.id_music!=null){
-              activity = a.id_music
-              day.insertAdjacentHTML("beforeend", `<div class="music_activity"><p>${a.time}</p><p style="display:none;">${activity.category_music}</p><p id=${activity.id_music}>${activity.name_music}</p></div>`)
-              document.querySelectorAll(".music_activity").forEach((e) => {
-                e.addEventListener("click", () => {
-                  fetch(url, {
+              let activity = a.id_music
+              fetch(url, {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/x-www-form-urlencoded",
@@ -221,20 +217,39 @@ const months = [
                   })
                   .then(response => response.json())
                   .then(data => {
-                    fetch(`http://127.0.0.1:8000/api/spotify/${e.childNodes[1].innerText}s/${e.childNodes[2].id}`,{
+                    fetch(`http://127.0.0.1:8000/api/spotify/${activity.category_music}s/${activity.id_music}`,{
                     headers: {
                       'Authorization': `Bearer ${data.access_token}`
                     }
                     })
                     .then(response => response.json())
                     .then(json => {
-                      document.querySelector(".reproductor").innerHTML = ''
-                      document.querySelector(".reproductor").insertAdjacentHTML('beforeend', `
-                      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/${json["type"]}/${json["id"]}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>            `)
+                      if(activity.category_music=='track'){
+                        day.insertAdjacentHTML("beforeend", `
+                        <div class="music_activity" id="${activity.id_music}">
+                          <p>${a.time}</p><p style="display:none;">${activity.category_music}</p>
+                          <img src="${json["album"]["images"][0].url}">
+                          <p>Escuchar:</p>
+                          <p>${activity.name_music}</p>
+                        </div>`)
+                      } else {
+                        day.insertAdjacentHTML("beforeend", `
+                        <div class="music_activity" id="${activity.id_music}">
+                          <p>${a.time}</p><p style="display:none;">${activity.category_music}</p>
+                          <img src="${json["images"][0].url}">
+                          <p>Escuchar:</p>
+                          <p>${activity.name_music}</p>
+                        </div>`)
+                      }
+                      document.getElementById(activity.id_music).addEventListener("click", (e) => {
+                        document.querySelector(".reproductor").innerHTML = ''
+                        document.querySelector(".reproductor").insertAdjacentHTML('beforeend', `
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/${activity.category_music}/${activity.id_music}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>            
+                        `)
+                      })
                     })
                   })
-                })
-              })
+                
             } else if(a.id_game!=null){
               activity = a.id_game
               day.insertAdjacentHTML("beforeend", `<p>${a.time}${activity.name}</p>`)
