@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": "tailwindcss build styles.css -o output.css"
+  }
+}
+
+

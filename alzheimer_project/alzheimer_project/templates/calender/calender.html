@@ -1,22 +1,80 @@
+{% extends 'index.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/calender/calender.css' %}">
-<div class="calendar">
-    <div class="header">
-        <button id="prevButton">&lt;</button>
-        <h2 id="monthYear"></h2>
-        <button id="nextButton">&gt;</button>
-    </div>
-    <div class="weekdays">
-        <div>Domingo</div>
-        <div>Lunes</div>
-        <div>Martes</div>
-        <div>Miércoles</div>
-        <div>Jueves</div>
-        <div>Viernes</div>
-        <div>Sábado</div>
-    </div>
-    <div class="days" id="calendarDays"></div>
-</div>
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
 
-<script src="{%static 'js/calender/calender.js'%}"></script>
+    <div class="formActivity">
+        <ul>
+            <li id="option_action" onclick="clickOption('action')">Accion</li>
+            <li id="option_object" onclick="clickOption('object')">Objeto</li>
+            <li id="option_game" onclick="clickOption('game')">Juego</li>
+            <li id="option_music" onclick="clickOption('music')">Musica</li>
+        </ul>
+        <form method="POST" class="formAction">
+            {% csrf_token %}
+            <input type="date" name="date" id="id_date" required>
+            <input type="time" name="time" id="id_time" required>
+            {{formAction}}
+            <input type="submit" value="Enviar" name="formAction">
+        </form>
+        <form method="POST" class="formObject">
+            {% csrf_token %}
+            <input type="date" name="date" id="id_date" required>
+            <input type="time" name="time" id="id_time" required>
+            {{formObject}}
+            <input type="submit" value="Enviar" name="formObject">
+        </form>
+        <form method="POST" class="formGame">
+            {% csrf_token %}
+            <input type="date" name="date" id="id_date" required>
+            <input type="time" name="time" id="id_time" required>
+            {{formGame}}
+            <input type="submit" value="Enviar" name="formGame">
+        </form>
+        <form method="POST" class="formMusic">
+            {% csrf_token %}
+            <input type="date" name="date" id="id_date" required>
+            <input type="time" name="time" id="id_time" required>
+            <div class="input_name_music">
+                {{formMusic.name_music}}
+            </div>
+            <div class="input_id_music">
+                {{formMusic.id_music}}
+            </div>
+            <div class="input_category_music">
+                {{formMusic.category_music}}
+            </div>
+            <p class="search_music">Buscar cancion</p>
+
+            {% include 'spotify/spotify.html' %}
+
+            <input type="submit" value="Enviar" name="formMusic">
+        </form>
+    </div>
+    <p id="id_user" style="display:none">{{request.user.id}}</p>
+    <div class="calendar">
+        <div class="header">
+            <button id="prevButton">&lt;</button>
+            <h2 id="monthYear"></h2>
+            <button id="nextButton">&gt;</button>
+        </div>
+        <div class="weekdays">
+            <div>Domingo</div>
+            <div>Lunes</div>
+            <div>Martes</div>
+            <div>Miércoles</div>
+            <div>Jueves</div>
+            <div>Viernes</div>
+            <div>Sábado</div>
+        </div>
+        <div class="days" id="calendarDays"></div>
+
+    </div>
+
+    <div class="reproductor"></div>
+
+    <script src="{%static 'js/calender/calender.js'%}"></script>
+
+{% endblock %}
 

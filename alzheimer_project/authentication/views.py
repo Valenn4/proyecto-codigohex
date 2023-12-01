@@ -30,7 +30,7 @@ def login(request):
         'form':form,
         'error':error
     }
-    return render(request, 'login.html', context)
+    return render(request, 'authentication/login.html', context)
 
 def register(request):
     if request.method == 'POST':
@@ -50,4 +50,4 @@ def register(request):
         'form':form,
         'error':error
     }
-    return render(request, 'register.html', context)
+    return render(request, 'authentication/register.html', context)
