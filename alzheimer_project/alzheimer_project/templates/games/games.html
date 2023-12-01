@@ -1,1 +1,15 @@
-<h1>JUEGOS</h1>
+{% extends 'index.html' %}
+
+{% block content %}
+    
+    <h1>Juegos</h1>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); ">
+        {% for game in games %}
+        <div style="background-color: gray; border: 1px solid black; padding: 20px; text-align: center;">
+            <a href="../juegos/{{game.name|lower}}">{{game.name}}</a>
+        </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
