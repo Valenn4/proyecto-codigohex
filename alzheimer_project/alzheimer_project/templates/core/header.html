@@ -5,13 +5,16 @@
     <div>
         <nav class=" p-4">
             <div class="container mx-auto flex  ">
-              <div class="text-white font-bold text-lg"><img src="{% static 'img/LogoSinfondo.png' %}" alt="Header Image" class="w-20  h-16 mx-auto"></div>
-              <div class="justify-center items-center flex container mx-auto">
-              <ul class="flex space-x-4 flex ">
-                <li><a href="../home.html" class=" hover:text-gray-300">Home</a></li>
-                <li><a href="../about.html" class=" hover:text-gray-300">About us</a></li>
-              </ul>
-            </div>
+                <div class=""><img src="" alt="Header Image" class="w-20  h-16 mx-auto"></div>
+                <div class="justify-center items-center flex container mx-auto">
+                    <ul class="flex space-x-4 flex ">
+                        <li><a href="{%url 'home'%}" class=" hover:text-blue-800">Home</a></li>
+                        <li><a href="{%url 'about'%}" class=" hover:text-blue-800">About us</a></li>
+                        <li><a href="{%url 'profile'%}" class=" hover:text-blue-800">Mis Datos</a></li>
+                        <li><a href="{%url 'calender'%}" class=" hover:text-blue-800">Mi calendario</a></li>
+                        <li><a href="{%url 'games'%}" class=" hover:text-blue-800">Juegos</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </div>

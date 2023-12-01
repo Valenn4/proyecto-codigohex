@@ -199,15 +199,15 @@ const months = [
       fetch(`http://127.0.0.1:8000/api/activities/${document.getElementById("id_user").innerHTML}/${currentYear}/${currentMonth+1}/${i}`)
       .then(response => response.json())
       .then(json => {
-        let activity = ''
         if(json.length>0){
           day.insertAdjacentHTML("beforeend", `<p>${i}</p>`)
           for(a of json){
+            let activity = a.id_music
             if(a.id_action!=null){
               let activity = a.id_action
               day.insertAdjacentHTML("beforeend", `<p>${a.time}${activity.name}</p>`)
             } else if(a.id_music!=null){
-              let activity = a.id_music
+              let time = a.time
               fetch(url, {
                     method: "POST",
                     headers: {
@@ -227,7 +227,8 @@ const months = [
                       if(activity.category_music=='track'){
                         day.insertAdjacentHTML("beforeend", `
                         <div class="music_activity" id="${activity.id_music}">
-                          <p>${a.time}</p><p style="display:none;">${activity.category_music}</p>
+                          <p>${time}</p>
+                          <p style="display:none;">${activity.category_music}</p>
                           <img src="${json["album"]["images"][0].url}">
                           <p>Escuchar:</p>
                           <p>${activity.name_music}</p>
@@ -235,7 +236,8 @@ const months = [
                       } else {
                         day.insertAdjacentHTML("beforeend", `
                         <div class="music_activity" id="${activity.id_music}">
-                          <p>${a.time}</p><p style="display:none;">${activity.category_music}</p>
+                          <p>${a.time}</p>
+                          <p style="display:none;">${activity.category_music}</p>
                           <img src="${json["images"][0].url}">
                           <p>Escuchar:</p>
                           <p>${activity.name_music}</p>

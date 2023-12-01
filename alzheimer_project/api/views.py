@@ -69,7 +69,7 @@ class ActivityByUserDateView(viewsets.ViewSet):
     
     def list(self, request, id, year, month, day):
         if request.user.id == id:
-            queryset = Activity.objects.filter(user=User.objects.get(id=id), date=datetime.date(year, month, day))
+            queryset = Activity.objects.filter(user=User.objects.get(id=id), date=datetime.date(year, month, day)).order_by("time")
             print(queryset.values().first())
             serializer = ActivitySerializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -81,7 +81,7 @@ class ActivityByUserView(viewsets.ViewSet):
     
     def list(self, request, id):
         if request.user.id == id:
-            queryset = Activity.objects.filter(user=User.objects.get(id=id))
+            queryset = Activity.objects.filter(user=User.objects.get(id=id)).order_by("time")
             serializer = ActivitySerializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
