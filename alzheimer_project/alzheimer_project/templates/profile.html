@@ -22,51 +22,60 @@
             <div class="col-12">
                 <section>
                     <h3>Datos de usuario</h3>
-                        <form action="" method="post">
+                        <form name="form_user" method="post">
+                            {% csrf_token %}
                             <p>
                             <label for="nombre">Nombre:</label><br>
-                            <input type="text" id="nombre" name="nombre" required>
+                            <input type="text" id="nombre" name="first_name" value="{{request.user.first_name}}" disabled>
                             </p>
                             <p>
                             <label for="apellido">Apellido:</label><br>
-                            <input type="text" id="apellido" name="apellido" required>
+                            <input type="text" id="apellido" name="last_name" value="{{request.user.last_name}}" disabled>
                             </p>
                             <p>
                             <label for="fecha">Fecha de nacimiento:</label><br>
-                            <input type="date" id="fecha" name="fecha" required>
+                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                            <p class="value_fecha" style="display:none">{{request.user.fecha_nacimiento}}</p>
                             </p>
                             <p>
                             <label for="direccion">Dirección:</label><br>
-                            <input type="text" id="direccion" name="direccion" required>
+                            <input type="text" id="direccion" name="direccion" value="{{request.user.direccion}}">
                             </p>
                             <p>
                             <label for="codigopostal">Código postal:</label><br>
-                            <input type="number" id="postal" name="postal" pattern="[0-9]+" title="" required>
+                            <input type="text" id="postal" name="codigo_postal" value="{{request.user.codigo_postal}}">
                             </p>
                             <p>
                             <label for="medicacion">Medicación:</label><br>
-                            <input type="text" id="medicacion" name="medicacion" required>
+                            <input type="text" id="medicacion" name="medicacion" value="{{request.user.medicacion}}">
                             </p>
                             <p>
                             <label for="telefono">Número de telefono:</label><br>
-                            <input type="number" id="telefono" name="telefono" pattern="[0-9]+" title="" required>
+                            <input type="number" id="telefono" name="numero_telefono" value="{{request.user.numero_telefono}}">
                             </p>
                             <p>
                             <label for="opciones">Selecciona una opción:</label><br>
-                            <select id="opciones" name="opciones" required>
-                                <option value="opcion1">Etapa 1. No existe demencia.</option>
-                                <option value="opcion2">Etapa 2. Pérdida.</option>
-                                <option value="opcion3">Etapa 3. Deterioro cognitivo leve.</option>
-                                <option value="opcion3">Etapa 4. Declive cognitivo leve.(Demencia leve)</option>
-                                <option value="opcion3">Etapa 5. Declive cognitivo moderado.</option>
+                            <select id="etapa" name="etapa">
+                                <option value="{{request.user.etapa}}" selected>{{request.user.etapa}}</option>
+                                {% for el in etapas_alzheimer %}
+                                    {% if el == request.user.etapa %}
+                                    <option value="{{el}}" selected>{{el}}</option>
+                                    {% else %}
+                                    <option value="{{el}}">{{el}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                                
                             </select>
                             </p>
                             <p>
                             <label for="email">Correo Electrónico:</label><br>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" value="{{request.user.email}}" disabled>
                             </p>
+                            <input type="submit" value="Enviar">
                     </form>
-                            <h3> Datos de contacto </h3>
+                    
+                    <h3> Datos de contacto </h3>
+                    <!--
                     <form action="" method="post">
                         <p>
                         <label for="nombrecontscto">Nombre:
@@ -90,6 +99,7 @@
                         <input type="email" id="email" name="email" required>
                         </p>
                     </form>
+                    -->
                 </section>
             </div>
         </div>
@@ -97,9 +107,13 @@
             <div class="col-12">
                 <input type="checkbox" id="terminos" name="terminos" required>
                 <label for="terminos">Acepto los términos y condiciones</label>
-                <button type="submit">Enviar</button>
+                <input type="submit" value="Enviar">
         </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('fecha_nacimiento').valueAsDate = new Date(document.querySelector(".value_fecha").innerHTML);
+    </script>
 </body>
 </html>
