@@ -8,17 +8,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
-</head>
-<body>
-    {% include 'core/header.html' %}
 
+    
+</head>
+<style>
+    .alert_activity{
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 15px;
+        background-color: tomato;
+        color: white;
+        font-family: sans-serif;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
+<body>
+    
+    {% include 'core/header.html' %}
+    <p class="id_user" style="display: none;">{{request.user.id}}</p>
+    <p class="alert_activity"></p>
     {% block content %}
-    <h1><b>Welcome to <br>
-        stories conections</b></h1>
+    
     {% endblock %}
     
     {% include 'core/footer.html' %}
 
-    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/indexx.js' %}"></script>
 </body>
 </html>

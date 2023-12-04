@@ -7,5 +7,6 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("",views.home, name="home"),
+    path('perfil/',views.profile,name='profile'),
     re_path(r'^oauth/', include('social_django.urls', namespace='social')),
 ]
