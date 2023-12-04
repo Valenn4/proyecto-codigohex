@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RECUERDA ME/TE</title>
-    <link rel="stylesheet" href="../static/css/generall.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
@@ -17,21 +17,21 @@
         <div class="text-center text-2xl">
             <h1>Obout us</h1>
         </div>
-        <div class="container mx-auto">
-            <div class="">
+        <div class="grid grid-cols-12  my-5">
+            <div class="col-span-8 col-start-3 text-center my-5 ">
                 <p>Somos un equipo comprometidos a mejorar la calidad de vida de las personas con 
                 Alzheimer , tomando en cuenta cada una de las necesidades que pueden tener y 
                 facilitando la planificación de sus días con las diferentes actividades.
                 </p>
             </div>
-            <div>
+            <div class=" col-span-8 col-start-3 text-center my-5">
                 <p>Enfrentando la realidad de las habilidades preservadas en la memoria de las personas 
                 con Alzheimer, como la capacidad de leer o escuchar libros, contar historias, compartir 
                 recuerdos, cantar, disfrutar de la música, bailar, dibujar, o participar en manualidades, 
                 nuestro proyecto tiene como misión enriquecer la vida diaria de estas personas.
                 </p>
             </div>
-            <div>
+            <div class=" col-span-8 col-start-3 text-center my-5">
                 <p>
                 Como objetivo mejorar la calidad de vida de estas personas mediante el desarrollo de 
                 un asistente virtual personalizado. Este asistente no solo ayuda a recordar las tareas 
@@ -41,5 +41,6 @@
             </div>
         </div>
     </div>
+    {% include 'core/footer.html' %}
 </body>
 </html>

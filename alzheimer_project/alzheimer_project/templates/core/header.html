@@ -1,18 +1,17 @@
 {%load static%}
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <header>
-    <h1>Recuerdame</h1>
     <div>
-        <nav class=" p-4">
+        <nav class=" p-6">
             <div class="container mx-auto flex  ">
-                <div class=""><img src="" alt="Header Image" class="w-20  h-16 mx-auto"></div>
+                <div class=""><img src=" {% static 'img/LogoSinfondo.png'%}" alt="Header Image" class="w-20  h-16 mx-auto"></div>
                 <div class="justify-center items-center flex container mx-auto">
-                    <ul class="flex space-x-4 flex ">
-                        <li><a href="{%url 'home'%}" class=" hover:text-blue-800">Home</a></li>
-                        <li><a href="{%url 'about'%}" class=" hover:text-blue-800">About us</a></li>
-                        <li><a href="{%url 'profile'%}" class=" hover:text-blue-800">Mis Datos</a></li>
-                        <li><a href="{%url 'calender'%}" class=" hover:text-blue-800">Mi calendario</a></li>
-                        <li><a href="{%url 'games'%}" class=" hover:text-blue-800">Juegos</a></li>
+                    <ul class="flex space-x-4 flex text-lg font-bold px-4 ">
+                        <li><a href="{%url 'home'%}" class=" hover:text-blue-800 px-4">Home</a></li>
+                        <li><a href="{%url 'about'%}" class=" hover:text-blue-800 px-4">About us</a></li>
+                        <li><a href="{%url 'profile'%}" class=" hover:text-blue-800 px-4">Mis Datos</a></li>
+                        <li><a href="{%url 'calender'%}" class=" hover:text-blue-800 px-4">Mi calendario</a></li>
+                        <li><a href="{%url 'games'%}" class=" hover:text-blue-800 px-4">Juegos</a></li>
                     </ul>
                 </div>
             </div>

@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'tailwind/styles.css'%}">
-    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-MrNyZJ01eAPop4GgmiHExO+gsr1i+A8nqJ7iwl5u8Zf/DJU86qF9XT7It+bivFV6" crossorigin="anonymous">
 </head>
 <body class="flex items-center justify-center h-screen bg-gray-100">
-    <div class="bg-white p-8 rounded border-2 border-blue-800 shadow-lg p-8 rounded rounded shadow-md w-full sm:w-96">
+    <div class="bg-white p-8 rounded border-1 border-blue-800 w-full sm:w-96 login">
         <main class="main">
             <h2 class="text-2xl font-semibold mb-6">Iniciar sesión</h2>
             <form method="POST">
             {% csrf_token %}
-                <div class="div_input mb-4">
-                    <label class="block text-gray-600 text-sm font-medium mb-2">Usuario</label>
+                <div class="div_input">
+                    <label class="block text-gray-700 text-sm font-medium mb-2">Usuario</label>
                     {{form.username}}
                 </div>
-                <div class="div_input">
+                <div class="div_input mt-4">
                     <label class="block text-gray-600 text-sm font-medium mb-2 ">Contraseña</label>
                 {{form.password}}
                 </div>
