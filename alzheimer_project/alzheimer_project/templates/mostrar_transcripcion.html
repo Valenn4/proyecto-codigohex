@@ -1,0 +1,22 @@
+<!-- chatbot/templates/chatbot/mostrar_transcripcion.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Transcripción</title>
+</head>
+<body>
+    <h1>Transcripción del Mensaje</h1>
+    <p>Texto grabado: {{ texto_grabado }}</p>
+    <p>Texto contestado: {{ respuesta }}</p>
+
+    <h1>Grabar Audio</h1>
+    <form method="post" action="{% url 'grabar_audio' %}">
+        {% csrf_token %}
+        <button type="submit">Grabar Mensaje</button>
+    </form>
+    
+
+    <a href="{% url 'grabar_audio' %}">Volver a grabar</a>
+</body>
+</html>

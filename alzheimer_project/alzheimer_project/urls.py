@@ -9,7 +9,9 @@ urlpatterns = [
     path('', include("authentication.urls")),
     path('', include('calender.urls')),
     path('api/', include('api.urls')),
-    path('sobre_nosotros/',about)
+    path('sobre_nosotros/',about),
+    path("Speech/", include('lilly.urls')),
+    
 ]
 
 

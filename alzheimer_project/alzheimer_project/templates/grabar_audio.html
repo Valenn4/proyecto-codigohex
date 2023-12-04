@@ -1,0 +1,65 @@
+<!-- grabar_audio.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grabar Audio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        #content {
+            flex: 1;
+        }
+
+        #chatbot-container {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Grabar Audio</h1>
+    <form id="grabarForm" method="post" action="{% url 'grabar_audio' %}">
+        {% csrf_token %}
+        <button type="submit">Grabar Mensaje</button>
+    </form>
+    <div id="chatbot-container">
+        {% include 'mostrar_transcripcion.html' %}
+    </div>
+
+    <script>
+        document.getElementById("grabarForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Realizar la solicitud POST a la vista grabar_audio
+            fetch("{% url 'grabar_audio' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: new URLSearchParams(new FormData(document.getElementById("grabarForm")))
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Actualizar dinámicamente el contenido en la página
+                document.getElementById("chatbot-container").innerHTML = `
+                    <h1>Transcripción del Mensaje</h1>
+                    <p>Texto grabado: ${data.texto_grabado}</p>
+                    <p>Texto contestado: ${data.respuesta}</p>
+                `;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>

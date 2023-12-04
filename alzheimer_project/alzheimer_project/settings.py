@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'social_django',
     'authentication',
     'calender',
-    'api'
+    'api',
+    'lilly',
 ]
 
 MIDDLEWARE = [
