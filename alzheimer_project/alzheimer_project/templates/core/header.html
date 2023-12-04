@@ -1,20 +1,35 @@
 {%load static%}
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
 <header>
-    <div>
-        <nav class=" p-6">
-            <div class="container mx-auto flex  ">
-                <div class=""><img src=" {% static 'img/LogoSinfondo.png'%}" alt="Header Image" class="w-20  h-16 mx-auto"></div>
-                <div class="justify-center items-center flex container mx-auto">
-                    <ul class="flex space-x-4 flex text-lg font-bold px-4 ">
-                        <li><a href="{%url 'home'%}" class=" hover:text-blue-800 px-4">Home</a></li>
-                        <li><a href="{%url 'about'%}" class=" hover:text-blue-800 px-4">About us</a></li>
-                        <li><a href="{%url 'profile'%}" class=" hover:text-blue-800 px-4">Mis Datos</a></li>
-                        <li><a href="{%url 'calender'%}" class=" hover:text-blue-800 px-4">Mi calendario</a></li>
-                        <li><a href="{%url 'games'%}" class=" hover:text-blue-800 px-4">Juegos</a></li>
-                    </ul>
-                </div>
+<body>
+        <nav class="flex items-center justify-between flex-wrap p-6">
+
+            <div class="flex items-center flex-shrink-0 text-white mr-6">
+                <a href="{%url 'home'%}">
+                    <img src=" {% static 'img/LogoSinfondo.png'%}" alt="Header Image" class="w-20  h-16 mx-auto">
+                    <span class="font-semibold text-xl tracking-tight">Recuerdate</span>
+
+                </a>
             </div>
-        </nav>
-    </div>
+
+            <div class="block lg:hidden">
+              <button id='boton' class="flex items-center px-3 py-2 border rounded text-black-200 border-blue-800 hover:text-black hover:border-black">
+               <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+              </button>
+            </div>
+
+            <div id='menu' class="w-full block flex-grow lg:flex lg:items-center lg:w-auto font-bold">
+              <div class="text-lg lg:flex-grow lg:flex lg:justify-center">
+                <a href="{%url 'about'%}" class="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-blue-800 mr-4">About us</a>
+                <a href="{%url 'profile'%}" class="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-blue-800 mr-4">Mis Datos</a>
+                <a href="{%url 'calender'%}" class="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-blue-800 mr-4">Mi calendario</a>
+                <a href="{%url 'games'%}" class="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-blue-800 mr-4">Juegos</a>
+              </div>
+            </div>
+
+          </nav>
+    <script src= "{% static 'js/menu/menu.js' %}"></script>
+</body>
 </header>
