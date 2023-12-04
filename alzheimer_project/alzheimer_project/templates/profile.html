@@ -13,41 +13,41 @@
 <body>
     {% include 'core/header.html' %}
     <div id="formu">
-        <div class="flex items-center justify-center">
-            <div class="col-12">
+        <div class="grid grid-cols-2 gap-8">
+            <div class=" mt-4 ">
                 <section>
-                    <h3>Datos de usuario</h3>
+                    <h3 class="text-blue-900 m-10">Datos de usuario</h3>
                         <form action="" method="post">
                             <p>
-                            <label for="nombre" class="block text-gray-700 text-sm font-medium">Nombre:</label>
+                            <label for="nombre" class="block text-gray-700 text-sm font-bold">Nombre:</label>
                             <input type="text" id="nombre" name="nombre" required class=" py-2 px-4 mt-2 border rounded-md focus:outline-none focus:border-blue-500">
                             </p>
                             <p>
-                            <label for="apellido" class="block text-gray-700 text-sm font-medium mt-3">Apellido:</label>
+                            <label for="apellido" class="block text-gray-700 text-sm mt-5 font-bold">Apellido:</label>
                             <input type="text" id="apellido" name="apellido" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                             </p>
                             <p>
-                            <label for="fecha" class="block text-gray-700 text-sm font-medium mt-3">Fecha de nacimiento:</label>
+                            <label for="fecha" class="block text-gray-700 text-sm font-bold mt-5">Fecha de nacimiento:</label>
                             <input type="date" id="fecha" name="fecha" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                             </p>
                             <p>
-                            <label for="direccion" class="block text-gray-700 text-sm font-medium mt-3">Dirección:</label>
+                            <label for="direccion" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
                             <input type="text" id="direccion" name="direccion" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                             </p>
                             <p>
-                            <label for="codigopostal" class="block text-gray-700 text-sm font-medium mt-3">Código postal:</label>
+                            <label for="codigopostal" class="block text-gray-700 text-sm font-bold mt-5">Código postal:</label>
                             <input type="number" id="postal" name="postal" pattern="[0-9]+" title="" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                             </p>
                             <p>
-                            <label for="medicacion" class="block text-gray-700 text-sm font-medium mt-3">Medicación:</label>
+                            <label for="medicacion" class="block text-gray-700 text-sm font-bold mt-5">Medicación:</label>
                             <input type="text" id="medicacion" name="medicacion" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                             </p>
                             <p>
-                            <label for="telefono" class="block text-gray-700 text-sm font-medium mt-3">Número de telefono:</label>
+                            <label for="telefono" class="block text-gray-700 text-sm font-bold mt-5">Número de telefono:</label>
                             <input type="number" id="telefono" name="telefono" pattern="[0-9]+" title="" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                             </p>
                             <p>
-                            <label for="opciones" class="block text-gray-700 text-sm font-medium mt-3">Selecciona una opción:</label>
+                            <label for="opciones" class="block text-gray-700 text-sm font-bold mt-5">Selecciona una opción:</label>
                             <select id="opciones" name="opciones" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                                 <option value="opcion1">Etapa 1. No existe demencia.</option>
                                 <option value="opcion2">Etapa 2. Pérdida.</option>
@@ -57,40 +57,48 @@
                             </select>
                             </p>
                             <p>
-                            <label for="email"class="block text-gray-700 text-sm font-medium mt-3">Correo Electrónico:</label>
+                            <label for="email"class="block text-gray-700 text-sm font-bold mt-5">Correo Electrónico:</label>
                             <input type="email" id="email" name="email" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                             </p>
                     </form>
-                            <h3> Datos de contacto </h3>
+                            <h3 class="text-blue-900 m-10"> Datos de contacto </h3>
                     <form action="" method="post">
                         <p>
-                        <label for="nombrecontscto" class="block text-gray-700 text-sm font-medium mt-3 ">Nombre:
+                        <label for="nombrecontscto" class="block text-gray-700 text-sm font-bold mt-5 ">Nombre:
                         </label>
                         <input type="text" id="nombre" name="nombre" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500"> 
                         </p>
                         <p>
-                        <label for="apellidocontacto" class="block text-gray-700 text-sm font-medium mt-3">Apellido:</label>
+                        <label for="apellidocontacto" class="block text-gray-700 text-sm font-bold mt-5">Apellido:</label>
                         <input type="text" id="apellido" name="apellido" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                         </p>
                         <p>
-                        <label for="telefonocontacto" class="block text-gray-700 text-sm font-medium mt-3">Número de telefono:</label>
+                        <label for="telefonocontacto" class="block text-gray-700 text-sm font-bold mt-5">Número de telefono:</label>
                         <input type="number" id="telefono" name="telefono" pattern="[0-9]+" title="" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                         </p>
                         <p>
-                        <label for="direccioncontacto" class="block text-gray-700 text-sm font-medium mt-3">Dirección:</label>
+                        <label for="direccioncontacto" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
                         <input type="text" id="direccion" name="direccion" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                         </p>
                         <p>
-                        <label for="emailcontacto" class="block text-gray-700 text-sm font-medium mt-3">Correo Electrónico:</label>
+                        <label for="emailcontacto" class="block text-gray-700 text-sm font-bold mt-5">Correo Electrónico:</label>
                         <input type="email" id="email" name="email" required class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                         </p>
                     </form>
                 </section>
             </div>
+            <div class=" mt-4 ">
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <label for="fotoPerfil">Selecciona tu foto de perfil:</label>
+                    <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
+                    <br>
+                    <input type="submit" value="Cargar Foto">
+                </form>
+            </div>
         </div>
         <div class="flex items-center justify-center mt-4">
-                <input type="checkbox" id="terminos" name="terminos" required>
-                <label for="terminos" class="block text-gray-700 text-sm font-medium">Acepto los términos y condiciones</label>
+                <input type="checkbox" id="terminos" name="terminos" required class="m-2">
+                <label for="terminos" class="block text-gray-700 text-sm font-bold">Acepto los términos y condiciones</label>
         </div>
         <div class=" flex items-center justify-center mt-4">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enviar</button>

@@ -3,18 +3,37 @@
 <header>
     <div>
         <nav class=" p-6">
-            <div class="container mx-auto flex  ">
+            <div class=" container mx-auto ">
                 <div class=""><img src=" {% static 'img/LogoSinfondo.png'%}" alt="Header Image" class="w-20  h-16 mx-auto"></div>
-                <div class="justify-center items-center flex container mx-auto">
-                    <ul class="flex space-x-4 flex text-lg font-bold px-4 ">
-                        <li><a href="{%url 'home'%}" class=" hover:text-blue-800 px-4">Home</a></li>
-                        <li><a href="{%url 'about'%}" class=" hover:text-blue-800 px-4">About us</a></li>
-                        <li><a href="{%url 'profile'%}" class=" hover:text-blue-800 px-4">Mis Datos</a></li>
-                        <li><a href="{%url 'calender'%}" class=" hover:text-blue-800 px-4">Mi calendario</a></li>
-                        <li><a href="{%url 'games'%}" class=" hover:text-blue-800 px-4">Juegos</a></li>
-                    </ul>
+            </div>
+            <div class="lg:hidden block">
+                    <button id="menuBtn" class=" flex items-center px-3 py-2 border round text-black-200 focus:outline-none">
+                        <svg class="fill-current h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+            </div>
+            <div  id= "menu" class=" w-full block flex-grow lg:items-center lg:w-auto">
+                <div class="lg:flex-grow space-x-4 lg:flex lg:justify-center text-lg font-bold px-4 ">
+                        <a href="{%url 'home'%}" class=" block mt-4 lg:inline-block lg:mt-0 mr-4 hover:text-blue-800 px-4">Home</a>
+                        <a href="{%url 'about'%}" class=" block mt-4 lg:inline-block lg:mt-0 mr-4 hover:text-blue-800 px-4">About us</a>
+                        <a href="{%url 'profile'%}" class=" block mt-4 lg:inline-block lg:mt-0 mr-4 hover:text-blue-800 px-4">Mis Datos</a>
+                        <a href="{%url 'calender'%}" class=" block mt-4 lg:inline-block lg:mt-0 mr-4 hover:text-blue-800 px-4">Mi calendario</a>
+                        <a href="{%url 'games'%}" class=" block mt-4 lg:inline-block lg:mt-0 mr-4 hover:text-blue-800 px-4">Juegos</a>
                 </div>
             </div>
         </nav>
     </div>
+    
 </header>
+<script>
+    // JavaScript para manejar el acordeón en dispositivos móviles
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+</script>

@@ -19,8 +19,8 @@ body{
     box-shadow: -10px 0px 50px 0px #8999ff;
 }
 
-/* ---Formulario--- */
-
-section {
-    padding: 20px 300px 20px 300px;
+/* ---header--- */
+.acordeon{
+    flex-direction: column;
 }
+
