@@ -27,11 +27,7 @@
 </head>
 
 <body>
-    <h1>Grabar Audio</h1>
-    <form id="grabarForm" method="post" action="{% url 'grabar_audio' %}">
-        {% csrf_token %}
-        <button type="submit">Grabar Mensaje</button>
-    </form>
+    
     <div id="chatbot-container">
         {% include 'mostrar_transcripcion.html' %}
     </div>

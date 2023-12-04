@@ -1,0 +1,105 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECUERDA ME/TE</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    {% include 'core/header.html' %}
+    <div id="formu">
+        
+        <div class="fila centrar-horizontal">
+            <div class="colum" id="form-title">
+                <h1> FORMULARIO</h1>
+            </div>
+        </div>
+        <div class="fila centrar-horizontal">
+            <div class="col-12">
+                <section>
+                    <h3>Datos de usuario</h3>
+                        <form action="" method="post">
+                            <p>
+                            <label for="nombre">Nombre:</label><br>
+                            <input type="text" id="nombre" name="nombre" required>
+                            </p>
+                            <p>
+                            <label for="apellido">Apellido:</label><br>
+                            <input type="text" id="apellido" name="apellido" required>
+                            </p>
+                            <p>
+                            <label for="fecha">Fecha de nacimiento:</label><br>
+                            <input type="date" id="fecha" name="fecha" required>
+                            </p>
+                            <p>
+                            <label for="direccion">Dirección:</label><br>
+                            <input type="text" id="direccion" name="direccion" required>
+                            </p>
+                            <p>
+                            <label for="codigopostal">Código postal:</label><br>
+                            <input type="number" id="postal" name="postal" pattern="[0-9]+" title="" required>
+                            </p>
+                            <p>
+                            <label for="medicacion">Medicación:</label><br>
+                            <input type="text" id="medicacion" name="medicacion" required>
+                            </p>
+                            <p>
+                            <label for="telefono">Número de telefono:</label><br>
+                            <input type="number" id="telefono" name="telefono" pattern="[0-9]+" title="" required>
+                            </p>
+                            <p>
+                            <label for="opciones">Selecciona una opción:</label><br>
+                            <select id="opciones" name="opciones" required>
+                                <option value="opcion1">Etapa 1. No existe demencia.</option>
+                                <option value="opcion2">Etapa 2. Pérdida.</option>
+                                <option value="opcion3">Etapa 3. Deterioro cognitivo leve.</option>
+                                <option value="opcion3">Etapa 4. Declive cognitivo leve.(Demencia leve)</option>
+                                <option value="opcion3">Etapa 5. Declive cognitivo moderado.</option>
+                            </select>
+                            </p>
+                            <p>
+                            <label for="email">Correo Electrónico:</label><br>
+                            <input type="email" id="email" name="email" required>
+                            </p>
+                    </form>
+                            <h3> Datos de contacto </h3>
+                    <form action="" method="post">
+                        <p>
+                        <label for="nombrecontscto">Nombre:
+                        </label><br>
+                        <input type="text" id="nombre" name="nombre" required>
+                        </p>
+                        <p>
+                        <label for="apellidocontacto">Apellido:</label><br>
+                        <input type="text" id="apellido" name="apellido" required>
+                        </p>
+                        <p>
+                        <label for="telefonocontacto">Número de telefono:</label><br>
+                        <input type="number" id="telefono" name="telefono" pattern="[0-9]+" title="" required>
+                        </p>
+                        <p>
+                        <label for="direccioncontacto">Dirección:</label><br>
+                        <input type="text" id="direccion" name="direccion" required>
+                        </p>
+                        <p>
+                        <label for="emailcontacto">Correo Electrónico:</label><br>
+                        <input type="email" id="email" name="email" required>
+                        </p>
+                    </form>
+                </section>
+            </div>
+        </div>
+        <div class="fila centrar-horizontal">
+            <div class="col-12">
+                <input type="checkbox" id="terminos" name="terminos" required>
+                <label for="terminos">Acepto los términos y condiciones</label>
+                <button type="submit">Enviar</button>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
