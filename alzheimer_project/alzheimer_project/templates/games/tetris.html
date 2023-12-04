@@ -3,7 +3,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tetris</title>
@@ -11,12 +10,18 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
     <style>
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
         .contenedor {
             position: absolute;
             top:370px;
             left:200px;
             display: flex;
-            justify-content: center;
+            justify-content: right;
             flex-direction: column;
          }
          .controles{
@@ -43,125 +48,135 @@
         
          
     </style>
+
 </head>
 
 <body>
-    
-    <div class="contenedor">
-        <div class="controles" >
-        <!-- Contenido dentro del div -->
-        </div>
+    <div>
+       <a href="{% url 'games' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">Salir</a>
     </div>
-    <script src="{% static 'js/games/tetris/tablero.js' %}"></script>
-    <script src="{% static 'js/games/tetris/tetrimino.js' %}"></script>
-    <script>
-        const MARGEN_TABLERO = 10
-        let regulador_velocidad_teclas = 10
-        let regulador_de_caida = 0
-        let lineas_hechas = 0
 
-        /* 
-        Generación de fondo dinámico
-        */
+    <div>
+        <div class="contenedor">
+            <div class="controles" >
+            <!-- Contenido dentro del div -->
+            </div>
+        </div>
+        <script src="{% static 'js/games/tetris/tablero.js' %}"></script>
+        <script src="{% static 'js/games/tetris/tetrimino.js' %}"></script>
+        <script>
+            const MARGEN_TABLERO = 10
+            let regulador_velocidad_teclas = 10
+            let regulador_de_caida = 0
+            let lineas_hechas = 0
 
-
-        /* 
-        Dificultad, hacer caer las piezas cada determinada cantidad de tiempo,
-        simulando una especie de gravedad, esto se hace fácilmente con un setInterval
-        */
-        setInterval(() => {
-            if (millis() - regulador_de_caida < 300) {
-                return
-            }
-            regulador_de_caida = millis()
-            tetrimino.moverAbajo()
-        }, 500);
-
-
-        /* 
-        La función setup es nativa de p5.js
-
-        y sirve para ajustar las propiedades iniciales de nuestros objetos 
-        y variables
-        */
-        function setup() {
-            createCanvas(900, 600) //crea un canvas
             /* 
-            VARIABLES GLOBALES
-
-            es importante que no le pongan let, ni var, ni const a las siguientes 
-            variables. Para que puedan ser identificadas como globales
+            Generación de fondo dinámico
             */
-            tablero = new Tablero()
-            crearMapeoBaseTetriminos()
-            tetrimino = new Tetrimino()
-            resizeCanvas(
-                tablero.ancho + 2 * MARGEN_TABLERO,
-                tablero.alto + 2 * MARGEN_TABLERO + 2*tablero.lado_celda
-            )
-        }
 
-        /* 
-        La función draw es nativa de p5.js
 
-        y sirve para dar instrucciones precisas de dibujo sobre el canvas
-        */
-        function draw() {
-            clear()
-            dibuajarPuntaje()
-            tablero.dibujar()
-            tetrimino.dibujar()
-            keyEventsTetris()
-        }
-
-        function dibuajarPuntaje() {
-            push()
-            textSize(20)
-            strokeWeight(2)
-            stroke("black")
-            fill("white")
-            text(
-                "Líneas: " + lineas_hechas,
-                tablero.posición.x,
-                tablero.posición.y - tablero.lado_celda / 2
-            )
-            pop()
-        }
-
-        let límite_regulador_velocidad_teclas = 100
-
-        function keyEventsTetris() {
-            if (millis() - regulador_velocidad_teclas < límite_regulador_velocidad_teclas) {
-                return
-            }
-            límite_regulador_velocidad_teclas = 100
-            regulador_velocidad_teclas = millis()
-
-            if (keyIsDown(RIGHT_ARROW)) {
-                tetrimino.moverDerecha()
+            /* 
+            Dificultad, hacer caer las piezas cada determinada cantidad de tiempo,
+            simulando una especie de gravedad, esto se hace fácilmente con un setInterval
+            */
+            setInterval(() => {
+                if (millis() - regulador_de_caida < 300) {
+                    return
+                }
                 regulador_de_caida = millis()
-            }
-            if (keyIsDown(LEFT_ARROW)) {
-                tetrimino.moverIzquierda()
-                regulador_de_caida = millis()
-            }
-            if (keyIsDown(DOWN_ARROW)) {
                 tetrimino.moverAbajo()
-                regulador_de_caida = millis()
-            }
-            if (keyIsDown(UP_ARROW)) {
-                límite_regulador_velocidad_teclas = 150
-                tetrimino.girar()
-                regulador_de_caida = millis()
-            }
-            if (keyIsDown(32)) {
-                límite_regulador_velocidad_teclas = 200
-                tetrimino.ponerEnElFondo()
-                regulador_de_caida = millis()
-            }
-        }
-    </script>
+            }, 500);
 
+
+            /* 
+            La función setup es nativa de p5.js
+
+            y sirve para ajustar las propiedades iniciales de nuestros objetos 
+            y variables
+            */
+            function setup() {
+                createCanvas(900, 600) //crea un canvas
+                /* 
+                VARIABLES GLOBALES
+
+                es importante que no le pongan let, ni var, ni const a las siguientes 
+                variables. Para que puedan ser identificadas como globales
+                */
+                tablero = new Tablero()
+                crearMapeoBaseTetriminos()
+                tetrimino = new Tetrimino()
+                resizeCanvas(
+                    tablero.ancho + 2 * MARGEN_TABLERO,
+                    tablero.alto + 2 * MARGEN_TABLERO + 2*tablero.lado_celda
+                )
+            }
+
+            /* 
+            La función draw es nativa de p5.js
+
+            y sirve para dar instrucciones precisas de dibujo sobre el canvas
+            */
+            function draw() {
+                clear()
+                dibuajarPuntaje()
+                tablero.dibujar()
+                tetrimino.dibujar()
+                keyEventsTetris()
+            }
+
+            function dibuajarPuntaje() {
+                push()
+                textSize(20)
+                strokeWeight(2)
+                stroke("black")
+                fill("white")
+                text(
+                    "Líneas: " + lineas_hechas,
+                    tablero.posición.x,
+                    tablero.posición.y - tablero.lado_celda / 2
+                )
+                pop()
+            }
+
+            let límite_regulador_velocidad_teclas = 100
+
+            function keyEventsTetris() {
+                if (millis() - regulador_velocidad_teclas < límite_regulador_velocidad_teclas) {
+                    return
+                }
+                límite_regulador_velocidad_teclas = 100
+                regulador_velocidad_teclas = millis()
+
+                if (keyIsDown(RIGHT_ARROW)) {
+                    tetrimino.moverDerecha()
+                    regulador_de_caida = millis()
+                }
+                if (keyIsDown(LEFT_ARROW)) {
+                    tetrimino.moverIzquierda()
+                    regulador_de_caida = millis()
+                }
+                if (keyIsDown(DOWN_ARROW)) {
+                    tetrimino.moverAbajo()
+                    regulador_de_caida = millis()
+                }
+                if (keyIsDown(UP_ARROW)) {
+                    límite_regulador_velocidad_teclas = 150
+                    tetrimino.girar()
+                    regulador_de_caida = millis()
+                }
+                if (keyIsDown(32)) {
+                    límite_regulador_velocidad_teclas = 200
+                    tetrimino.ponerEnElFondo()
+                    regulador_de_caida = millis()
+                }
+            }
+        </script>
+    </div>
+    <div class="juego">
+         <main>
+        </main>
+    </div>
+   
 </body>
 
 </html>

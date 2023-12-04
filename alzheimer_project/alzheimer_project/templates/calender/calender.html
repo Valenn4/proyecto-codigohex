@@ -3,14 +3,16 @@
 {% block content %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
 
     <div class="formActivity">
-        <ul>
+        <div>
             <li id="option_action" onclick="clickOption('action')">Accion</li>
             <li id="option_object" onclick="clickOption('object')">Objeto</li>
             <li id="option_game" onclick="clickOption('game')">Juego</li>
             <li id="option_music" onclick="clickOption('music')">Musica</li>
-        </ul>
+        </div>
         <form method="POST" class="formAction">
             {% csrf_token %}
             <input type="date" name="date" id="id_date" required>
