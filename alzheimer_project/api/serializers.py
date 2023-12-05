@@ -30,6 +30,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+class UserFeelingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["feeling"]
+        
 class ActivitySerializer(serializers.ModelSerializer):
     user = UserSerializer()
     id_action = ActionSerializer()

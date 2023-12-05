@@ -72,44 +72,43 @@
                             <label for="email">Correo Electrónico:</label><br>
                             <input type="email" id="email" name="email" value="{{request.user.email}}" disabled>
                             </p>
-                            <input type="submit" value="Enviar">
-                    </form>
-                    
-                    <h3> Datos de contacto </h3>
-                    <!--
-                    <form action="" method="post">
+
+                            <h3> Datos de contacto </h3>
                         <p>
-                        <label for="nombrecontscto">Nombre:
+                        <label for="nombrecontacto">Nombre:
                         </label><br>
-                        <input type="text" id="nombre" name="nombre" required>
+                        <input type="text" id="firstname_contact" name="firstname_contact" value="{{contact_user.firstname}}">
                         </p>
                         <p>
                         <label for="apellidocontacto">Apellido:</label><br>
-                        <input type="text" id="apellido" name="apellido" required>
+                        <input type="text" id="lastname_contact" name="lastname_contact" value="{{contact_user.lastname}}">
                         </p>
                         <p>
                         <label for="telefonocontacto">Número de telefono:</label><br>
-                        <input type="number" id="telefono" name="telefono" pattern="[0-9]+" title="" required>
+                        <input type="number" id="phone_contact" name="phone_contact" pattern="[0-9]+" value="{{contact_user.number_phone}}">
                         </p>
                         <p>
                         <label for="direccioncontacto">Dirección:</label><br>
-                        <input type="text" id="direccion" name="direccion" required>
+                        <input type="text" id="address_contact" name="address_contact" value="{{contact_user.address}}">
                         </p>
                         <p>
                         <label for="emailcontacto">Correo Electrónico:</label><br>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email_contact" name="email_contact" value="{{contact_user.email}}">
                         </p>
+
+                        <input type="submit" value="Enviar">
                     </form>
-                    -->
                 </section>
             </div>
         </div>
+        <!--
         <div class="fila centrar-horizontal">
             <div class="col-12">
                 <input type="checkbox" id="terminos" name="terminos" required>
                 <label for="terminos">Acepto los términos y condiciones</label>
                 <input type="submit" value="Enviar">
         </div>
+        -->
         </div>
     </div>
 

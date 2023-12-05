@@ -28,6 +28,7 @@
     
     {% include 'core/header.html' %}
     <p class="id_user" style="display: none;">{{request.user.id}}</p>
+    <p class="alert_feeling" style="display: none; position: fixed; top: 20px; left: 20px; background-color: tomato; color: white; padding: 10px;"></p>
     <p class="alert_activity"></p>
     {% block content %}
     
@@ -35,6 +36,6 @@
     
     {% include 'core/footer.html' %}
 
-    <script src="{% static 'js/indexx.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>
