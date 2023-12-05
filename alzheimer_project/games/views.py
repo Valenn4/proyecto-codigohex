@@ -14,3 +14,6 @@ def tetris(request):
 
 def memory(request):
     return render(request, 'games/memory.html')
+
+def sopa_de_letras(request):
+    return render(request, 'games/sopa_de_letras.html')

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
+from datetime import datetime
 
 import speech_recognition as sr
 from .chatbot import chatear
@@ -13,16 +14,27 @@ def grabar_audio(request):
         recognizer = sr.Recognizer()
 
         with sr.Microphone() as source:
-            print("Habla algo:")
+            
             audio = recognizer.listen(source)
         
         
         try:
-            texto_grabado = recognizer.recognize_google(audio, language='es-ES')
+            texto_grabado = recognizer.recognize_google(audio, language='es-ES') 
             respuesta = chatear(texto_grabado)
-            if respuesta == 'games.html':
+            
+            if respuesta == '../juegos':
                 return redirect(f'{respuesta}')
-            sintetizar_voz(respuesta)
+            if respuesta == '../calendario':
+                return redirect(f'{respuesta}')
+            if respuesta =='dia':
+                fecha=datetime.now()
+                respuesta=f'Hoy es día {fecha.day} de {fecha.month} de {fecha.year}'
+                sintetizar_voz(respuesta)
+            if respuesta =='hora':
+                fecha=datetime.now()
+                respuesta=f'Son las {fecha.hour} y {fecha.minute}'
+                sintetizar_voz(respuesta)
+               
 
             # Renderizar la plantilla con la respuesta
             return render(request, 'grabar_audio.html', {'texto_grabado': texto_grabado, 'respuesta': respuesta})

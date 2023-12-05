@@ -11,18 +11,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
     
 </head>
+<style>
+    .alert_activity{
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 15px;
+        background-color: tomato;
+        color: white;
+        font-family: sans-serif;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
 <body>
-    {% include 'core/header.html' %}
-    <div class="flex items-center justify-center ">
-        <h1>Welcome to <br>
-            stories conections</h1>
-    </div>
     
+    {% include 'core/header.html' %}
+    <p class="id_user" style="display: none;">{{request.user.id}}</p>
+    <p class="alert_activity"></p>
     {% block content %}
-
+    
     {% endblock %}
 
     {% include 'core/footer.html' %}
 
+    <script src="{% static 'js/indexx.js' %}"></script>
 </body>
 </html>

@@ -50,7 +50,7 @@ pares = [
     ],
      [
         r"Quiero jugar un juego",
-        ["games.html"]
+        ["../juegos"]
     ],
      [
         r"Dónde guardo mis llaves generalmente",
@@ -76,6 +76,18 @@ pares = [
     [
         r"quién es Olga",
         ["La mejor orientadora del mundo",]
+    ],
+    [
+        r"Quiero ver el calendario",
+        ["../calendario"]
+    ],
+    [
+        r"qué día es hoy",
+        ["dia"]
+    ],
+    [
+        r"qué hora es",
+        ["hora"]
     ],
     [
         r"finalizar",
