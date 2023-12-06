@@ -8,7 +8,7 @@ from .forms import FormActivity, FormAction, FormObject,FormGame, FormMusic
 def calender(request):
     if request.method == 'POST':
         if 'formAction' in request.POST:
-            formAction = FormAction(request.POST)
+            formAction = FormAction(request.POST, request.FILES)
             if formAction.is_valid():
                 id = formAction.save()
                 Activity.objects.create(user=request.user, 
@@ -16,7 +16,7 @@ def calender(request):
                                         time=formAction.data["time"],
                                         id_action=id)
         elif 'formObject' in request.POST:
-                formObject = FormObject(request.POST)
+                formObject = FormObject(request.POST, request.FILES)
                 if formObject.is_valid():
                     id = formObject.save()
                     Activity.objects.create(user=request.user, 
