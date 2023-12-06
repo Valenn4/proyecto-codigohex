@@ -202,11 +202,17 @@ const months = [
         if(json.length>0){
           day.insertAdjacentHTML("beforeend", `<p>${i}</p>`)
           for(a of json){
-            let activity = a.id_music
             if(a.id_action!=null){
               let activity = a.id_action
-              day.insertAdjacentHTML("beforeend", `<p>${a.time}${activity.name}</p>`)
+              console.log(url)
+              day.insertAdjacentHTML("beforeend", `
+                <p>${a.time}${activity.name}</p>
+                <video width="700px" height="500px" controls>
+                  <source src="..${activity.video}" type="video/mp4">
+                </video>
+              `)
             } else if(a.id_music!=null){
+              let activity = a.id_music
               let time = a.time
               fetch(url, {
                     method: "POST",
@@ -257,7 +263,10 @@ const months = [
               day.insertAdjacentHTML("beforeend", `<p>${a.time}${activity.name}</p>`)
             } else if(a.id_object!=null){
               activity = a.id_object
-              day.insertAdjacentHTML("beforeend", `<p>${a.time}${activity.name}</p>`)
+              day.insertAdjacentHTML("beforeend", `
+                <p>${a.time}${activity.name}</p>
+                <img src="..${activity.image}">
+              `)
             }
 
           }
@@ -292,5 +301,3 @@ const months = [
     document.getElementById("monthYear").innerText = `${months[currentMonth]} ${currentYear}`;
     renderCalendar();
   });
-
-

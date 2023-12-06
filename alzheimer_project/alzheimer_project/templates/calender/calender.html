@@ -11,14 +11,14 @@
             <li id="option_game" onclick="clickOption('game')">Juego</li>
             <li id="option_music" onclick="clickOption('music')">Musica</li>
         </ul>
-        <form method="POST" class="formAction">
+        <form method="POST" class="formAction" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="date" name="date" id="id_date" required>
             <input type="time" name="time" id="id_time" required>
             {{formAction}}
             <input type="submit" value="Enviar" name="formAction">
         </form>
-        <form method="POST" class="formObject">
+        <form method="POST" class="formObject" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="date" name="date" id="id_date" required>
             <input type="time" name="time" id="id_time" required>
@@ -74,7 +74,7 @@
 
     <div class="reproductor"></div>
 
-    <script src="{%static 'js/calender/calenderrr.js'%}"></script>
+    <script src="{%static 'js/calender/calenderr.js'%}"></script>
 
 {% endblock %}
 

@@ -12,6 +12,6 @@ urlpatterns = [
     path('juegos/', include('games.urls')),
     path('sobre_nosotros/',about,name='about'),
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
