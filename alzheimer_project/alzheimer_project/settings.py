@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'authentication',
     'calender',
     'api',
-    'games'
+    'games',
+    'lilly'
 ]
 
 MIDDLEWARE = [

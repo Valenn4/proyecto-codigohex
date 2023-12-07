@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from authentication.models import User, Contact
 import cv2
 import threading
-import requests
 from time import sleep
 
 

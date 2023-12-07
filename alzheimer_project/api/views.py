@@ -7,6 +7,7 @@ from calender.models import Activity
 from authentication.models import User
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from lilly import chatbot
 # Create your views here.
 
 '''
@@ -64,8 +65,16 @@ class MusicView(viewsets.ViewSet):
 
 '''
 
+# Chatbot
+class ChatbotView(viewsets.ViewSet):
+    def list(self, request, message):
+        queryset = chatbot.chatear(message)
+        if queryset == None:
+            return Response('No hay respuesta', status=status.HTTP_200_OK)
+        return Response(queryset, status=status.HTTP_200_OK)
+
 # Open CV Sentimientos
-class FeelingUser(viewsets.ViewSet):
+class FeelingUserView(viewsets.ViewSet):
 
     def list(self, request, id):
         queryset = User.objects.get(id = id)
