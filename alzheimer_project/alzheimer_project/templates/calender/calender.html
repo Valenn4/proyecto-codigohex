@@ -29,7 +29,11 @@
             {% csrf_token %}
             <input type="date" name="date" id="id_date" required>
             <input type="time" name="time" id="id_time" required>
-            {{formGame}}
+            <select name="game">
+                {% for g in games %}
+                    <option>{{g.name}}</option>
+                {% endfor %}
+            </select>
             <input type="submit" value="Enviar" name="formGame">
         </form>
         <form method="POST" class="formMusic">
@@ -74,7 +78,7 @@
 
     <div class="reproductor"></div>
 
-    <script src="{%static 'js/calender/calenderr.js'%}"></script>
+    <script src="{%static 'js/calender/calender.js'%}"></script>
 
 {% endblock %}
 

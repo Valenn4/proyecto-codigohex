@@ -259,8 +259,17 @@ const months = [
                   })
                 
             } else if(a.id_game!=null){
-              activity = a.id_game
-              day.insertAdjacentHTML("beforeend", `<p>${a.time}${activity.name}</p>`)
+              let activity = a.id_game
+              day.insertAdjacentHTML("beforeend", `
+                <div id=${a.id}>
+                  <p>${a.time}</p>
+                  <p>Jugar:</p>
+                  <p>${activity.name}</p>
+                </div>
+              `)
+              document.getElementById(a.id).addEventListener("click", (e) => {
+                location.href = `../juegos/${activity.name.toLowerCase()}`
+              })
             } else if(a.id_object!=null){
               activity = a.id_object
               day.insertAdjacentHTML("beforeend", `
