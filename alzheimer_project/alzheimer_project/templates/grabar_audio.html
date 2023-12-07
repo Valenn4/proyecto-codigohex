@@ -1,33 +1,5 @@
-<!-- grabar_audio.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Grabar Audio</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
 
-        #content {
-            flex: 1;
-        }
-
-        #chatbot-container {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            background-color: #f0f0f0;
-            padding: 10px;
-        }
-    </style>
-</head>
-
-<body>
-    
+    {% load static %}
     <div id="chatbot-container">
         {% include 'mostrar_transcripcion.html' %}
     </div>
@@ -57,5 +29,4 @@
             .catch(error => console.error("Error:", error));
         });
     </script>
-</body>
-</html>
+

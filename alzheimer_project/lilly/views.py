@@ -19,6 +19,8 @@ def grabar_audio(request):
         
         
         try:
+            template_name = request.POST.get('template_name')
+            template2=f'{template_name}.html'
             texto_grabado = recognizer.recognize_google(audio, language='es-ES') 
             respuesta = chatear(texto_grabado)
             
@@ -37,18 +39,14 @@ def grabar_audio(request):
                
 
             # Renderizar la plantilla con la respuesta
-            return render(request, 'grabar_audio.html', {'texto_grabado': texto_grabado, 'respuesta': respuesta})
-
+            
+            return render(request, template2, {'texto_grabado': texto_grabado,'respuesta': respuesta,'template_name': template_name})
         except sr.UnknownValueError:
             texto_grabado = "Google Speech Recognition no pudo entender el audio"
-            return render(request, 'grabar_audio.html', {'texto_grabado': texto_grabado})
+            return render(request, template2, {'texto_grabado': texto_grabado})
 
         except sr.RequestError as e:
             texto_grabado = f"Error en la solicitud a Google Speech Recognition; {e}"
-            return render(request, 'grabar_audio.html', {'texto_grabado': texto_grabado})
+            return render(request, template2, {'texto_grabado': texto_grabado})
 
-    return render(request, 'grabar_audio.html')
-#def mostrar_transcripcion(request):
- #   texto_grabado = request.session.get('texto_grabado', 'No hay texto grabado')
-
-  #  return render(request, 'mostrar_transcripcion.html', {'texto_grabado': texto_grabado})
+    return render(request, template2)

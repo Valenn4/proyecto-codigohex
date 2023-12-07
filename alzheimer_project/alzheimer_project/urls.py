@@ -10,7 +10,7 @@ urlpatterns = [
     path('', include('calender.urls')),
     path('api/', include('api.urls')),
     path('sobre_nosotros/',about),
-    path("Speech/", include('lilly.urls')),
+    path('lilly', include('lilly.urls')),
     path('juegos/', include('games.urls')),
     path('sobre_nosotros/',about,name='about'),
     path('calendario/', include('calender.urls')),

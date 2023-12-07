@@ -88,3 +88,16 @@ setInterval(() => {
         })
       })
 },1000);
+document.addEventListener("DOMContentLoaded", function () {
+    var toggleButton = document.getElementById("toggleDropdown");
+    var dropdownContent = document.getElementById("dropdownContent");
+    dropdownContent.style.display = "block"
+
+    toggleButton.addEventListener("click", function () {
+        if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+            dropdownContent.style.display = "block";
+        } else {
+            dropdownContent.style.display = "none";
+        }
+    });
+});
