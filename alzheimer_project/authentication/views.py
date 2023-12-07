@@ -4,12 +4,12 @@ from .forms import FormRegister, FormLogin
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
-from authentication.models import User
+from authentication.models import User, Contact
 import cv2
 import threading
-import queue
+import requests
+from time import sleep
 
-result_emotion_queue = queue.Queue()
 
 # Create your views here.
 class VideoCaptureThread(threading.Thread):
@@ -29,14 +29,11 @@ class VideoCaptureThread(threading.Thread):
 
     def stop(self):
         self.stop_event.set()
-
 video_capture_thread = None
-
 def start_video_capture(result_emotion_callback):
     global video_capture_thread
     video_capture_thread = VideoCaptureThread(result_emotion_callback)
     video_capture_thread.start()
-
 def stop_video_capture():
     global video_capture_thread
     if video_capture_thread:
@@ -100,6 +97,16 @@ def capture_faces(imagen):
 
 @login_required(redirect_field_name=None, login_url="login")
 def home(request):
+    '''
+    result_emotion_lock = threading.Lock()
+    def result_emotion_callback(emotion):
+        with result_emotion_lock:
+            requests.post(f'http://127.0.0.1:8000/api/feeling/{request.user.id}', data={"feeling":emotion})
+            sleep(0.2)
+
+
+    start_video_capture(result_emotion_callback)
+    '''
     return render(request, 'home.html')
 
 @login_required(redirect_field_name=None, login_url="login")
@@ -111,28 +118,21 @@ def profile(request):
             "Etapa 4. Declive cognitivo leve.(Demencia leve).",
             "Etapa 5. Declive cognitivo moderado."
         ]
-    
-    result_emotion = result_emotion_queue.get()
-    # Usa un objeto de bloqueo para sincronizar el acceso a result_emotion
-    result_emotion_lock = threading.Lock()
-
-    def result_emotion_callback(emotion):
-        nonlocal result_emotion
-        with result_emotion_lock:
-            result_emotion = emotion
-
-    start_video_capture(result_emotion_callback)
 
     if request.user.etapa != None:
         etapas_alzheimer.remove(request.user.etapa)
 
+    contact_user = ''
+    if Contact.objects.filter(user=request.user).count()!=0:
+        contact_user = Contact.objects.get(user=request.user)
+
     context = {
         "etapas_alzheimer": etapas_alzheimer,
-        'cv': result_emotion
-
+        "contact_user": contact_user
     }
 
     if request.method == 'POST':
+        # MODEL USER
         user = User.objects.get(id=request.user.id)
         if request.POST["fecha_nacimiento"] != '':
             user.fecha_nacimiento = request.POST["fecha_nacimiento"]
@@ -143,6 +143,27 @@ def profile(request):
         if request.POST["numero_telefono"] != '':
             user.numero_telefono = request.POST["numero_telefono"]
         user.save()
+
+        # MODEL 
+        if Contact.objects.filter(user=request.user).count()!=0:
+            contact = Contact.objects.get(user=request.user)
+            contact.firstname = request.POST["firstname_contact"]
+            contact.lastname = request.POST["lastname_contact"]
+            contact.number_phone = request.POST["phone_contact"]
+            contact.address = request.POST["address_contact"]
+            contact.email = request.POST["email_contact"]
+            contact.save()
+        else:
+            new_contact = Contact.objects.create(
+                user = request.user,
+                firstname = request.POST["firstname_contact"],
+                lastname = request.POST["lastname_contact"],
+                number_phone = request.POST["phone_contact"],
+                address = request.POST["address_contact"],
+                email = request.POST["email_contact"]
+            )
+            new_contact.save()
+
         return redirect("profile")
     return render(request,"authentication/profile.html", context)
     

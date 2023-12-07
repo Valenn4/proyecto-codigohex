@@ -1,3 +1,14 @@
+/*setInterval(() => {
+    fetch(`http://127.0.0.1:8000/api/feeling/${document.querySelector(".id_user").innerHTML}`)
+    .then(response => response.json())
+    .then(json => {
+        document.querySelector(".alert_feeling").style.display = 'block'
+        document.querySelector(".alert_feeling").innerHTML = json["feeling"]
+    })
+}, 2500);
+*/
+
+
 let alert_activity = document.querySelector(".alert_activity")
 
 setInterval(() => {

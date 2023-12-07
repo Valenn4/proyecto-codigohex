@@ -10,8 +10,8 @@ class Game(models.Model):
 
 class Action(models.Model):
     name= models.CharField(max_length=100, null=False)
-    video = models.TextField(null=False)
     description = models.TextField(null=False)
+    video = models.FileField(upload_to="videos/", null=False)
 
 class Music(models.Model):
     id_music = models.CharField(max_length=200, null=False)
@@ -21,7 +21,7 @@ class Music(models.Model):
 class Object(models.Model):
     name= models.CharField(max_length=100, null=False)
     description = models.TextField(null=False)
-    image = models.TextField(null=False)
+    image = models.ImageField(upload_to="images/", null=False)
 
 class Activity(models.Model):
     user = models.ForeignKey(to=User, null=False, on_delete=models.CASCADE)

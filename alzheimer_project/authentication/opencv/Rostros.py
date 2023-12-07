@@ -16,10 +16,6 @@ media = [104, 117, 123]
 umbral = 0.7
 
 
-def result(img):
-    return img
-
-
 # Empezamos
 while True:
 
