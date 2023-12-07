@@ -5,11 +5,16 @@ body{
     font-family: 'Montserrat', sans-serif;
 
 }
+
 #principal #oboutus #formu{
     width: 100%;
     margin: auto;
 }
-
+.centrado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* ---Login--- */
 .login{
     box-shadow: -10px -0px 50px 0px #8999ff;
@@ -19,8 +24,7 @@ body{
     box-shadow: -10px 0px 50px 0px #8999ff;
 }
 
-/* ---header--- */
-.acordeon{
-    flex-direction: column;
-}
 
+.datos{
+    padding: 50px;
+}

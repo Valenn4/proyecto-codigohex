@@ -5,18 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RECUERDA ME/TE</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-    {% include 'core/header.html' %}
-    <div class="flex items-center justify-center ">
-        <h1>Welcome to <br>
-            stories conections</h1>
-    </div>
+<body class="font-body">
+                    <!-- home section -->
+        <section class="bg-white mb-20 md:mb-52 xl:mb-65">
+            <div class="container max-w-screen-xl mx-auto px-4">
+                {% include 'core/header.html' %}
+                
+                <div class="flex items-center justify-center xl:justify-start">
+                    <div class="mt-28 text-center xl:text-left">
+                        <h1 class="font-semibold text-4xl md:text-6xl lg:text-7xl primario leading-normal mb-6">Tu aliado virtual</h1>
+                            <p class="font-normal text-xl text-gray-400 leading-relaxed mb-12">Únete a nosotros en este viaje hacia el bienestar<br> emocional y la conexión significativa. Estamos listos <br>para ser ese compañero confiable que transforma cada día<br> 
+                                en una historia llena de emociones y recuerdos preciosos</p>
+                            <p class="font-normal text-l text-gray-400 leading-relaxed mb-12">¡Descúbrelo ahora y haz que cada momento cuente!</p>
+                            <button class="px-6 py-4 bg-gray-800 text-white font-semibold text-lg rounded-xl hover:bg-gray-400 transition ease-in-out duration-500">Registrate</button>
+                    </div>
+                    <div class="hidden xl:block xl:absolute z-0 top-0 right-0">
+                        <img src="{% static 'img/principal1.png'%}" alt="Home img">
+                    </div>
+                </div>
+            </div> <!-- container.// -->
+        </section>
+        <!-- home section //nd -->
+    
+        <!-- feature section -->
+        <section class="bg-white py-10 md:py-16 xl:relative">
+
+            <div class="container max-w-screen-xl mx-auto px-4">
+
+            <div class="flex flex-col xl:flex-row justify-end">
+
+                    <div class="hidden xl:block xl:absolute left-0 bottom-0 w-full">
+                        <img src="{% static 'img/principal3.png'%}" alt="Feature img">
+                    </div>
+
+                    <div class="">
+
+                        <h1 class="font-semibold primario text-xl md:text-4xl text-center leading-normal mb-10">Te brindamos numerosas facilidades </h1>
+
+                        <p class="font-normal text-gray-400 text-md md:text-xl text-center mb-16">Tu Asistente Virtual ajustará sus interacciones para ofrecerte consuelo y entretenimiento, <br>
+                            por supuesto, los recuerdos son tesoros que atesoramos con cariño</p>
+
+                        <div class="flex flex-col md:flex-row justify-center xl:justify-start space-x-4 mb-20">
+                            <div class="px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0">
+                                <img src="{% static 'img/calendario.png'%}" alt="calendario img" class="w-20">
+                            </div>
+                            
+                            <div class="text-center md:text-left">
+                                <h4 class="font-semibold secundario text-2xl mb-2">Recordatorio de Tareas Diarias</h4>
+                                <p class="font-normal text-gray-400 text-l leading-relaxed">El asistente virtual ayuda a las personas con Alzheimer a recordar
+                                    y realizar<br> sus tareas diarias, proporcionando orientación y recordatorios personalizados.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row justify-center xl:justify-start space-x-4 mb-20">
+                            <div class="px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0">
+                                <img src="{% static 'img/felicidad.png'%}" alt="Felicidad" class="w-20">
+                            </div>
+
+                            <div class="text-center md:text-left">
+                                <h4 class="font-semibold secundario text-2xl mb-2">Detección Emocional</h4>
+                                <p class="font-normal text-gray-400 text-l leading-relaxed">Utilizando la tecnología de identificación facial, el asistente puede reconocer 
+                                    <br>las emociones de los usuarios. Si detecta tristeza, puede ofrecer actividades<br> y juegos diseñados para mejorar el estado de ánimo.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row justify-center xl:justify-start space-x-4">
+                            <div class="px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0">
+                                <img src="{% static 'img/entretenimiento.png'%}" alt="entretenimiento" class="w-20">
+                            </div>
+
+                            <div class="text-center md:text-left">
+                                <h4 class="font-semibold secundario text-2xl mb-2">Entretenimiento Terapéutico</h4>
+                                <p class="font-normal text-gray-400 text-l leading-relaxed">El proyecto incluye funciones de entretenimiento, como juegos interactivos y la 
+                                    <br>reproducción de música seleccionada para mejorar el bienestar emocional <br>de los usuarios.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+            </div>
+
+            </div> <!-- container.// -->
+
+        </section>
+        <!-- feature section //end -->
+        
+        <script>
+            feather.replace()
+        </script>
+
+    </body>
+</html>
     
     {% block content %}
 
