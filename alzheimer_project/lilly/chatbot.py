@@ -1,6 +1,5 @@
 from nltk.chat.util import Chat, reflections
 from datetime import datetime
-
 mis_reflexions = {
 "ir": "fui",
 "hola": "hey"
@@ -51,20 +50,40 @@ pares = [
     ],
     
     [
-        r"(.*) Spotify ?",
-        ["Quieres escuchar un artista, canción o Playlist?",]
+        r"(.*) Spotify ?|Quiero escuchar música|Quiero escuchar musica",
+        ["Quieres escuchar un artista, canción, playlist o album?",]
     ],
     [
-        r"(.*) canción ",
-        ["De que artista?",]
+        r"Quiero escuchar una cancion|Quiero escuchar una canción",
+        ["Cuál es el nombre de la canción?",]
     ],
     [
-        r"(.*) álbum ",
-        ["De que artista?",]
+        r"Quiero escuchar una playlist",
+        ["Cuál es el nombre de la playlist?",]
     ],
     [
-        r"(.*) playlist ",
-        ["De que artista?",]
+        r"Quiero escuchar un album",
+        ["Cuál es el nombre del album?",]
+    ],
+    [
+        r"Quiero escuchar un artista",
+        ["Cuál es el nombre del artista?",]
+    ],
+    [
+        r"La cancion se llama (.*)|La canción se llama (.*)",
+        ["track:http://127.0.0.1:8000/api/spotify/%1",]
+    ],
+    [
+        r"El album se llama (.*)",
+        ["album:http://127.0.0.1:8000/api/spotify/%1",]
+    ],
+    [
+        r"La playlist se llama (.*)",
+        ["playlist:http://127.0.0.1:8000/api/spotify/%1",]
+    ],
+    [
+        r"El artista se llama (.*)",
+        ["artist:http://127.0.0.1:8000/api/spotify/%1",]
     ],
     [
         r"quién es Olga",
@@ -73,6 +92,10 @@ pares = [
     [
         r"Quiero ver el calendario",
         ["../calendario"]
+    ],
+    [
+        r"Quién es mi contacto de emergencia|Quien es mi contacto de emergencia",
+        ["contacto de emergencia"]
     ],
     [
         r"qué día es hoy",
@@ -91,7 +114,6 @@ pares = [
 chat = Chat(pares, mis_reflexions)
 
 def chatear(mensaje):
-    
     chat = Chat(pares, mis_reflexions)
     x=chat.respond(mensaje)
     return x

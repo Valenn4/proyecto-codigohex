@@ -2,9 +2,9 @@ import datetime
 import requests
 from django.shortcuts import render
 from rest_framework import viewsets, status
-from .serializers import ActivitySerializer, UserFeelingSerializer
+from .serializers import ActivitySerializer, UserFeelingSerializer, ContactSerializer
 from calender.models import Activity
-from authentication.models import User
+from authentication.models import User, Contact
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from lilly import chatbot
@@ -70,8 +70,8 @@ class ChatbotView(viewsets.ViewSet):
     def list(self, request, message):
         queryset = chatbot.chatear(message)
         if queryset == None:
-            return Response('No hay respuesta', status=status.HTTP_200_OK)
-        return Response(queryset, status=status.HTTP_200_OK)
+            return Response({"message":message, "respuesta":'No hay respuesta'}, status=status.HTTP_200_OK)
+        return Response({"message":message, "respuesta":queryset}, status=status.HTTP_200_OK)
 
 # Open CV Sentimientos
 class FeelingUserView(viewsets.ViewSet):
@@ -107,7 +107,6 @@ class ActivityByUserDateView(viewsets.ViewSet):
         else:
             return Response("No tienes acceso a este sitio", status=status.HTTP_401_UNAUTHORIZED)
         
-    
 class ActivityByUserView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
     
@@ -171,4 +170,18 @@ class GetMusicsAPI(viewsets.ViewSet):
         response = requests.get(api_url, headers=headers)
         if response.status_code == 200:
             spotify_data = response.json()
-            return Response(spotify_data)
+            return Response(spotify_data, status=status.HTTP_200_OK)
+    
+        
+
+class ContactView(viewsets.ViewSet):
+    permission_classes=[IsAuthenticated]
+
+    def list(self, request):
+        try:
+            queryset = Contact.objects.get(user=request.user)
+            serializer = ContactSerializer(queryset)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except: 
+            return Response('No has cargado a ningún contacto')
+    
