@@ -50,7 +50,7 @@ setInterval(() => {
                                 alert_activity.style.display = 'block'
                                 alert_activity.innerHTML = "Hay una actividad para realizar"
                                 setTimeout(() => {
-                                    alert_activity.innerHTML = ''
+                                    alert_activity.style.display = 'none'
                                 }, 5000);
                             }
                         } else {

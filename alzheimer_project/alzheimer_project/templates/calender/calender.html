@@ -3,7 +3,7 @@
 {% block content %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
-
+    <p class="error" style="display:none; position: fixed; top: 15px; left: 15px; background-color: red; color: white; padding: 5px;">{{error}}</p>
     <div class="formActivity">
         <ul>
             <li id="option_action" onclick="clickOption('action')">Accion</li>
@@ -78,7 +78,7 @@
 
     <div class="reproductor"></div>
 
-    <script src="{%static 'js/calender/calender.js'%}"></script>
+    <script src="{%static 'js/calender/calenderr.js'%}"></script>
 
 {% endblock %}
 

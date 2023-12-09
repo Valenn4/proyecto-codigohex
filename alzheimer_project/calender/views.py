@@ -7,6 +7,20 @@ from .forms import FormAction, FormObject, FormMusic
 @login_required(redirect_field_name=None, login_url='login')
 def calender(request):
     if request.method == 'POST':
+        if Activity.objects.filter(date=request.POST["date"], time=request.POST["time"]).count()>0:
+            formAction = FormAction()
+            formObject = FormObject()
+            formMusic = FormMusic()
+            context = {
+                "activities": Activity.objects.filter(user=request.user),
+                'games': Game.objects.all(),
+                'formAction': formAction,
+                'formObject': formObject,
+                'formMusic': formMusic,
+                'error':'Ya hay cargada una tarea en el mismo horario.'
+            }
+            return render(request,'calender/calender.html', context)
+        
         if 'formAction' in request.POST:
             formAction = FormAction(request.POST, request.FILES)
             if formAction.is_valid():

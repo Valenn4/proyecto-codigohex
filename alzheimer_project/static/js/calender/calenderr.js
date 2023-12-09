@@ -7,7 +7,6 @@ data.append("grant_type", "client_credentials");
 data.append("client_id", client_id);
 data.append("client_secret", client_secret);
 
-
 const formAction = document.querySelector(".formAction")
 const formObject = document.querySelector(".formObject")
 const formGame = document.querySelector(".formGame")
@@ -16,6 +15,14 @@ const formMusic = document.querySelector(".formMusic")
 formObject.style.display = 'none'
 formMusic.style.display = 'none'
 formGame.style.display = 'none'
+
+let error = document.querySelector(".error")
+if(error.innerHTML == 'Ya hay cargada una tarea en el mismo horario.'){
+  error.style.display = 'block'
+  setTimeout(() => {
+    error.style.display = 'none'
+  }, 5000);
+}
 
 function clickOption(option){
   switch(option){
