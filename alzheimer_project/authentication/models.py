@@ -12,6 +12,7 @@ relationships = (
 
 
 class User(AbstractUser):
+    avatar = models.ImageField(upload_to="avatar/", default="user.jpg")
     fecha_nacimiento = models.DateField(blank=True, null=True)
     direccion = models.CharField(max_length=100, blank=True, null=True)
     codigo_postal = models.CharField(blank=True, null=True, max_length=6)

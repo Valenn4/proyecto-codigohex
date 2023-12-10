@@ -18,15 +18,8 @@
     <div id="formu"> 
         <div class="grid grid-cols-2 gap-8">
             <div class=" mt-4 datos ">
-                <div class=" mt-4 ">
-                    <form action="#" method="post" enctype="multipart/form-data">
-                        <label for="fotoPerfil">Selecciona tu foto de perfil:</label>
-                        <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
-                        <br>
-                        <input type="submit" value="Cargar Foto">
-                    </form>
-                </div>
-                <form name="form_user" method="post">
+                <form name="form_user" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="forms" style="display:flex">
                         <div>
                             <div>
@@ -34,8 +27,11 @@
                                     <h3 class="text-blue-900 m-10">Datos de usuario</h3>
                                 </div>
                             </div>
+                            
                             <div style="display: flex;">
                                 <div>
+                                    <img style="width:150px" src="../media/{{request.user.avatar}}">
+                                    <input type="file" id="avatar" name="avatar" accept="image/*">
                                     <p>
                                     <label for="nombre" class="block text-gray-700 text-sm font-bold">Nombre:</label>
                                     <input type="text" id="nombre" name="first_name" value="{{request.user.first_name}}" disabled class=" py-2 px-4 mt-2 border rounded-md focus:outline-none focus:border-blue-500">
@@ -49,12 +45,16 @@
                                     <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                                     <p class="value_fecha" style="display:none">{{request.user.fecha_nacimiento}}</p>
                                     </p>
+                                </div>
+                                <div> 
                                     <p>
                                     <label for="direccion" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
                                     <input type="text" id="direccion" name="direccion" value="{{request.user.direccion}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
                                     </p>
-                                </div>
-                                <div> 
+                                    <p>
+                                    <label for="codigo_postal" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
+                                    <input type="number" id="codigo_postal" name="codigo_postal" value="{{request.user.codigo_postal}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
                                     <p>
                                     <label for="medicacion" class="block text-gray-700 text-sm font-bold mt-5">Medicación:</label>
                                     <input type="text" id="medicacion" name="medicacion" value="{{request.user.medicacion}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
@@ -112,7 +112,7 @@
                             </p>
                         </div>
                     </div>
-                    <input type="submit" value="Actualizar">
+                    <input type="submit" value="Actualizar" style="background-color:tomato; padding:10px; color:white">
                 </form>
             </div>
         </div>

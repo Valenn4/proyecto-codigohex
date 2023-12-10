@@ -132,6 +132,8 @@ def profile(request):
     if request.method == 'POST':
         # MODEL USER
         user = User.objects.get(id=request.user.id)
+        if request.FILES["avatar"] != '':
+            user.avatar = request.FILES["avatar"]
         if request.POST["fecha_nacimiento"] != '':
             user.fecha_nacimiento = request.POST["fecha_nacimiento"]
         user.direccion = request.POST["direccion"]
@@ -142,7 +144,7 @@ def profile(request):
             user.numero_telefono = request.POST["numero_telefono"]
         user.save()
 
-        # MODEL 
+        # MODEL CONTACT
         if Contact.objects.filter(user=request.user).count()!=0:
             contact = Contact.objects.get(user=request.user)
             contact.firstname = request.POST["firstname_contact"]
