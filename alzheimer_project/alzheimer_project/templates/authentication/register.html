@@ -1,41 +1,47 @@
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <main class="main">
-        
-        <form method="POST">
+
+    <main class="main flex justify-center items-center h-screen">
+        <form method="POST" class="bg-white p-8 rounded border-1 border-blue-800  register">
             {% csrf_token %}
-            <div class="div_input">
-                <label>Usuario</label>
+            <div class="div_input ">
+                <labe class="block text-gray-700 text-sm font-bold mb-2">Usuario</label>
                 {{form.username}}
             </div>
-            <div class="div_input">
-                <label>Nombre</label>
+            <div class="div_input mt-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
                 {{form.first_name}}
             </div>
-            <div class="div_input">
-                <label>Apellido</label>
+            <div class="div_input mt-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Apellidos</label>
                 {{form.last_name}}
             </div>
-            <div class="div_input">
-                <label>Correo electrónico</label>
+            <div class="div_input mt-3">
+                <labe class="block text-gray-700 text-sm font-bold mb-2">Correo electrónico</label>
                 {{form.email}}
             </div>
-            <div class="div_input">
-                <label>Contraseña</label>
+            <div class="div_input mt-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
                 {{form.password1}}
             </div>
-            <div class="div_input">
-                <label>Repetir contraseña</label>
+            <div class="div_input mt-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Repetir contraseña</label>
                 {{form.password2}}
             </div>
-            <p>{{error}}</p>
-            <input type="submit" value="Registrarse">
-        </form>
+            <p class="text-red-500" >{{error}}</p>
+            <div class=" flex items-center justify-center mt-4">
+                <input type="submit" value="Registrarse"  class="bg-blue-500 text-white px-4 py-2 rounded">
+            </div>
+            </form>
     </main>
 </body>
+<script src="{% static 'js/authentication/register.js'%}"></script>
 </html>

@@ -6,107 +6,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RECUERDA ME/TE</title>
     <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
 </head>
 
 {% block content %}
-<body>
-    <div id="formu">
-        {{cv}}
-        <div class="fila centrar-horizontal">
-            <div class="col-12">
-                <section>
-                    <h3>Datos de usuario</h3>
-                        <form name="form_user" method="post">
-                            {% csrf_token %}
-                            <p>
-                            <label for="nombre">Nombre:</label><br>
-                            <input type="text" id="nombre" name="first_name" value="{{request.user.first_name}}" disabled>
-                            </p>
-                            <p>
-                            <label for="apellido">Apellido:</label><br>
-                            <input type="text" id="apellido" name="last_name" value="{{request.user.last_name}}" disabled>
-                            </p>
-                            <p>
-                            <label for="fecha">Fecha de nacimiento:</label><br>
-                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
-                            <p class="value_fecha" style="display:none">{{request.user.fecha_nacimiento}}</p>
-                            </p>
-                            <p>
-                            <label for="direccion">Dirección:</label><br>
-                            <input type="text" id="direccion" name="direccion" value="{{request.user.direccion}}">
-                            </p>
-                            <p>
-                            <label for="codigopostal">Código postal:</label><br>
-                            <input type="text" id="postal" name="codigo_postal" value="{{request.user.codigo_postal}}">
-                            </p>
-                            <p>
-                            <label for="medicacion">Medicación:</label><br>
-                            <input type="text" id="medicacion" name="medicacion" value="{{request.user.medicacion}}">
-                            </p>
-                            <p>
-                            <label for="telefono">Número de telefono:</label><br>
-                            <input type="number" id="telefono" name="numero_telefono" value="{{request.user.numero_telefono}}">
-                            </p>
-                            <p>
-                            <label for="opciones">¿Cuál es tu etapa?</label><br>
-                            <select id="etapa" name="etapa">
-                                {% for el in etapas_alzheimer %}
-                                    {% if el == request.user.etapa %}
-                                        {% if request.user.etapa != None %}
-                                        <option value="{{request.user.etapa}}" selected>{{request.user.etapa}}</option>
-                                        {% endif %}
-                                    {% else %}
-                                    <option value="{{el}}">{{el}}</option>
-                                    {% endif %}
-                                {% endfor %}
-                                
-                            </select>
-                            </p>
-                            <p>
-                            <label for="email">Correo Electrónico:</label><br>
-                            <input type="email" id="email" name="email" value="{{request.user.email}}" disabled>
-                            </p>
-
-                            <h3> Datos de contacto </h3>
-                        <p>
-                        <label for="nombrecontacto">Nombre:
-                        </label><br>
-                        <input type="text" id="firstname_contact" name="firstname_contact" value="{{contact_user.firstname}}">
-                        </p>
-                        <p>
-                        <label for="apellidocontacto">Apellido:</label><br>
-                        <input type="text" id="lastname_contact" name="lastname_contact" value="{{contact_user.lastname}}">
-                        </p>
-                        <p>
-                        <label for="telefonocontacto">Número de telefono:</label><br>
-                        <input type="number" id="phone_contact" name="phone_contact" pattern="[0-9]+" value="{{contact_user.number_phone}}">
-                        </p>
-                        <p>
-                        <label for="direccioncontacto">Dirección:</label><br>
-                        <input type="text" id="address_contact" name="address_contact" value="{{contact_user.address}}">
-                        </p>
-                        <p>
-                        <label for="emailcontacto">Correo Electrónico:</label><br>
-                        <input type="email" id="email_contact" name="email_contact" value="{{contact_user.email}}">
-                        </p>
-
-                        <input type="submit" value="Actualizar">
+<body class="font-body">
+    <div id="formu"> 
+        <div class="grid grid-cols-2 gap-8">
+            <div class=" mt-4 datos ">
+                <div class=" mt-4 ">
+                    <form action="#" method="post" enctype="multipart/form-data">
+                        <label for="fotoPerfil">Selecciona tu foto de perfil:</label>
+                        <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
+                        <br>
+                        <input type="submit" value="Cargar Foto">
                     </form>
-                </section>
+                </div>
+                <form name="form_user" method="post">
+                    <div class="forms" style="display:flex">
+                        <div>
+                            <div>
+                                <div class="centrado">
+                                    <h3 class="text-blue-900 m-10">Datos de usuario</h3>
+                                </div>
+                            </div>
+                            <div style="display: flex;">
+                                <div>
+                                    <p>
+                                    <label for="nombre" class="block text-gray-700 text-sm font-bold">Nombre:</label>
+                                    <input type="text" id="nombre" name="first_name" value="{{request.user.first_name}}" disabled class=" py-2 px-4 mt-2 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="apellido" class="block text-gray-700 text-sm mt-5 font-bold">Apellido:</label>
+                                    <input type="text" id="apellido" name="last_name" value="{{request.user.last_name}}" disabled class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="fecha" class="block text-gray-700 text-sm font-bold mt-5">Fecha de nacimiento:</label>
+                                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    <p class="value_fecha" style="display:none">{{request.user.fecha_nacimiento}}</p>
+                                    </p>
+                                    <p>
+                                    <label for="direccion" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
+                                    <input type="text" id="direccion" name="direccion" value="{{request.user.direccion}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                </div>
+                                <div> 
+                                    <p>
+                                    <label for="medicacion" class="block text-gray-700 text-sm font-bold mt-5">Medicación:</label>
+                                    <input type="text" id="medicacion" name="medicacion" value="{{request.user.medicacion}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="telefono" class="block text-gray-700 text-sm font-bold mt-5">Número de telefono:</label>
+                                    <input type="number" id="telefono" name="numero_telefono" value="{{request.user.numero_telefono}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="opciones" class="block text-gray-700 text-sm font-bold mt-5">Selecciona una opción:</label>
+                                    <select id="etapa" name="etapa" >
+                                        {% for el in etapas_alzheimer %}
+                                            {% if el == request.user.etapa %}
+                                                {% if request.user.etapa != None %}
+                                                <option value="{{request.user.etapa}}" selected>{{request.user.etapa}}</option>
+                                                {% endif %}
+                                            {% else %}
+                                            <option value="{{el}}">{{el}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    </p>
+                                    <p>
+                                    <label for="email"class="block text-gray-700 text-sm font-bold mt-5">Correo Electrónico:</label>
+                                    <input type="email" id="email" name="email" value="{{request.user.email}}" disabled class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="centrado" >
+                                <h3 class="text-blue-900 m-10"> Datos de contacto </h3>
+                            </div>
+
+                            <p>
+                            <label for="nombrecontscto" class="block text-gray-700 text-sm font-bold mt-5 ">Nombre:
+                            </label>
+                            <input type="text" id="firstname_contact" name="firstname_contact" value="{{contact_user.firstname}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500"> 
+                            </p>
+                            <p>
+                            <label for="apellidocontacto" class="block text-gray-700 text-sm font-bold mt-5">Apellido:</label>
+                            <input type="text" id="lastname_contact" name="lastname_contact" value="{{contact_user.lastname}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                            </p>
+                            <p>
+                            <label for="telefonocontacto" class="block text-gray-700 text-sm font-bold mt-5">Número de telefono:</label>
+                            <input type="number" id="phone_contact" name="phone_contact" pattern="[0-9]+" value="{{contact_user.number_phone}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                            </p>
+                            <p>
+                            <label for="direccioncontacto" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
+                            <input type="text" id="address_contact" name="address_contact" value="{{contact_user.address}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                            </p>
+                            <p>
+                            <label for="emailcontacto" class="block text-gray-700 text-sm font-bold mt-5">Correo Electrónico:</label>
+                            <input type="email" id="email_contact" name="email_contact" value="{{contact_user.email}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                            </p>
+                        </div>
+                    </div>
+                    <input type="submit" value="Actualizar">
+                </form>
             </div>
         </div>
-        <!--
-        <div class="fila centrar-horizontal">
-            <div class="col-12">
-                <input type="checkbox" id="terminos" name="terminos" required>
-                <label for="terminos">Acepto los términos y condiciones</label>
-                <input type="submit" value="Enviar">
-        </div>
-        -->
-        </div>
+        
     </div>
 
     <script>

@@ -94,7 +94,6 @@ def capture_faces(imagen):
                 return 'Es un rostro'
             return 'No es un rostro'
 
-@login_required(redirect_field_name=None, login_url="login")
 def home(request):
     '''
     result_emotion_lock = threading.Lock()

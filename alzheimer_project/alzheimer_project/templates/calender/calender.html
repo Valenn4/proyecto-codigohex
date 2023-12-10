@@ -1,9 +1,19 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+<body class="font-body">
     <p class="error" style="display:none; position: fixed; top: 15px; left: 15px; background-color: red; color: white; padding: 5px;">{{error}}</p>
+    <section class="bg-white mb-10 md:mb-42 xl:mb-62">
+        <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="flex items-center justify-center xl:justify-start">
+                <div class="mt-18 text-center xl:text-center">
+                        <h1 class="font-semibold text-5xl md:text-6xl lg:text-5xl primario leading-normal mb-10">Calendario</h1>
+                </div>
+            </div>
+        </div> <!-- container.// -->
+    </section>
     <div class="formActivity">
         <ul>
             <li id="option_action" onclick="clickOption('action')">Accion</li>
@@ -79,7 +89,7 @@
     <div class="reproductor"></div>
 
     <script src="{%static 'js/calender/calenderr.js'%}"></script>
-
+</body>
 {% endblock %}
 
 
