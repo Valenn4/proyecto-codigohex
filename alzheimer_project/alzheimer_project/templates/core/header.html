@@ -1,35 +1,41 @@
 {%load static%}
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
 <header>
 <body>
-        <nav class="flex items-center justify-between flex-wrap p-6">
+    <nav class="flex-wrap  lg:flex items-center py-14 xl:relative z-10" x-data="{navbarOpen:false}">
 
             <div class="flex items-center flex-shrink-0 text-white mr-6">
                 <a href="{%url 'home'%}">
                     <img src=" {% static 'img/LogoSinfondo.png'%}" alt="Header Image" class="w-20  h-16 mx-auto">
                     <span class="font-semibold text-xl tracking-tight text-blue-800">Recuerdate</span>
 
-                </a>
-            </div>
+        </a>
 
-            <div class="block lg:hidden">
-              <button id='boton' class="flex items-center px-3 py-2 border rounded text-black-200 border-blue-800 hover:text-black hover:border-black">
-               <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-              </button>
-            </div>
+        <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center text-gray-800 border border-gray-800 rounded-md" @click="navbarOpen = !navbarOpen">
+            <i data-feather="menu"></i>
+        </button>
+    </div>
+    <ul class="lg:flex flex-col lg:flex-row  text-nav secundario lg:items-center lg:mx-auto lg:space-x-8 xl:space-x-16" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+      
+        <li class="font-semibold   hover:text-gray-400 px-6 transition ease-in-out duration-300 mb-5 lg:mb-0">
+            <a href="{%url 'about'%}">About us</a>
+        </li>
 
-            <div id='menu' class="w-full block flex-grow lg:flex lg:items-center lg:w-auto font-bold">
-              <div class="text-lg lg:flex-grow lg:flex lg:justify-center">
-                <a href="{%url 'about'%}" class="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-blue-800 mr-4">About us</a>
-                <a href="{%url 'profile'%}" class="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-blue-800 mr-4">Mis Datos</a>
-                <a href="{%url 'calender'%}" class="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-blue-800 mr-4">Mi calendario</a>
-                <a href="{%url 'games'%}" class="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-blue-800 mr-4">Juegos</a>
-              </div>
-            </div>
+        <li class="font-semibold  hover:text-gray-400 px-6 transition ease-in-out duration-300 mb-5 lg:mb-0">
+            <a href="{%url 'profile'%}">Mis Datos</a>
+        </li>
 
-          </nav>
-    <script src= "{% static 'js/menu/menu.js' %}"></script>
+        <li class="font-semibold  hover:text-gray-400 px-6 transition ease-in-out duration-300 mb-5 lg:mb-0">
+            <a href="{%url 'calender'%}">Mi calendario</a>
+        </li>
+        <li class="font-semibold hover:text-gray-400 px-6  transition ease-in-out duration-300 mb-5 lg:mb-0">
+          <a href="%url 'games'%">Juegos</a>
+      </li>
+    </ul>
+    
+    </nav>
+
 </body>
 </header>
