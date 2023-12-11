@@ -1,14 +1,28 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Activity
-from .forms import FormActivity, FormAction, FormObject,FormGame, FormMusic
+from .models import Activity, Game
+from .forms import FormAction, FormObject, FormMusic
 # Create your views here.
 
 @login_required(redirect_field_name=None, login_url='login')
 def calender(request):
     if request.method == 'POST':
+        if Activity.objects.filter(date=request.POST["date"], time=request.POST["time"]).count()>0:
+            formAction = FormAction()
+            formObject = FormObject()
+            formMusic = FormMusic()
+            context = {
+                "activities": Activity.objects.filter(user=request.user),
+                'games': Game.objects.all(),
+                'formAction': formAction,
+                'formObject': formObject,
+                'formMusic': formMusic,
+                'error':'Ya hay cargada una tarea en el mismo horario.'
+            }
+            return render(request,'calender/calender.html', context)
+        
         if 'formAction' in request.POST:
-            formAction = FormAction(request.POST)
+            formAction = FormAction(request.POST, request.FILES)
             if formAction.is_valid():
                 id = formAction.save()
                 Activity.objects.create(user=request.user, 
@@ -16,7 +30,7 @@ def calender(request):
                                         time=formAction.data["time"],
                                         id_action=id)
         elif 'formObject' in request.POST:
-                formObject = FormObject(request.POST)
+                formObject = FormObject(request.POST, request.FILES)
                 if formObject.is_valid():
                     id = formObject.save()
                     Activity.objects.create(user=request.user, 
@@ -24,13 +38,13 @@ def calender(request):
                                             time=formObject.data["time"],
                                             id_object=id)  
         elif 'formGame' in request.POST:
-                formGame = FormGame(request.POST)
-                if formGame.is_valid():
-                    id = formGame.save()
-                    Activity.objects.create(user=request.user, 
-                                            date=formGame.data["date"], 
-                                            time=formGame.data["time"],
-                                            id_game=id)  
+                
+                game = Game.objects.get(name=request.POST["game"])
+
+                Activity.objects.create(user=request.user, 
+                                        date=request.POST["date"], 
+                                        time=request.POST["time"],
+                                        id_game=game)  
         elif 'formMusic' in request.POST:
                 formMusic = FormMusic(request.POST)
                 if formMusic.is_valid():
@@ -42,18 +56,16 @@ def calender(request):
                     return redirect('calender')
         formAction = FormAction()
         formObject = FormObject()
-        formGame = FormGame()
         formMusic = FormMusic()
     else:
         formAction = FormAction()
         formObject = FormObject()
-        formGame = FormGame()
         formMusic = FormMusic()
     context = {
         "activities": Activity.objects.filter(user=request.user),
+        'games': Game.objects.all(),
         'formAction': formAction,
         'formObject': formObject,
-        'formGame': formGame,
         'formMusic': formMusic
     }
     return render(request,'calender/calender.html', context)

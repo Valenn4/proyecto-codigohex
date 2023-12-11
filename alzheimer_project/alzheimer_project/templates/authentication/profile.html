@@ -1,0 +1,126 @@
+{% extends 'index.html' %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECUERDA ME/TE</title>
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+</head>
+
+{% block content %}
+<body class="font-body">
+    <div id="formu"> 
+        <div class="grid grid-cols-2 gap-8">
+            <div class=" mt-4 datos ">
+                <form name="form_user" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="forms" style="display:flex">
+                        <div>
+                            <div>
+                                <div class="centrado">
+                                    <h3 class="text-blue-900 m-10">Datos de usuario</h3>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex;">
+                                <div>
+                                    <img style="width:150px" src="../media/{{request.user.avatar}}">
+                                    <input type="file" id="avatar" name="avatar" accept="image/*">
+                                    <p>
+                                    <label for="nombre" class="block text-gray-700 text-sm font-bold">Nombre:</label>
+                                    <input type="text" id="nombre" name="first_name" value="{{request.user.first_name}}" disabled class=" py-2 px-4 mt-2 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="apellido" class="block text-gray-700 text-sm mt-5 font-bold">Apellido:</label>
+                                    <input type="text" id="apellido" name="last_name" value="{{request.user.last_name}}" disabled class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="fecha" class="block text-gray-700 text-sm font-bold mt-5">Fecha de nacimiento:</label>
+                                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    <p class="value_fecha" style="display:none">{{request.user.fecha_nacimiento}}</p>
+                                    </p>
+                                </div>
+                                <div> 
+                                    <p>
+                                    <label for="direccion" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
+                                    <input type="text" id="direccion" name="direccion" value="{{request.user.direccion}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="codigo_postal" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
+                                    <input type="number" id="codigo_postal" name="codigo_postal" value="{{request.user.codigo_postal}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="medicacion" class="block text-gray-700 text-sm font-bold mt-5">Medicación:</label>
+                                    <input type="text" id="medicacion" name="medicacion" value="{{request.user.medicacion}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="telefono" class="block text-gray-700 text-sm font-bold mt-5">Número de telefono:</label>
+                                    <input type="number" id="telefono" name="numero_telefono" value="{{request.user.numero_telefono}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="opciones" class="block text-gray-700 text-sm font-bold mt-5">Selecciona una opción:</label>
+                                    <select id="etapa" name="etapa" >
+                                        {% for el in etapas_alzheimer %}
+                                            {% if el == request.user.etapa %}
+                                                {% if request.user.etapa != None %}
+                                                <option value="{{request.user.etapa}}" selected>{{request.user.etapa}}</option>
+                                                {% endif %}
+                                            {% else %}
+                                            <option value="{{el}}">{{el}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    </p>
+                                    <p>
+                                    <label for="email"class="block text-gray-700 text-sm font-bold mt-5">Correo Electrónico:</label>
+                                    <input type="email" id="email" name="email" value="{{request.user.email}}" disabled class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="centrado" >
+                                <h3 class="text-blue-900 m-10"> Datos de contacto </h3>
+                            </div>
+
+                            <p>
+                            <label for="nombrecontscto" class="block text-gray-700 text-sm font-bold mt-5 ">Nombre:
+                            </label>
+                            <input type="text" id="firstname_contact" name="firstname_contact" value="{{contact_user.firstname}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500"> 
+                            </p>
+                            <p>
+                            <label for="apellidocontacto" class="block text-gray-700 text-sm font-bold mt-5">Apellido:</label>
+                            <input type="text" id="lastname_contact" name="lastname_contact" value="{{contact_user.lastname}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                            </p>
+                            <p>
+                            <label for="telefonocontacto" class="block text-gray-700 text-sm font-bold mt-5">Número de telefono:</label>
+                            <input type="number" id="phone_contact" name="phone_contact" pattern="[0-9]+" value="{{contact_user.number_phone}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                            </p>
+                            <p>
+                            <label for="direccioncontacto" class="block text-gray-700 text-sm font-bold mt-5">Dirección:</label>
+                            <input type="text" id="address_contact" name="address_contact" value="{{contact_user.address}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                            </p>
+                            <p>
+                            <label for="emailcontacto" class="block text-gray-700 text-sm font-bold mt-5">Correo Electrónico:</label>
+                            <input type="email" id="email_contact" name="email_contact" value="{{contact_user.email}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                            </p>
+                        </div>
+                    </div>
+                    <input type="submit" value="Actualizar" style="background-color:tomato; padding:10px; color:white">
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        document.getElementById('fecha_nacimiento').valueAsDate = new Date(document.querySelector(".value_fecha").innerHTML);
+    </script>
+</body>
+{% endblock %}
