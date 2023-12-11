@@ -1,13 +1,12 @@
-
+{% extends 'index.html' %}
 {% load static %}
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
 <body class="font-body">
+    <p class="error" style="display:none; position: fixed; top: 15px; left: 15px; background-color: red; color: white; padding: 5px;">{{error}}</p>
     <section class="bg-white mb-10 md:mb-42 xl:mb-62">
         <div class="container max-w-screen-xl mx-auto px-4">
-                {% include 'core/header.html' %}
             <div class="flex items-center justify-center xl:justify-start">
                 <div class="mt-18 text-center xl:text-center">
                         <h1 class="font-semibold text-5xl md:text-6xl lg:text-5xl primario leading-normal mb-10">Calendario</h1>
@@ -22,14 +21,14 @@
             <li id="option_game" onclick="clickOption('game')">Juego</li>
             <li id="option_music" onclick="clickOption('music')">Musica</li>
         </ul>
-        <form method="POST" class="formAction">
+        <form method="POST" class="formAction" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="date" name="date" id="id_date" required>
             <input type="time" name="time" id="id_time" required>
             {{formAction}}
             <input type="submit" value="Enviar" name="formAction">
         </form>
-        <form method="POST" class="formObject">
+        <form method="POST" class="formObject" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="date" name="date" id="id_date" required>
             <input type="time" name="time" id="id_time" required>
@@ -40,7 +39,11 @@
             {% csrf_token %}
             <input type="date" name="date" id="id_date" required>
             <input type="time" name="time" id="id_time" required>
-            {{formGame}}
+            <select name="game">
+                {% for g in games %}
+                    <option>{{g.name}}</option>
+                {% endfor %}
+            </select>
             <input type="submit" value="Enviar" name="formGame">
         </form>
         <form method="POST" class="formMusic">
@@ -85,8 +88,8 @@
 
     <div class="reproductor"></div>
 
+    <script src="{%static 'js/calender/calenderr.js'%}"></script>
 </body>
-
-<script src="{%static 'js/calender/calender.js'%}"></script>
 {% endblock %}
+
 

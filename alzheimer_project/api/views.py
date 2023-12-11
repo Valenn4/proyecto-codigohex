@@ -2,11 +2,12 @@ import datetime
 import requests
 from django.shortcuts import render
 from rest_framework import viewsets, status
-from .serializers import ActivitySerializer, ObjectSerializer, GameSerializer, ActionSerializer, MusicSerializer
+from .serializers import ActivitySerializer, UserFeelingSerializer, ContactSerializer
 from calender.models import Activity
-from authentication.models import User
+from authentication.models import User, Contact
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from lilly import chatbot
 # Create your views here.
 
 '''
@@ -64,13 +65,43 @@ class MusicView(viewsets.ViewSet):
 
 '''
 
+# Chatbot
+class ChatbotView(viewsets.ViewSet):
+    def list(self, request, message):
+        queryset = chatbot.chatear(message)
+        if queryset == None:
+            return Response({"message":message, "respuesta":'No hay respuesta'}, status=status.HTTP_200_OK)
+        return Response({"message":message, "respuesta":queryset}, status=status.HTTP_200_OK)
+
+# Open CV Sentimientos
+class FeelingUserView(viewsets.ViewSet):
+
+    def list(self, request, id):
+        queryset = User.objects.get(id = id)
+        serializer = UserFeelingSerializer(queryset)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+    def create(self, request, id):
+        data = request.data
+
+        serializer = UserFeelingSerializer(data=data)
+
+        if serializer.is_valid():
+            user = User.objects.get(id=id)
+            user.feeling = data["feeling"]
+            user.save()
+
+            return Response('Sentimiento cambiado', status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)        
+        
+# Actividades
 class ActivityByUserDateView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
     
     def list(self, request, id, year, month, day):
         if request.user.id == id:
-            queryset = Activity.objects.filter(user=User.objects.get(id=id), date=datetime.date(year, month, day))
-            print(queryset.values().first())
+            queryset = Activity.objects.filter(user=User.objects.get(id=id), date=datetime.date(year, month, day)).order_by("time")
             serializer = ActivitySerializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
@@ -81,7 +112,7 @@ class ActivityByUserView(viewsets.ViewSet):
     
     def list(self, request, id):
         if request.user.id == id:
-            queryset = Activity.objects.filter(user=User.objects.get(id=id))
+            queryset = Activity.objects.filter(user=User.objects.get(id=id)).order_by("time")
             serializer = ActivitySerializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
@@ -98,6 +129,7 @@ class ActivityByUserView(viewsets.ViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# Api SPOTIFY
 class GetMusicAPI(viewsets.ViewSet):
     auth_url = "https://accounts.spotify.com/api/token"
     client_id = "6f6a277ceb024282bd6b71a5ec18d995"
@@ -138,4 +170,18 @@ class GetMusicsAPI(viewsets.ViewSet):
         response = requests.get(api_url, headers=headers)
         if response.status_code == 200:
             spotify_data = response.json()
-            return Response(spotify_data)
+            return Response(spotify_data, status=status.HTTP_200_OK)
+    
+        
+
+class ContactView(viewsets.ViewSet):
+    permission_classes=[IsAuthenticated]
+
+    def list(self, request):
+        try:
+            queryset = Contact.objects.get(user=request.user)
+            serializer = ContactSerializer(queryset)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except: 
+            return Response('No has cargado a ningún contacto')
+    
