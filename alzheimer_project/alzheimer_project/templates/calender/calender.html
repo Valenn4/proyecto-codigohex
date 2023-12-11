@@ -6,6 +6,36 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
 
+    <div class="calendar">
+        <div class="header">
+            <div class="border border-gray-200 p-4 bg-blue-200 rounded-full font-bold text-black hover:text-white">
+                <button id="prevButton">&lt;</button>
+            </div>
+            <div class="text-black font-bold">
+                <h2 id="monthYear"></h2>
+            </div>
+            <div class="border border-gray-200 p-4 bg-blue-200 rounded-full font-bold text-black hover:text-white">
+                <button class="" id="nextButton">&gt;</button>
+            </div>
+            
+        </div>
+        <div class="weekdays">
+            <div>Domingo</div>
+            <div>Lunes</div>
+            <div>Martes</div>
+            <div>Miércoles</div>
+            <div>Jueves</div>
+            <div>Viernes</div>
+            <div>Sábado</div>
+        </div>
+        <div class="days" id="calendarDays"></div>
+
+    </div>
+
+    <div class="reproductor"></div>
+
+
+
     <div class="formActivity">
         <div>
             <li id="option_action" onclick="clickOption('action')">Accion</li>
@@ -54,29 +84,18 @@
             <input type="submit" value="Enviar" name="formMusic">
         </form>
     </div>
+
     <p id="id_user" style="display:none">{{request.user.id}}</p>
-    <div class="calendar">
-        <div class="header">
-            <button id="prevButton">&lt;</button>
-            <h2 id="monthYear"></h2>
-            <button id="nextButton">&gt;</button>
-        </div>
-        <div class="weekdays">
-            <div>Domingo</div>
-            <div>Lunes</div>
-            <div>Martes</div>
-            <div>Miércoles</div>
-            <div>Jueves</div>
-            <div>Viernes</div>
-            <div>Sábado</div>
-        </div>
-        <div class="days" id="calendarDays"></div>
 
-    </div>
 
-    <div class="reproductor"></div>
+
+
+
+
+
+
+    
 
     <script src="{%static 'js/calender/calender.js'%}"></script>
 
 {% endblock %}
-
