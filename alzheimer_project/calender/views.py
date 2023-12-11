@@ -7,7 +7,7 @@ from .forms import FormAction, FormObject, FormMusic
 @login_required(redirect_field_name=None, login_url='login')
 def calender(request):
     if request.method == 'POST':
-        if Activity.objects.filter(date=request.POST["date"], time=request.POST["time"]).count()>0:
+        if 'formAudio' not in request.POST and Activity.objects.filter(date=request.POST["date"], time=request.POST["time"]).count()>0:
             formAction = FormAction()
             formObject = FormObject()
             formMusic = FormMusic()
