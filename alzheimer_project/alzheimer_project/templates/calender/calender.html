@@ -1,14 +1,16 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
-
+<link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
 <body class="font-body">
     <p class="error" style="display:none; position: fixed; top: 15px; left: 15px; background-color: red; color: white; padding: 5px;">{{error}}</p>
-    <section class="bg-white mb-10 md:mb-42 xl:mb-62">
+    
+    
+    <section class="bg-white xl:mt-62 md:mt-42 mb-10 md:mb-42 xl:mb-62">
         <div class="container max-w-screen-xl mx-auto px-4">
-            <div class="flex items-center justify-center xl:justify-start">
-                <div class="mt-18 text-center xl:text-center">
-                        <h1 class="font-semibold text-5xl md:text-6xl lg:text-5xl primario leading-normal mb-10">Calendario</h1>
+            <div class="flex items-center justify-center">
+                <div class="xl:mt-60  mt-10 text-center xl:text-center">
+                        <h1 class="font-semibold mt-50 text-4xl md:text-6©xl lg:text-7xl primario leading-normal mb-10">Calendario</h1>
                 </div>
             </div>
         </div> <!-- container.// -->
