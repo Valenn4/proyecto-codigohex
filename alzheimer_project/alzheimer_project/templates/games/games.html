@@ -1,16 +1,31 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <body class="font-body">
 
-<body class="font-body">
-    <h1>Juegos</h1>
 
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); ">
-        {% for game in games %}
-        <div style="background-color: gray; border: 1px solid black; padding: 20px; text-align: center;">
-            <a href="../juegos/{{game.name|lower}}">{{game.name}}</a>
+    <h1 class="flex justify-center text-6xl m-7">
+        Juegos
+    </h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sombra my-20">
+        <div class="flex justify-center my-10">
+            <a href="../juegos/memory" class="inline-block bg-cover bg-center border border-blue-800 relative text-black font-bold py-6 md:py-10 px-20 text-lg rounded" style="background-image: url('../../../static/img/games/memory/boton.png');">
+                Memory
+            </a>
         </div>
-        {% endfor %}
+        <div class="flex justify-center sombra my-10">
+            <a href="../juegos/tetris" class="inline-block bg-cover bg-center border border-blue-800 relative text-white font-bold py-6 md:py-10 px-20 text-lg rounded" style="background-image: url('../../../static/img/games/tetris/boton.png');">
+                Tetris
+            </a>
+        </div>
+        <div class="flex justify-center sombra my-10">
+            <a href="../games/sopa_de_letras.html" class="inline-block bg-cover bg-center border border-blue-800 relative text-black font-bold  py-6 md:py-10 px-20 text-lg rounded" style="background-image: url('../../../static/img/games/sopa de letras/boton.png');">
+                Sopa de letras
+            </a>
+        </div>
     </div>
-</body> 
+    </body>
+
+    
 {% endblock %}

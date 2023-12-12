@@ -1,12 +1,16 @@
-/*setInterval(() => {
+setInterval(() => {
     fetch(`http://127.0.0.1:8000/api/feeling/${document.querySelector(".id_user").innerHTML}`)
     .then(response => response.json())
     .then(json => {
-        document.querySelector(".alert_feeling").style.display = 'block'
-        document.querySelector(".alert_feeling").innerHTML = json["feeling"]
+        if (json["feeling"] != 'No es un rostro'){
+            document.querySelector(".alert_feeling").style.display = 'block'
+            document.querySelector(".alert_feeling").innerHTML = 'Te noto con '+json["feeling"]
+        } else {
+            document.querySelector(".alert_feeling").style.display = 'none'
+            document.querySelector(".alert_feeling").innerHTML = ''
+        }
     })
-}, 2500);
-*/
+}, 2000);
 
 
 let alert_activity = document.querySelector(".alert_activity")

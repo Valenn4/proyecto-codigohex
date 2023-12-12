@@ -5,9 +5,13 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from authentication.models import User, Contact
+import speech_recognition as sr
+from lilly.chatbot import chatear
+from lilly.voz import sintetizar_voz
 import cv2
 import threading
 from time import sleep
+from .opencv.deteccion_emociones import emocion
 
 
 # Create your views here.
@@ -90,17 +94,43 @@ def capture_faces(imagen):
                             (0,0,0), cv2.FILLED)
                 # Colocamps el texto
                 cv2.putText(frame, label, (xmin, ymin), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1)
-                #cv2.imshow("Imagen", cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))
-                return 'Es un rostro'
+                return emocion(imagen)
             return 'No es un rostro'
 
 def home(request):
+    if request.method == 'POST':
+            if 'formAudio' in request.POST:
+                recognizer = sr.Recognizer()
+
+                with sr.Microphone() as source:
+                    audio = recognizer.listen(source)
+
+                try:
+                    texto_grabado = recognizer.recognize_google(audio, language='es-ES') 
+                    texto_grabado = 'hola'
+                    respuesta = chatear(texto_grabado)
+                    
+                    if respuesta == '../juegos':
+                        return redirect(f'{respuesta}')
+                    if respuesta == '../calendario':
+                        return redirect(f'{respuesta}')
+                
+                    # Renderizar la plantilla con la respuesta
+                    
+                    return render(request, 'home.html', {'texto_grabado': texto_grabado,'respuesta': respuesta})
+                except sr.UnknownValueError:
+                    texto_grabado = "Google Speech Recognition no pudo entender el audio"
+                    return render(request, 'home.html', {'texto_grabado': texto_grabado})
+
+                except sr.RequestError as e:
+                    texto_grabado = f"Error en la solicitud a Google Speech Recognition; {e}"
+                    return render(request, 'home.html', {'texto_grabado': texto_grabado})
     '''
     result_emotion_lock = threading.Lock()
     def result_emotion_callback(emotion):
         with result_emotion_lock:
             requests.post(f'http://127.0.0.1:8000/api/feeling/{request.user.id}', data={"feeling":emotion})
-            sleep(0.2)
+            sleep(0.1)
 
 
     start_video_capture(result_emotion_callback)
@@ -130,9 +160,10 @@ def profile(request):
     }
 
     if request.method == 'POST':
+        print(request.FILES)
         # MODEL USER
         user = User.objects.get(id=request.user.id)
-        if request.FILES["avatar"] != '':
+        if 'avatar' in request.FILES:
             user.avatar = request.FILES["avatar"]
         if request.POST["fecha_nacimiento"] != '':
             user.fecha_nacimiento = request.POST["fecha_nacimiento"]
@@ -147,6 +178,8 @@ def profile(request):
         # MODEL CONTACT
         if Contact.objects.filter(user=request.user).count()!=0:
             contact = Contact.objects.get(user=request.user)
+            if 'avatar_contact' in request.FILES:
+                contact.avatar = request.FILES["avatar_contact"]
             contact.firstname = request.POST["firstname_contact"]
             contact.lastname = request.POST["lastname_contact"]
             contact.number_phone = request.POST["phone_contact"]
