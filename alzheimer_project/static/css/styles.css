@@ -23,7 +23,10 @@ body{
     box-shadow: -10px 0px 50px 0px #8999ff;
 }
 
-
+.sombra{
+    box-shadow: -10px 0px 50px 0px #4e84a6;
+   
+}
 .datos{
     padding: 50px;
 }
