@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: rgb(255, 255, 255);
-    font-family: 'Montserrat';
+
 }
 
 #principal #oboutus #formu{
@@ -29,6 +29,5 @@ body{
 }
 
 .text-nav {
-    font-size: 20px;
-    font-family: 'Montserrat';
+    font-size: 40px;
 }
