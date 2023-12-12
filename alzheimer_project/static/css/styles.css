@@ -31,3 +31,14 @@ body{
 .text-nav {
     font-size: 40px;
 }
+
+.video{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 58px auto;
+}
+.lilly{
+    width:50%; 
+    text-align:left;
+}
