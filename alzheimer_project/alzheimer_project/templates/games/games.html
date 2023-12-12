@@ -20,21 +20,21 @@
     
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="flex justify-center my-10 ">
-            <a href="../juegos/memory" class="inline-block bg-cover bg-center border border-blue-800 relative text-black font-bold py-6 md:py-20 px-20 sombra text-lg rounded" style="background-image: url('../../../static/img/games/memory/boton.png');">
+            <a href="{% url 'memory' %}" class="inline-block bg-cover bg-center border border-blue-800 relative text-black font-bold py-6 md:py-20 px-20 sombra text-lg rounded" style="background-image: url('../../../static/img/games/memory/boton.png');">
                 <div class="p-1 md:p-20">
                     Memory
                 </div>
             </a>
         </div>
         <div class="flex justify-center my-10">
-            <a href="../juegos/tetris" class="inline-block bg-cover bg-center border border-blue-800 relative text-white font-bold py-6 md:py-20 px-20 sombra text-lg rounded" style="background-image: url('../../../static/img/games/tetris/boton.png');">
+            <a href="{% url 'tetris' %}" class="inline-block bg-cover bg-center border border-blue-800 relative text-white font-bold py-6 md:py-20 px-20 sombra text-lg rounded" style="background-image: url('../../../static/img/games/tetris/boton.png');">
                 <div class="p-1 md:p-20">
                     Tetris
                 </div>
             </a>
         </div>
         <div class="flex justify-center my-10">
-            <a href="../games/sopa_de_letras.html" class="inline-block bg-cover bg-center border border-blue-800 relative text-black font-bold  py-6 md:py-20 px-20 sombra text-lg rounded" style="background-image: url('../../../static/img/games/sopa de letras/boton.png');">
+            <a href="{% url 'sopa de letras' %}" class="inline-block bg-cover bg-center border border-blue-800 relative text-black font-bold  py-6 md:py-20 px-20 sombra text-lg rounded" style="background-image: url('../../../static/img/games/sopa de letras/boton.png');">
                 <div class="p-1 md:p-20">
                     Sopa de letras
                 </div>
