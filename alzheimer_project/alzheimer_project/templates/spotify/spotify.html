@@ -1,7 +1,8 @@
-<div class="list_spotify" style="display: none; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; right: 0; justify-content: center; background-color: tomato;">
-    <div method="POST" class="form_music">
+{% load static %}
+<div class="list_spotify" style="display: none; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; right: 0; justify-content: center;">
+    <div class="form_spotify">
         <input type="text" class="input_music" placeholder="Buscar cancion, artista, album o playlist">
-        <p class="enter_music">Buscar</p>
+        <button class="enter_music">Buscar</button>
     </div>
     <div class="spotify_track">
         <p>Tracks</p>
@@ -20,3 +21,5 @@
         <div class="playlists" style="display: flex;"></div>
     </div>
 </div>
+
+<script src="{%static 'js/spotify/spotify.js'%}"></script>
