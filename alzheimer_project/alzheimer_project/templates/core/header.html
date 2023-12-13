@@ -32,6 +32,9 @@
             <li class="font-semibold hover:text-gray-400 px-6  transition ease-in-out duration-300 mb-5 lg:mb-0">
             <a href="{%url 'games'%}">Juegos</a>
             </li>
+            <li class="font-semibold hover:text-gray-400 px-6  transition ease-in-out duration-300 mb-5 lg:mb-0">
+                <a href="{%url 'detect_object'%}">Detección de objetos</a>
+                </li>
         </ul>
     {% else %}
         <ul class="lg:flex flex-col lg:flex-row  text-nav secundario lg:items-center lg:mx-auto lg:space-x-6 xl:space-x-12" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
