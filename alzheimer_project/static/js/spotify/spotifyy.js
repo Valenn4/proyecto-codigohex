@@ -1,7 +1,6 @@
 const url = "https://accounts.spotify.com/api/token"
 const client_id = "6f6a277ceb024282bd6b71a5ec18d995";
 const client_secret = "67038f5e05ec4e13873b3cc68ff2d52d";
-
 const data = new URLSearchParams();
 data.append("grant_type", "client_credentials");
 data.append("client_id", client_id);
