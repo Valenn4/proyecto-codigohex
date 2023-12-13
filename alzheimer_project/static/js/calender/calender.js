@@ -306,9 +306,7 @@ function renderCalendar() {
             }
           }
         })
-        day.insertAdjacentHTML('beforeend', `<span class="material-symbols-outlined">
-        push_pin
-        </span>`)
+        day.insertAdjacentHTML('beforeend', `<h1>*</h1>`)
       }
     })
     calendarDays.appendChild(day);
