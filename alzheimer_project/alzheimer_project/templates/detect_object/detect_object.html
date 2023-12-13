@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="file" name="img_object" id="">
+        <input type="submit" value="Encontrar">
+    </form>
+{% endblock %}
