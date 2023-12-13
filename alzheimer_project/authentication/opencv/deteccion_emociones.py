@@ -10,8 +10,8 @@ loaded_model = tf.keras.models.load_model('Modelocompleto_deteccionEmociones01.h
 # Cargar la imagen
 ruta_imagen = 'foto_sorprendida.jpg'
 
-imagen_color = cv2.imread(ruta_imagen)
-imagen_color = cv2.cvtColor(imagen_color, cv2.COLOR_BGR2RGB)
+#imagen_color = cv2.imread(ruta_imagen)
+#imagen_color = cv2.cvtColor(imagen_color, cv2.COLOR_BGR2RGB)
 
 imagen_gris = cv2.cvtColor(imagen_color, cv2.COLOR_RGB2GRAY)
 imagen_redimensionada = cv2.resize(imagen_gris, (96, 96))
