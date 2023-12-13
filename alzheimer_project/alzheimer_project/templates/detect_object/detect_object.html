@@ -1,9 +1,13 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <form method="post">
+    {% if object %}
+    <p>El objeto es un/a {{object}}</p>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="img_object" id="">
+        {{form}}
+        
         <input type="submit" value="Encontrar">
     </form>
 {% endblock %}
