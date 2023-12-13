@@ -28,6 +28,7 @@ class Person(models.Model):
     relationship = models.CharField(choices=relationships, max_length=100, null=False)
 
 class Contact(models.Model):
+    avatar = models.ImageField(upload_to="avatar/contacts/",  null=True)
     user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=100, null=True, blank=True)
     lastname = models.CharField(max_length=100, null=True, blank=True)

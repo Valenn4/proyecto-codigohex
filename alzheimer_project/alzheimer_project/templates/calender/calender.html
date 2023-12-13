@@ -16,7 +16,6 @@
         </div> <!-- container.// -->
     </section>
 
-
     <div class="formActivity grid grid-cols-1 md:grid-cols-3">
         <div>
             <div class="mt-20">
@@ -36,6 +35,7 @@
             </div>
             <div class="flex justify-center">
                 <form method="POST" class="formAction grid grid-rows-5" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div>
                         <input type="date" class="border border-black rounded-lg p-2 m-1" name="date" id="id_date" required>
                         <input type="time" class="border border-black rounded-lg p-2 m-1" name="time" id="id_time" required>
@@ -58,6 +58,7 @@
     
                 </form>
                 <form method="POST" class="formObject grid grid-rows-5" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div>
                         <input type="date" class="border border-black rounded-lg p-2 m-1" name="date" id="id_date" required>
                         <input type="time" class="border border-black rounded-lg p-2 m-1" name="time" id="id_time" required>
@@ -95,13 +96,13 @@
                     <input type="date" class="border border-black rounded-lg p-2 m-2" name="date" id="id_date" required>
                     <input type="time" class="border border-black rounded-lg p-2 m-2" name="time" id="id_time" required>
                     <div class="input_name_music">
-                        {{formMusic.name_music}}
+                        {{formMusic.name}}
                     </div>
                     <div class="input_id_music">
                         {{formMusic.id_music}}
                     </div>
                     <div class="input_category_music">
-                        {{formMusic.category_music}}
+                        {{formMusic.category}}
                     </div>
                     <div>
                         <p class="search_music">Buscar cancion</p>
@@ -136,12 +137,20 @@
         </div>
         
     </div>
-    <p id="id_user" style="display:none">{{request.user.id}}</p>
 
+    <div class="window_day" style="display: none; flex-direction: column; background-color: grey; padding:5px; width: 50%; height: 50%; margin:auto; align-items: center; justify-content: center; position:fixed; top:0;bottom:0;left:0; right:0;">
+        <div class="close_window" onclick="closeWindowActivities()">
+            <span class="material-symbols-outlined close_window" style="width:50%; text-align:right; margin:auto; cursor: pointer">
+              close
+            </span>
+        </div>
+    </div>
+
+    <p id="id_user" style="display:none">{{request.user.id}}</p>
 
     <div class="reproductor"></div>
 
-    <script src="{%static 'js/calender/calenderr.js'%}"></script>
+    <script src="{%static 'js/calender/calender.js'%}"></script>
 </body>
 {% endblock %}
 

@@ -15,7 +15,7 @@ class FormAction(forms.ModelForm):
 class FormMusic(forms.ModelForm):
     class Meta:
         model = Music
-        fields = ['name_music', 'id_music', 'category_music']
+        fields = '__all__'
 
 class FormGame(forms.ModelForm):
     class Meta:
