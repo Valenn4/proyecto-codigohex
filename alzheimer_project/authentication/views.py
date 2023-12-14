@@ -16,6 +16,7 @@ from .opencv.opencv_emociones import detectar_emociones_en_rostro
 import requests
 import asyncio
 
+'''
 # Create your views here.
 class VideoCaptureThread(threading.Thread):
     def __init__(self, result_emotion_callback):
@@ -50,6 +51,7 @@ def stop_video_capture():
 
 def capture_face(imagen):
     return detectar_emociones_en_rostro(imagen)
+'''
 
 def home(request):
     if request.method == 'POST':
@@ -68,17 +70,20 @@ def home(request):
                         sintetizar_voz("Te llevare a la pagina de juegos, para que tengas un día lleno de diversión")
                         asyncio.sleep(0.5)
                         return redirect(f'{respuesta}')
-                    if respuesta == '../calendario':
+                    elif respuesta == '../calendario':
                         sintetizar_voz("Claro, veremos el calendario, para que puedas revisar tus rutinas programadas")
                         asyncio.sleep(0.5)
                         return redirect(f'{respuesta}')
-                    if respuesta == '../perfil':
+                    elif respuesta == '../perfil':
                         sintetizar_voz("Por supuesto, acá está tu perfil. Recuerda rellenar los datos de contacto")
                         asyncio.sleep(0.5)
                         return redirect(f'{respuesta}')
+                    elif respuesta == 'contacto de emergencia':
+                        contact = Contact.objects.get(user=request.user) 
+                        sintetizar_voz(f'{contact.firstname} {contact.lastname} es tu contacto de emergencia. Aquí están sus datos.')
+                        respuesta = f' \n Nombre: {contact.firstname}\n Apellido: {contact.lastname} \n Numero de telefono: {contact.number_phone} \n Dirección:{contact.address} \n Email: {contact.email}'
                     else:
                         sintetizar_voz(respuesta)
-
                     
                 
                     # Renderizar la plantilla con la respuesta
@@ -92,6 +97,7 @@ def home(request):
                     texto_grabado = f"Error en la solicitud a Google Speech Recognition; {e}"
                     return render(request, 'home.html', {'texto_grabado': texto_grabado})
 
+    '''
     result_emotion_lock = threading.Lock()
     def result_emotion_callback(emotion):
         with result_emotion_lock:
@@ -100,9 +106,8 @@ def home(request):
                 sleep(0.1)
             except:
                 requests.post(f'http://127.0.0.1:8000/api/feeling/{request.user.id}', data={"feeling":"No ES UN ROSTRO"})
-
-
     start_video_capture(result_emotion_callback)
+    '''
 
     return render(request, 'home.html')
 

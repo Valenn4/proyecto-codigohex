@@ -9,7 +9,7 @@ def detect_object(request):
         form = FormObject(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            objeto = object(f'C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/media/objects/{request.FILES["imagen"]}')
+            objeto = object(f'C:/Users/valen/OneDrive/Desktop/proyecto-codigohex/alzheimer_project/media/objects/{request.FILES["imagen"]}')
             return render(request, 'detect_object/detect_object.html', {'form':form, 'object':objeto, 'imagen':request.FILES["imagen"]})
     else:
         form = FormObject(request.POST)

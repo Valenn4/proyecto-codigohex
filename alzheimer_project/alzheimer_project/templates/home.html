@@ -172,21 +172,17 @@
                     </span>
                 </div>
         
-                <div id="conversation" style="height: 250px;overflow-y:scroll; bottom: 0;" class="flex-1 p-4 bg-white rounded">
+                <div id="conversation" class="flex-1 p-4 bg-white rounded" style="margin-top:0px; height: 250px;overflow-y:scroll; bottom: 0;">
                     <div class="items-start mb-2">
                         <div class="bg-gray-200 p-2 rounded-tl rounded-tr rounded-br">
                             <p class="text-gray-800">Hola soy Lilly, escribe algo para comenzar...</p>
                         </div>
                         {% if texto_grabado %}
-                        <div class="flex items-end mb-2">
-                            <div class="bg-gray-800 text-white p-2 rounded-tl rounded-tr rounded-bl self-end">
-                                <p>{{texto_grabado}}</p>
-                            </div>
+                        <div class="bg-gray-800 text-white p-2 rounded-tl rounded-tr rounded-bl self-end">
+                            <p>{{texto_grabado}}</p>
                         </div>
-                        <div class="flex items-start mb-2">
-                            <div class="bg-gray-300 p-2 rounded-tl rounded-tr rounded-br">
-                                <p class="text-gray-800">Lilly: {{respuesta}}</p>
-                            </div>
+                        <div class="bg-gray-300 p-2 rounded-tl rounded-tr rounded-br">
+                            <p class="text-gray-800">Lilly: {{respuesta}}</p>
                         </div>
                         {% endif %}
                     </div>
@@ -251,6 +247,8 @@
                     location.href = '../juegos'
                 } else if (respuesta == '../calendario'){
                     location.href = '../calendario'
+                } else if (respuesta == '../perfil'){
+                    location.href = '../perfil'
                 } else if (respuesta.includes("http://127.0.0.1:8000/api/spotify/")) {
                     let category = respuesta.substr(0, respuesta.indexOf(":"))
                     let link_music = respuesta.substr(respuesta.indexOf(":")+1)

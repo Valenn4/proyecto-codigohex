@@ -6,7 +6,7 @@ import tensorflow as tf
 
 
 def object(obj):
-    loaded_model = tf.keras.models.load_model('C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/detect_object/Cargas_modelo_Objetos.h5')
+    loaded_model = tf.keras.models.load_model('C:/Users/valen/OneDrive/Desktop/proyecto-codigohex/alzheimer_project/detect_object/Cargas_modelo_Objetos.h5')
 
     # Cargar la imagen
     ruta_imagen = obj

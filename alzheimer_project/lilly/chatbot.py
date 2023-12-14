@@ -98,12 +98,12 @@ pares = [
         ["../perfil"]
     ],
     [
-        r"(.*) Quién es mi contacto de emergencia|Quien es mi contacto de emergencia",
+        r"(.*) Quién es mi contacto de emergencia|Quien es mi contacto de emergencia|quién es mi contacto de emergencia",
         ["contacto de emergencia"]
     ],
     [
         r"(.*) Tengo una emergencia|ayuda|auxilio",
-        ["Policia: 8989. Quiere que llame a uno de estos contactos?"]
+        ["Los numeros de emergencia son. El numero de la Policía Nacional es 091. El numero de la Guardia Civil es 062. El numero de los bombero es 080. Si sufre de violencia de genero marque 016. ¿A qué numero quieres llamar?"]
     ],
     [
         r"(.*) qué día es hoy",

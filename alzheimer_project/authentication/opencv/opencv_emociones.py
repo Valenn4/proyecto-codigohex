@@ -5,7 +5,7 @@ import tensorflow as tf
 dict_emociones = {0: 'Ira', 1: 'Asco', 2: 'Tristeza', 3: 'Felicidad', 4: 'Sorpresa'}
 
 # Cargar el clasificador de rostros
-loaded_model = tf.keras.models.load_model(r'C:\Users\mati\Desktop\proyecto-codigohex\alzheimer_project\authentication\opencv\Modelocompleto_deteccionEmociones01.h5')
+loaded_model = tf.keras.models.load_model(r'C:\Users\valen\OneDrive\Desktop\proyecto-codigohex\alzheimer_project\authentication\opencv\Modelocompleto_deteccionEmociones01.h5')
 cascada_rostro = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 def detectar_emociones(imagen):
