@@ -218,7 +218,7 @@ function renderCalendar() {
       if(json.length>0){
         day.addEventListener("click", (e) => {
           window_day.style.display = 'grid'
-          activities_day .innerHTML = ''
+          activities_day.innerHTML = ''
           day_window.innerHTML = ''
           day_window.insertAdjacentHTML("beforeend", `
           <div><p>${i} del ${currentMonth+1} del ${currentYear}</p></div>`)
@@ -283,7 +283,7 @@ function renderCalendar() {
             } else if(a.id_game!=null){
               let activity = a.id_game
               activities_day.insertAdjacentHTML("beforeend", `
-                <div class="activity" id=${a.id}>
+                <div class="activity inline-block bg-cover bg-center border border-blue-800 m-4 relative text-black font-bold py-6 px-20 text-lg rounded" id=${a.id} style="background-image: url('../../../static/img/mando.jpg'); width:auto; height: 80%;">
                   <p>${a.time}</p>
                   <p>Jugar:</p>
                   <p>${activity.name}</p>
@@ -303,7 +303,7 @@ function renderCalendar() {
             }
           }
         })
-        day.insertAdjacentHTML('beforeend', `<h1>*</h1>`)
+        day.insertAdjacentHTML('beforeend', `<h1>&#128075</h1>`)
       }
     })
     calendarDays.appendChild(day);
