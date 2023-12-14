@@ -1,15 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import about, detect_object
+from .views import about
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('detect_object/', detect_object, name="detect_object"),
     path('', include("authentication.urls")),
     path('', include('calender.urls')),
     path('', include('lilly.urls')),
+    path('', include('detect_object.urls')),
     path('api/', include('api.urls')),
     path('juegos/', include('games.urls')),
     path('sobre_nosotros/',about,name='about'),

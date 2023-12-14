@@ -9,76 +9,6 @@ from authentication.models import User, Contact
 import speech_recognition as sr
 from lilly.chatbot import chatear
 from lilly.voz import sintetizar_voz
-import cv2
-import threading
-from time import sleep
-from .opencv.opencv_emociones import detectar_emociones_en_rostro, detectar_emociones, detectar_rostros
-
-
-# Create your views here.
-class VideoCaptureThread(threading.Thread):
-    def __init__(self, result_emotion_callback):
-        super().__init__()
-        self.result_emotion_callback = result_emotion_callback
-        self.stop_event = threading.Event()
-
-    def run(self):
-        while not self.stop_event.is_set():
-            cap = cv2.VideoCapture(0)
-            while True:
-                ret, frame = cap.read()
-
-                if not ret:
-                    break
-
-                # Aplicar la detección de emociones en rostros
-                self.result_emotion_callback(detectar_emociones_en_rostro(frame))
-
-
-                # Salir si se presiona 'q'
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
-
-            # Liberar la captura y cerrar la ventana
-            cap.release()
-            cv2.destroyAllWindows()
-
-            while True:
-                ret, frame = cap.read()
-
-                if not ret:
-                    break
-                
-                self.result_emotion_callback(detectar_emociones_en_rostro(frame))
-                # Aplicar la detección de emociones en rostros
-                frame_con_emociones = detectar_emociones_en_rostro(frame)
-
-                cv2.imshow('Deteccion de Emociones en vivo', frame_con_emociones)
-
-                # Salir si se presiona 'q'
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
-
-            cap.release()
-            cv2.destroyAllWindows()
-            
-
-    def stop(self):
-        self.stop_event.set()
-video_capture_thread = None
-def start_video_capture(result_emotion_callback):
-    global video_capture_thread
-    video_capture_thread = VideoCaptureThread(result_emotion_callback)
-    video_capture_thread.start()
-def stop_video_capture():
-    global video_capture_thread
-    if video_capture_thread:
-        video_capture_thread.stop()
-        video_capture_thread.join()
-        video_capture_thread = None
-def capture_faces(imagen):
-    while True:
-        return detectar_emociones_en_rostro(imagen)
 
 
 
@@ -86,15 +16,15 @@ def home(request):
     if request.method == 'POST':
             if 'formAudio' in request.POST:
                 recognizer = sr.Recognizer()
-
+                '''
                 with sr.Microphone() as source:
                     audio = recognizer.listen(source)
-
+                '''
                 try:
-                    texto_grabado = recognizer.recognize_google(audio, language='es-ES') 
+                    #texto_grabado = recognizer.recognize_google(audio, language='es-ES') 
                     texto_grabado = 'hola'
                     respuesta = chatear(texto_grabado)
-                    
+                    sintetizar_voz(respuesta)
                     if respuesta == '../juegos':
                         return redirect(f'{respuesta}')
                     if respuesta == '../calendario':
@@ -111,15 +41,8 @@ def home(request):
                     texto_grabado = f"Error en la solicitud a Google Speech Recognition; {e}"
                     return render(request, 'home.html', {'texto_grabado': texto_grabado})
     
-    result_emotion_lock = threading.Lock()
-    def result_emotion_callback(emotion):
-        with result_emotion_lock:
-            print(emotion)
-            requests.post(f'http://127.0.0.1:8000/api/feeling/{request.user.id}', data={"feeling":emotion})
-            sleep(0.1)
 
 
-    start_video_capture(result_emotion_callback)
     
     return render(request, 'home.html')
 
