@@ -6,8 +6,7 @@
     {% endif %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form}}
-        
+        {{form.imagen}}
         <input type="submit" value="Encontrar">
     </form>
 {% endblock %}

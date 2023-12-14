@@ -1,5 +1,6 @@
 from django.http import StreamingHttpResponse
 from django.shortcuts import render, redirect
+import requests
 from .forms import FormRegister, FormLogin
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
@@ -11,7 +12,7 @@ from lilly.voz import sintetizar_voz
 import cv2
 import threading
 from time import sleep
-from .opencv.deteccion_emociones import emocion
+from .opencv.opencv_emociones import detectar_emociones_en_rostro, detectar_emociones, detectar_rostros
 
 
 # Create your views here.
@@ -22,13 +23,45 @@ class VideoCaptureThread(threading.Thread):
         self.stop_event = threading.Event()
 
     def run(self):
-        cap = cv2.VideoCapture(0)
         while not self.stop_event.is_set():
-            ret, frame = cap.read()
-            if ret:
-                result_emotion = capture_faces(frame)
-                self.result_emotion_callback(result_emotion)
-        cap.release()
+            cap = cv2.VideoCapture(0)
+            while True:
+                ret, frame = cap.read()
+
+                if not ret:
+                    break
+
+                # Aplicar la detección de emociones en rostros
+                self.result_emotion_callback(detectar_emociones_en_rostro(frame))
+
+
+                # Salir si se presiona 'q'
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+            # Liberar la captura y cerrar la ventana
+            cap.release()
+            cv2.destroyAllWindows()
+
+            while True:
+                ret, frame = cap.read()
+
+                if not ret:
+                    break
+                
+                self.result_emotion_callback(detectar_emociones_en_rostro(frame))
+                # Aplicar la detección de emociones en rostros
+                frame_con_emociones = detectar_emociones_en_rostro(frame)
+
+                cv2.imshow('Deteccion de Emociones en vivo', frame_con_emociones)
+
+                # Salir si se presiona 'q'
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+            cap.release()
+            cv2.destroyAllWindows()
+            
 
     def stop(self):
         self.stop_event.set()
@@ -44,58 +77,10 @@ def stop_video_capture():
         video_capture_thread.join()
         video_capture_thread = None
 def capture_faces(imagen):
-    # Leemos el modelo
-    net = cv2.dnn.readNetFromCaffe("C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/authentication/opencv/opencv_face_detector.prototxt", "C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/authentication/opencv/res10_300x300_ssd_iter_140000.caffemodel")
-
-    # Parametros del modelo
-    # Tamaño
-    anchonet = 300
-    altonet = 300
-    # Valores medios de los canales de color
-    media = [104, 117, 123]
-    umbral = 0.7
-
     while True:
-        # Realizamos conversion de forma
-        frame = cv2.flip(imagen, 1)
+        return detectar_emociones_en_rostro(imagen)
 
-        # Extraemos info de los frames
-        altoframe = frame.shape[0]
-        anchoframe = frame.shape[1]
 
-        # Preprocesamos la imagen
-        # Images - Factor de escala - tamaño - media de color - Formato de color(BGR-RGB) - Recorte
-        blob = cv2.dnn.blobFromImage(frame, 1.0, (anchonet, altonet), media, swapRB = False, crop = False)
-
-        # Corremos el modelo
-        net.setInput(blob)
-        detecciones = net.forward()
-
-        # Iteramos
-        for i in range(detecciones.shape[2]):
-            # Extraemos la confianza de esa deteccion
-            conf_detect = detecciones[0,0,i,2]
-            # Si superamos el umbral (70% de probabilidad de que sea un rostro)
-            if conf_detect > umbral:
-                # Extraemos las coordenadas
-                xmin = int(detecciones[0, 0, i, 3] * anchoframe)
-                ymin = int(detecciones[0, 0, i, 4] * altoframe)
-                xmax = int(detecciones[0, 0, i, 5] * anchoframe)
-                ymax = int(detecciones[0, 0, i, 6] * altoframe)
-
-                # Dibujamos el rectangulo
-                cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0,0,255), 2)
-                # Texto que vamos a mostrar
-                label = "Confianza de deteccion: %.4f" % conf_detect
-                # Tamaño del fondo del label
-                label_size, base_line = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
-                # Colocamos fondo al texto
-                cv2.rectangle(frame, (xmin, ymin - label_size[1]), (xmin + label_size[0], ymin + base_line),
-                            (0,0,0), cv2.FILLED)
-                # Colocamps el texto
-                cv2.putText(frame, label, (xmin, ymin), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1)
-                return emocion(imagen)
-            return 'No es un rostro'
 
 def home(request):
     if request.method == 'POST':
@@ -125,16 +110,17 @@ def home(request):
                 except sr.RequestError as e:
                     texto_grabado = f"Error en la solicitud a Google Speech Recognition; {e}"
                     return render(request, 'home.html', {'texto_grabado': texto_grabado})
-    '''
+    
     result_emotion_lock = threading.Lock()
     def result_emotion_callback(emotion):
         with result_emotion_lock:
+            print(emotion)
             requests.post(f'http://127.0.0.1:8000/api/feeling/{request.user.id}', data={"feeling":emotion})
             sleep(0.1)
 
 
     start_video_capture(result_emotion_callback)
-    '''
+    
     return render(request, 'home.html')
 
 @login_required(redirect_field_name=None, login_url="login")
