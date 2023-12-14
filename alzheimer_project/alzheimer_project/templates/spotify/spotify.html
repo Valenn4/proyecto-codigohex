@@ -1,8 +1,11 @@
-{% load static %}
-<div class="list_spotify" style="display: none; grid-template-rows: repeat(5, 1fr); overflow: auto; margin: auto; width: 50%; height: auto; align-items: center; background-color: rgb(27, 146, 27); flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; right: 0; justify-content: center;">
-    <div class="form_spotify" style="grid-row: 1/1;">
-        <input type="text" class="input_music" placeholder="Buscar cancion, artista, album o playlist">
-        <button class="enter_music">Buscar</button>
+<div class="list_spotify" style="display: none; grid-template-rows: repeat(5, 1fr); overflow: auto; margin: auto; 
+border-radius: 10px; width: 50%; height: 78%; align-items: center; background-color: #1db954; 
+flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; right: 0; justify-content: center;margin-top: 160px; 
+padding: 30px; padding-top: 17%; border: 3px solid #191414;box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.3);"> 
+       <div method="POST" class="form_music">
+        
+        <input type="text" class="input_music" placeholder="Buscar cancion, artista, album o playlist" style="border-radius: 10px; padding: 1px; border: 2px solid #191414;">
+        <p class="enter_music" style="border: 2px solid black;border-radius: 10px; text-align: center; background: black; color: white; " >Buscar</p>
     </div>
     <div class="spotify_track" style="grid-row: 2/3;">
         <p>Tracks</p>
@@ -21,5 +24,3 @@
         <div class="playlists" style="display: flex;"></div>
     </div>
 </div>
-
-<script src="{%static 'js/spotify/spotifyy.js'%}"></script>

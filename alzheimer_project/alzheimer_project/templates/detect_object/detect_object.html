@@ -4,11 +4,11 @@
 <html>
 <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
 <body class="font-body">
-    <div class="centrado mb-20 md:mt-30 lg:mt-40">
-        <h3 class="font-semibold primario text-6xl px-6">Detección de objetos </h3>
+    <div class="centrado mb-20 md:mt-30 lg:mt-70 pt-5">
+        <h3 class="font-semibold primario text-5xl px-6">Detección de objetos </h3>
     </div> 
     {% if object %}
-    <p class="font-normal text-gray-400 text-xl md:text-xl ">El objeto es un/a {{object}}</p>
+    <p class="text-center pb-6 font-normal text-gray-400 text-xl md:text-xl ">El objeto es un/a {{object}}</p>
     {% endif %}
     <form method="post" enctype="multipart/form-data" style="display:flex; margin: auto; justify-content: center; align-items: center;">
         {% csrf_token %}

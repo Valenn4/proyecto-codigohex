@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
+<link rel="stylesheet" href="{% static 'css/calender/calender.css' %}">
 <body class="font-body">
     <p class="error" style="display:none; position: fixed; top: 15px; left: 15px; background-color: red; color: white; padding: 5px;">{{error}}</p>
     
@@ -25,12 +25,12 @@
             </div>
             <div class="flex justify-center my-5 md:my-20 grid grid-rows-2">
                 <div>
-                    <button id="option_action" onclick="clickOption('action')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 " style="background-color:#4E84A6;">Accion</button>
-                    <button id="option_object" onclick="clickOption('object')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5" style="background-color:#4E84A6;">Objeto</button>
+                    <button id="option_action" onclick="clickOption('action')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 custom-button" >Accion</button>
+                    <button id="option_object" onclick="clickOption('object')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 custom-button">Objeto</button>
                 </div>
                 <div>
-                    <button id="option_game" onclick="clickOption('game')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5" style="background-color:#4E84A6;">Juego</button>
-                    <button id="option_music" onclick="clickOption('music')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5" style="background-color:#4E84A6;">Musica</button>
+                    <button id="option_game" onclick="clickOption('game')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 custom-button">Juego</button>
+                    <button id="option_music" onclick="clickOption('music')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 custom-button">Musica</button>
                 </div>
             </div>
             <div class="flex justify-center">
@@ -105,7 +105,7 @@
                         {{formMusic.category}}
                     </div>
                     <div>
-                        <p class="search_music">Buscar cancion</p>
+                        <button class="search_music border border-gray-200 bg-gray-200 hover:bg-blue-100 p-2 rounded-lg">Buscar cancion</button>
     
                         {% include 'spotify/spotify.html' %}
                     </div>
@@ -115,13 +115,13 @@
             </div>
         </div>
     
-        <div class="calendar mx-25 md:m-50 sombra mt-20 col-span-2" style="max-width: 800px; background-color: white; color: black;">
+        <div class="calendar mx-25 md:m-50 sombra mt-20 col-span-2" style="max-width: 800px; background-color: white; color: black; margin: 10%; ">
             <div class="header">
                 <button id="prevButton">&lt;</button>
                 <h2 id="monthYear"></h2>
                 <button id="nextButton">&gt;</button>
             </div>
-            <div class="weekdays bg-white">
+            <div class="weekdays bg-white text-xs md:text-xl">
                 <div class="text-red-800">Domingo</div>
                 <div>Lunes</div>
                 <div>Martes</div>
@@ -138,11 +138,24 @@
         
     </div>
 
-    <div class="window_day" style="display: none; flex-direction: column; background-color: grey; padding:5px; width: 50%; height: 50%; margin:auto; align-items: center; justify-content: center; position:fixed; top:0;bottom:0;left:0; right:0;">
-        <div class="close_window" onclick="closeWindowActivities()">
-            <span class="material-symbols-outlined close_window" style="width:50%; text-align:right; margin:auto; cursor: pointer">
+    <div class="window_day" style="display:none; flex-direction: column;
+     background-color: rgb(157, 176, 242); padding: 20px; width: 50%; border: 2px solid black;
+      height: 50%; margin: auto; align-items: flex-end; justify-content: flex-start;
+       position: fixed; inset: 0px; box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 5px 2px; border-radius: 10px; overflow: auto;">
+       <div class="grid grid-cols-2">
+        <div class="close_window" onclick="closeWindowActivities()" style="
+        width: 100px;
+        color: red;
+        height: 1px;">
+            <span class="material-symbols-outlined close_window" style="width:auto; text-align:right; margin:auto; cursor: pointer">
               close
             </span>
+        </div>
+        <div class="day_window"></div>
+       </div>
+
+        <div class="activities_day" style="display:grid;height: auto; grid-template-columns: repeat(3, 1fr); overflow: auto; margin: auto; ">
+
         </div>
     </div>
 
@@ -151,6 +164,7 @@
     <div class="reproductor"></div>
 
     <script src="{%static 'js/calender/calenderr.js'%}"></script>
+
 </body>
 {% endblock %}
 

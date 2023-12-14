@@ -8,6 +8,8 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" crossorigin="anonymous"></script>
     <script src="{% static 'js/games/sopa_de_letras/wordfind.js' %}"></script>
     <script src="{% static 'js/games/sopa_de_letras/wordfindgame.js' %}"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
 </head>
 <style>
     body {
@@ -171,10 +173,14 @@
 <body>
     <!-- Estructura de la sopa de letras-->
     <div class="titulo">Sopa de Letras</div>
-    <input type="button" id="BTNresolver" value="Resolver sopa de letras" />
-    <input type="button" value="Reiniciar la sopa de letras" id="BTNrefresh">
-    <div id="contenedor"></div>
-    <div id="palabras-sopadeletras"></div>
+    
+    <div>
+        <div id="contenedor"></div>
+        <div id="palabras-sopadeletras" class="m-10 mt-20"></div>
+    </div>
+    <button class="border border-gray-800 rounded-lg bg-black hover:bg-gray-400 text-white font-bold p-2 " value="Resolver sopa de letras" id="BTNresolver">Resolver sopa de letras</button>
+    <button class="border border-gray-800 rounded-lg bg-black hover:bg-gray-400 text-white font-bold p-2 " value="Reiniciar la sopa de letras" id="BTNrefresh">Reiniciar sopa de letras</button>
+
 
     <!-- Construcción de la sopa de letras -->
     <script>
@@ -202,6 +208,9 @@
             window.location.href = window.location.href;
         });
     </script>
+       <div>
+        <a href="{% url 'games' %}" class="flex justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">Salir</a>
+     </div>
     
 </body>
 

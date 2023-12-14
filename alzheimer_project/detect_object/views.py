@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from authentication.opencv.detect_object import object
+from detect_object.detect_object import object
 from .forms import FormObject
 # Create your views here.
 

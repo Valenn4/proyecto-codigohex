@@ -8,9 +8,9 @@ data.append("client_secret", client_secret);
 
 document.querySelector(".search").style.display = 'none'
 
-document.querySelector(".enter_music").addEventListener('click', (e) => {
+document.querySelector(".enter_musicc").addEventListener('click', (e) => {
   document.querySelector(".search").style.display = 'flex'
-
+  console.log("hola")
   e.preventDefault()
   value = document.querySelector(".input_music").value
   fetch(url, {

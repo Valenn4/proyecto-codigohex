@@ -32,7 +32,7 @@ def home(request):
                 
                     # Renderizar la plantilla con la respuesta
                     
-                    return render(request, 'home.html', {'texto_grabado': texto_grabado,'respuesta': respuesta})
+                    return render(request, 'home.html', {'texto_grabado': texto_grabado,'respuesta': respuesta, 'visible_chatbot':True})
                 except sr.UnknownValueError:
                     texto_grabado = "Google Speech Recognition no pudo entender el audio"
                     return render(request, 'home.html', {'texto_grabado': texto_grabado})

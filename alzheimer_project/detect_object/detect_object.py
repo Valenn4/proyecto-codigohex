@@ -2,13 +2,14 @@
 import numpy as np
 import cv2
 from sklearn.preprocessing import LabelEncoder
+import tensorflow as tf
 
 
 def object(obj):
-    loaded_model = tf.keras.models.load_model('C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/authentication/opencv/best_model21.h5')
+    loaded_model = tf.keras.models.load_model('C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/detect_object/Cargas_modelo_Objetos.h5')
 
     # Cargar la imagen
-    ruta_imagen = 'C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/authentication/opencv/R.jpg'
+    ruta_imagen = obj
     imagen_color = cv2.imread(ruta_imagen)
     imagen_gris = cv2.cvtColor(imagen_color, cv2.COLOR_RGB2GRAY)
     imagen_redimensionada = cv2.resize(imagen_gris, (150, 150))
