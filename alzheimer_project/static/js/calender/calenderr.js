@@ -25,11 +25,8 @@ if(error.innerHTML == 'Ya hay cargada una tarea en el mismo horario.'){
 
 function closeWindowActivities(){
   document.querySelector(".window_day").style.display = 'none'
-  document.querySelector(".window_day").innerHTML = `<div class="close_window" onclick="closeWindowActivities()">
-  <span class="material-symbols-outlined close_window" style="width:50%; text-align:right; margin:auto; cursor: pointer">
-    close
-  </span>
-</div>`
+  document.querySelector(".activities_day").innerHTML = ''
+  document.querySelector(".day_window").innerHTML = ''
 }
 
 function clickOption(option){
@@ -213,25 +210,25 @@ function renderCalendar() {
     day.insertAdjacentHTML("beforeend", `<p class="id_dia" name="id_dia">${i}</p>`)
     day.style.display = 'block'
     let window_day = document.querySelector(".window_day")
+    let day_window = document.querySelector(".day_window")
+    let activities_day = document.querySelector(".activities_day")
     fetch(`http://127.0.0.1:8000/api/activities/${document.getElementById("id_user").innerHTML}/${currentYear}/${currentMonth+1}/${i}`)
     .then(response => response.json())
     .then(json => {
       if(json.length>0){
         day.addEventListener("click", (e) => {
-          window_day.style.display = 'flex'
-          window_day.innerHTML = `<div class="close_window" onclick="closeWindowActivities()">
-            <span class="material-symbols-outlined close_window" style="width:50%; text-align:right; margin:auto; cursor: pointer">
-              close
-            </span>
-          </div>
-          <div><p>${i} del ${currentMonth+1} del ${currentYear}</p></div>`
+          window_day.style.display = 'grid'
+          activities_day .innerHTML = ''
+          day_window.innerHTML = ''
+          day_window.insertAdjacentHTML("beforeend", `
+          <div><p>${i} del ${currentMonth+1} del ${currentYear}</p></div>`)
           for(a of json){
             if(a.id_action!=null){
               let activity = a.id_action
-              window_day.insertAdjacentHTML("beforeend", `
+              activities_day.insertAdjacentHTML("beforeend", `
                 <div class="activity">
                   <p>${a.time}${activity.name}</p>
-                  <video width="50%" height="500px" controls>
+                  <video width="50%" height="50%" controls>
                     <source src="..${activity.video}" type="video/mp4">
                   </video>
                 </div>
@@ -239,12 +236,12 @@ function renderCalendar() {
             } else if(a.id_music!=null){
               let activity = a.id_music
               let time = a.time
-              fetch(url, {
+              fetch(url_account, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/x-www-form-urlencoded",
                 },
-                body: data,
+                body: data_account,
               })
               .then(response => response.json())
               .then(data => {
@@ -256,7 +253,7 @@ function renderCalendar() {
                 .then(response => response.json())
                 .then(json => {
                   if(activity.category=='track'){
-                    window_day.insertAdjacentHTML("beforeend", `
+                    activities_day.insertAdjacentHTML("beforeend", `
                     <div class="activity" id="${activity.id_music}">
                       <p>${time}</p>
                       <p style="display:none;">${activity.category}</p>
@@ -265,8 +262,8 @@ function renderCalendar() {
                       <p>${activity.name}</p>
                     </div>`)
                   } else {
-                    window_day.insertAdjacentHTML("beforeend", `
-                    <div class="music_activity" id="${activity.id_music}">
+                    activities_day.insertAdjacentHTML("beforeend", `
+                    <div class="activity" id="${activity.id_music}">
                       <p>${a.time}</p>
                       <p style="display:none;">${activity.category}</p>
                       <img width="50%" src="${json["images"][0].url}">
@@ -285,7 +282,7 @@ function renderCalendar() {
                 
             } else if(a.id_game!=null){
               let activity = a.id_game
-              window_day.insertAdjacentHTML("beforeend", `
+              activities_day.insertAdjacentHTML("beforeend", `
                 <div class="activity" id=${a.id}>
                   <p>${a.time}</p>
                   <p>Jugar:</p>
@@ -297,7 +294,7 @@ function renderCalendar() {
               })
             } else if(a.id_object!=null){
               activity = a.id_object
-              window_day.insertAdjacentHTML("beforeend", `
+              activities_day.insertAdjacentHTML("beforeend", `
                 <div class="activity">
                   <p>${a.time}${activity.name}</p>
                   <img width='50%' src="..${activity.image}">

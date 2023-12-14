@@ -138,11 +138,21 @@
         
     </div>
 
-    <div class="window_day" style="display: none; flex-direction: column; background-color: grey; padding:5px; width: 50%; height: 50%; margin:auto; align-items: center; justify-content: center; position:fixed; top:0;bottom:0;left:0; right:0;">
-        <div class="close_window" onclick="closeWindowActivities()">
-            <span class="material-symbols-outlined close_window" style="width:50%; text-align:right; margin:auto; cursor: pointer">
+    <div class="window_day" style="display:none; flex-direction: column;
+     background-color: rgb(157, 176, 242); padding: 20px; width: 50%; border: 2px solid black;
+      height: 50%; margin: auto; align-items: flex-end; justify-content: flex-start;
+       position: fixed; inset: 0px; box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 5px 2px; border-radius: 10px;">
+        <div class="close_window" onclick="closeWindowActivities()" style="
+        width: 100px;
+        color: red;
+        height: 1px;">
+            <span class="material-symbols-outlined close_window" style="width:auto; text-align:right; margin:auto; cursor: pointer">
               close
             </span>
+        </div>
+        <div class="day_window"></div>
+        <div class="activities_day" style="display:grid;height: auto; grid-template-columns: repeat(3, 1fr); overflow: auto; margin: auto; ">
+
         </div>
     </div>
 
@@ -150,7 +160,7 @@
 
     <div class="reproductor"></div>
 
-    <script src="{%static 'js/calender/calender.js'%}"></script>
+    <script src="{%static 'js/calender/calenderr.js'%}"></script>
 
 </body>
 {% endblock %}
