@@ -1,27 +1,35 @@
-// script.js
-const url = "https://accounts.spotify.com/api/token";
-const client_id = "6f6a277ceb024282bd6b71a5ec18d995";
-const client_secret = "67038f5e05ec4e13873b3cc68ff2d52d";
-const data = new URLSearchParams();
-data.append("grant_type", "client_credentials");
-data.append("client_id", client_id);
-data.append("client_secret", client_secret);
+const url_account = "https://accounts.spotify.com/api/token"
+const client_id_account = "6f6a277ceb024282bd6b71a5ec18d995";
+const client_secret_account = "67038f5e05ec4e13873b3cc68ff2d52d";
+const data_account = new URLSearchParams();
+data_account.append("grant_type", "client_credentials");
+data_account.append("client_i_accountd", client_id_account);
+data_account.append("client_secret", client_secret_account);
 
 const formAction = document.querySelector(".formAction")
 const formObject = document.querySelector(".formObject")
 const formGame = document.querySelector(".formGame")
 const formMusic = document.querySelector(".formMusic")
-
 formObject.style.display = 'none'
 formMusic.style.display = 'none'
 formGame.style.display = 'none'
 
 let error = document.querySelector(".error")
+
 if(error.innerHTML == 'Ya hay cargada una tarea en el mismo horario.'){
   error.style.display = 'block'
   setTimeout(() => {
     error.style.display = 'none'
   }, 5000);
+}
+
+function closeWindowActivities(){
+  document.querySelector(".window_day").style.display = 'none'
+  document.querySelector(".window_day").innerHTML = `<div class="close_window" onclick="closeWindowActivities()">
+  <span class="material-symbols-outlined close_window" style="width:50%; text-align:right; margin:auto; cursor: pointer">
+    close
+  </span>
+</div>`
 }
 
 function clickOption(option){
@@ -55,8 +63,8 @@ function clickOption(option){
   
 // MUSIC
 document.getElementById("id_id_music").style.display = 'none'
-document.getElementById("id_category_music").style.display = 'none'
-document.getElementById("id_name_music").setAttribute('readonly', 'true')
+document.getElementById("id_category").style.display = 'none'
+document.querySelector(".input_name_music").childNodes[1].setAttribute('readonly', 'true')
 document.querySelector(".search_music").addEventListener("click", () => {
   open_search_music()
 })
@@ -64,12 +72,12 @@ document.querySelector(".search_music").addEventListener("click", () => {
 function open_search_music(){
   document.querySelector(".list_spotify").style.display = 'flex'
 
-  fetch(url, {
+  fetch(url_account, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: data,
+    body: data_account,
   })
   .then(response => response.json())
   .then(data => {
@@ -98,8 +106,8 @@ function open_search_music(){
         document.querySelectorAll(".track").forEach((e) => {
           e.addEventListener("click", () => {
             document.getElementById("id_id_music").value = e.id
-            document.getElementById("id_category_music").value = e.childNodes[1].innerHTML
-            document.getElementById("id_name_music").value = e.childNodes[5].innerText
+            document.getElementById("id_category").value = e.childNodes[1].innerHTML
+            document.querySelector(".input_name_music").childNodes[1].value = e.childNodes[5].innerText
             document.querySelector(".list_spotify").style.display = 'none'
           })
         })
@@ -120,8 +128,8 @@ function open_search_music(){
         document.querySelectorAll(".artist").forEach((e) => {
           e.addEventListener("click", () => {
             document.getElementById("id_id_music").value = e.id
-            document.getElementById("id_category_music").value = e.childNodes[1].innerHTML
-            document.getElementById("id_name_music").value = e.childNodes[5].innerText
+            document.getElementById("id_category").value = e.childNodes[1].innerHTML
+            document.getElementById("id_name").value = e.childNodes[5].innerText
             document.querySelector(".list_spotify").style.display = 'none'
           })
         })
@@ -142,8 +150,8 @@ function open_search_music(){
         document.querySelectorAll(".album").forEach((e) => {
           e.addEventListener("click", () => {
             document.getElementById("id_id_music").value = e.id
-            document.getElementById("id_category_music").value = e.childNodes[1].innerHTML
-            document.getElementById("id_name_music").value = e.childNodes[5].innerText
+            document.getElementById("id_category").value = e.childNodes[1].innerHTML
+            document.getElementById("id_name").value = e.childNodes[5].innerText
             document.querySelector(".list_spotify").style.display = 'none'
           })
         })
@@ -164,8 +172,8 @@ function open_search_music(){
         document.querySelectorAll(".playlist").forEach((e) => {
           e.addEventListener("click", () => {
             document.getElementById("id_id_music").value = e.id
-            document.getElementById("id_category_music").value = e.childNodes[1].innerHTML
-            document.getElementById("id_name_music").value = e.childNodes[5].innerText
+            document.getElementById("id_category").value = e.childNodes[1].innerHTML
+            document.getElementById("id_name").value = e.childNodes[5].innerText
             document.querySelector(".list_spotify").style.display = 'none'
           })
         })
@@ -182,93 +190,103 @@ const months = [
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
   
-  const weekdays = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+const weekdays = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
   
-  const today = new Date();
-  let currentMonth = today.getMonth();
-  let currentYear = today.getFullYear();
-  
-  document.getElementById("monthYear").innerText = `${months[currentMonth]} ${currentYear}`;
-  
-  function renderCalendar() {
-    const calendarDays = document.getElementById("calendarDays");
-    calendarDays.innerHTML = "";
-    const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  
-    for (let i = 0; i < firstDayOfMonth; i++) {
-      const emptyDay = document.createElement("div");
-      calendarDays.appendChild(emptyDay);
-    }
-    for (let i = 1; i <= daysInMonth; i++) {
-      const day = document.createElement("div");
-      
-      fetch(`http://127.0.0.1:8000/api/activities/${document.getElementById("id_user").innerHTML}/${currentYear}/${currentMonth+1}/${i}`)
-      .then(response => response.json())
-      .then(json => {
-        if(json.length>0){
-          day.insertAdjacentHTML("beforeend", `<p>${i}</p>`)
+const today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
+document.getElementById("monthYear").innerText = `${months[currentMonth]} ${currentYear}`;
+
+function renderCalendar() {
+  const calendarDays = document.getElementById("calendarDays");
+  calendarDays.innerHTML = "";
+  const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    const emptyDay = document.createElement("div");
+    calendarDays.appendChild(emptyDay);
+  }
+  for (let i = 1; i <= daysInMonth; i++) {
+    const day = document.createElement("div");
+    day.insertAdjacentHTML("beforeend", `<p class="id_dia" name="id_dia">${i}</p>`)
+    day.style.display = 'block'
+    let window_day = document.querySelector(".window_day")
+    fetch(`http://127.0.0.1:8000/api/activities/${document.getElementById("id_user").innerHTML}/${currentYear}/${currentMonth+1}/${i}`)
+    .then(response => response.json())
+    .then(json => {
+      if(json.length>0){
+        day.addEventListener("click", (e) => {
+          window_day.style.display = 'flex'
+          window_day.innerHTML = `<div class="close_window" onclick="closeWindowActivities()">
+            <span class="material-symbols-outlined close_window" style="width:50%; text-align:right; margin:auto; cursor: pointer">
+              close
+            </span>
+          </div>
+          <div><p>${i} del ${currentMonth+1} del ${currentYear}</p></div>`
           for(a of json){
             if(a.id_action!=null){
               let activity = a.id_action
-              console.log(url)
-              day.insertAdjacentHTML("beforeend", `
-                <p>${a.time}${activity.name}</p>
-                <video width="700px" height="500px" controls>
-                  <source src="..${activity.video}" type="video/mp4">
-                </video>
+              window_day.insertAdjacentHTML("beforeend", `
+                <div class="activity">
+                  <p>${a.time}${activity.name}</p>
+                  <video width="50%" height="500px" controls>
+                    <source src="..${activity.video}" type="video/mp4">
+                  </video>
+                </div>
               `)
             } else if(a.id_music!=null){
               let activity = a.id_music
               let time = a.time
               fetch(url, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: data,
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: data,
+              })
+              .then(response => response.json())
+              .then(data => {
+                fetch(`http://127.0.0.1:8000/api/spotify/${activity.category}s/${activity.id_music}`,{
+                headers: {
+                  'Authorization': `Bearer ${data.access_token}`
+                }
+                })
+                .then(response => response.json())
+                .then(json => {
+                  if(activity.category=='track'){
+                    window_day.insertAdjacentHTML("beforeend", `
+                    <div class="activity" id="${activity.id_music}">
+                      <p>${time}</p>
+                      <p style="display:none;">${activity.category}</p>
+                      <img width="50%" src="${json["album"]["images"][0].url}">
+                      <p>Escuchar:</p>
+                      <p>${activity.name}</p>
+                    </div>`)
+                  } else {
+                    window_day.insertAdjacentHTML("beforeend", `
+                    <div class="music_activity" id="${activity.id_music}">
+                      <p>${a.time}</p>
+                      <p style="display:none;">${activity.category}</p>
+                      <img width="50%" src="${json["images"][0].url}">
+                      <p>Escuchar:</p>
+                      <p>${activity.name}</p>
+                    </div>`)
+                  }
+                  document.getElementById(activity.id_music).addEventListener("click", (e) => {
+                    document.querySelector(".reproductor").innerHTML = ''
+                    document.querySelector(".reproductor").insertAdjacentHTML('beforeend', `
+                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/${activity.category}/${activity.id_music}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>            
+                    `)
                   })
-                  .then(response => response.json())
-                  .then(data => {
-                    fetch(`http://127.0.0.1:8000/api/spotify/${activity.category_music}s/${activity.id_music}`,{
-                    headers: {
-                      'Authorization': `Bearer ${data.access_token}`
-                    }
-                    })
-                    .then(response => response.json())
-                    .then(json => {
-                      if(activity.category_music=='track'){
-                        day.insertAdjacentHTML("beforeend", `
-                        <div class="music_activity" id="${activity.id_music}">
-                          <p>${time}</p>
-                          <p style="display:none;">${activity.category_music}</p>
-                          <img src="${json["album"]["images"][0].url}">
-                          <p>Escuchar:</p>
-                          <p>${activity.name_music}</p>
-                        </div>`)
-                      } else {
-                        day.insertAdjacentHTML("beforeend", `
-                        <div class="music_activity" id="${activity.id_music}">
-                          <p>${a.time}</p>
-                          <p style="display:none;">${activity.category_music}</p>
-                          <img src="${json["images"][0].url}">
-                          <p>Escuchar:</p>
-                          <p>${activity.name_music}</p>
-                        </div>`)
-                      }
-                      document.getElementById(activity.id_music).addEventListener("click", (e) => {
-                        document.querySelector(".reproductor").innerHTML = ''
-                        document.querySelector(".reproductor").insertAdjacentHTML('beforeend', `
-                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/${activity.category_music}/${activity.id_music}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>            
-                        `)
-                      })
-                    })
-                  })
+                })
+              })
                 
             } else if(a.id_game!=null){
               let activity = a.id_game
-              day.insertAdjacentHTML("beforeend", `
-                <div id=${a.id}>
+              window_day.insertAdjacentHTML("beforeend", `
+                <div class="activity" id=${a.id}>
                   <p>${a.time}</p>
                   <p>Jugar:</p>
                   <p>${activity.name}</p>
@@ -279,24 +297,26 @@ const months = [
               })
             } else if(a.id_object!=null){
               activity = a.id_object
-              day.insertAdjacentHTML("beforeend", `
-                <p>${a.time}${activity.name}</p>
-                <img src="..${activity.image}">
+              window_day.insertAdjacentHTML("beforeend", `
+                <div class="activity">
+                  <p>${a.time}${activity.name}</p>
+                  <img width='50%' src="..${activity.image}">
+                </div>
               `)
             }
-
           }
-        } else {
-          day.insertAdjacentHTML("beforeend", `<p>${i}</p>`)
-        }
-      })
-      calendarDays.appendChild(day);
-
-    }
-    
+        })
+        day.insertAdjacentHTML('beforeend', `<span class="material-symbols-outlined">
+        push_pin
+        </span>`)
+      }
+    })
+    calendarDays.appendChild(day);
   }
-  
-  renderCalendar();
+}
+
+
+renderCalendar();
 
   document.getElementById("prevButton").addEventListener("click", () => {
     currentMonth -= 1;

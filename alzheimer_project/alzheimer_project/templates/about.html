@@ -1,24 +1,14 @@
+{% extends 'index.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECUERDA ME/TE</title>
-    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
+{% block content %}
+
 <body class="font-body">
     <!-- home section -->
-    <section class="bg-white mb-10 md:mb-42 xl:mb-62">
+    <section class="bg-white xl:mt-62 md:mt-42 mb-10  md:mb-42 xl:mb-62">
             <div class="container max-w-screen-xl mx-auto px-4">
-                    {% include 'core/header.html' %}
                 <div class="flex items-center justify-center xl:justify-start">
-                    <div class="mt-18 text-center xl:text-center">
-                            <h1 class="font-semibold text-4xl md:text-6xl lg:text-5xl primario leading-normal mb-10">¿Quienes somos?</h1>
+                    <div class="xl:mt-60 md:50 mt-10 text-center xl:text-center">
+                            <h1 class="font-semibold mt-30 text-4xl md:text-6xl lg:text-5xl primario leading-normal mb-10">¿Quienes somos?</h1>
                             
                             <p class="font-normal text-xl text-center text-gray-400 leading-relaxed mb-12">Somos un equipo comprometidos a mejorar la calidad de vida de las personas con 
                                 Alzheimer, tomando en cuenta cada una de las necesidades que pueden tener y facilitando la planificación de sus días con las diferentes actividades.</p>
@@ -43,23 +33,22 @@
 
             <div class="container max-w-screen-xl  mx-auto px-4">
 
-                <h1 class="font-semibold primario text-5xl text-center mb-10">Conócenos</h1>
+                <h1 class="font-semibold secundario text-7xl text-center mb-20">Conócenos</h1>
 
                 <div class="flex space-x-4 md:space-x-6 lg:space-x-8">
                     <div>
-                        <img src="{% static 'assets/image/gallery-1.png'%}" alt="image" class="mb-4 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500">
-                        <img src="{% static 'assets/image/gallery-4.png'%}" alt="image" class="hover:opacity-75 transition ease-in-out duration-500">
+                        <img src="{% static 'img/valen.png'%}" alt="image" class="mb-4 md:mb-6 w-100 h-90 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500">
+                        <img src="{% static 'img/lluna.png'%}" alt="image" class="hover:opacity-75 transition ease-in-out duration-500">
                     </div>
 
                     <div>
-                        <img src="{% static 'assets/image/gallery-2.png'%}" alt="image" class="mb-4 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500">
-                        <img src="{% static 'assets/image/gallery-5.png'%}" alt="image" class="mb-3 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500">
-                        <img src="{% static 'assets/image/gallery-6.png'%}" alt="image" class="hover:opacity-75 transition ease-in-out duration-500">
+                        <img src="{% static 'img/carla.png'%}" alt="" class="mb-4 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500">
+                        <img src="{% static 'img/sergio.png'%}" alt="" class="mb-3 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500">
                     </div>
 
                     <div>
-                        <img src="{% static 'assets/image/gallery-3.png'%}" alt="image" class="mb-4 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500">
-                        <img src="{% static 'assets/image/gallery-7.png'%}" alt="image" class="hover:opacity-75 transition ease-in-out duration-500">
+                        <img src="{% static 'img/gracia.png'%}" alt="" class="mb-4 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500">
+                        <img src="{% static 'img/cristian.png'%}" alt="image" class="hover:opacity-75 transition ease-in-out duration-500">
                     </div>
                 </div>
 
@@ -69,18 +58,20 @@
     <!-- book section -->
     <section class="bg-white py-10 md:py-16">
             <div class="container max-w-screen-xl mx-auto px-4 xl:relative">
-                <div class="bg-gray-700 flex flex-col lg:flex-row items-center justify-evenly py-14 rounded-3xl">
+                <div class="bg-gray-700 flex flex-col lg:flex-row items-center justify-evenly py-10 rounded-3xl">
                     <div class="text-center lg:text-left mb-10 lg:mb-0">
+                        
                         <h1 class="font-semibold text-white text-4xl md:text-5xl lg:text-7xl leading-normal mb-4">Contactamos</h1>
                         <p class="font-normal text-white text-md md:text-xl">¡Queremos tu colaboración! Conéctate con nosotros <br>para ser parte activa del proyecto.</p>
-                        
+                        <img src=" {% static 'img/CodeHexLogoBlanco.png'%}" alt="CodeHexLogoBlanco" class="w-40 mt-10 h-30 ">
+
                     </div>
                     <div class="hidden xl:block xl:absolute right-0">
                         <img src="{% static 'assets/image/book.png'%}" alt="Image">
                     </div>
                     <div class="hidden md:block bg-white xl:relative px-6 py-3 rounded-3xl">
                         <div class="py-3">
-                            <h3 class="font-semibold text-gray-900 text-3xl">Cita de reunion</h3>
+                            <h3 class="font-semibold text-gray-900 text-3xl">Cita de reunión</h3>
                         </div>
                         <div class="py-3">
                             <input type="text" placeholder="Nombre" class="px-4 py-4 w-96 bg-gray-100 placeholder-gray-400 rounded-xl outline-none">
@@ -98,15 +89,12 @@
                             <button class="w-full py-4 font-semibold text-lg text-white bg-gray-800  rounded-xl hover:bg-gray-400  transition ease-in-out duration-500">Enviar</button>
                         </div>
                     </div>
+                    
                 </div>
+                
             </div> <!-- container.// -->
     </section>
         <!-- book section //end -->
 
-
-        <script>
-            feather.replace()
-        </script>
-    {% include 'core/footer.html' %}
 </body>
-</html>
+{%endblock%}

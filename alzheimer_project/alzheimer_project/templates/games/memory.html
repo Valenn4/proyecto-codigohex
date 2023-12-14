@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
 </head>
 <body>
     <style>
@@ -39,5 +41,8 @@
 
     </main>
     <script src="{% static 'js/games/memory/memoryy.js' %}"></script>
+    <div>
+        <a href="{% url 'games' %}" class="flex justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">Salir</a>
+     </div>
 </body>
 </html>

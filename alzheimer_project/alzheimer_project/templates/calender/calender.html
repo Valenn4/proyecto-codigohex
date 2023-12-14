@@ -1,95 +1,155 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+<link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
 <body class="font-body">
     <p class="error" style="display:none; position: fixed; top: 15px; left: 15px; background-color: red; color: white; padding: 5px;">{{error}}</p>
-    <section class="bg-white mb-10 md:mb-42 xl:mb-62">
+    
+    
+    <section class="bg-white xl:mt-62 md:mt-42 mb-10 md:mb-42 xl:mb-62">
         <div class="container max-w-screen-xl mx-auto px-4">
-            <div class="flex items-center justify-center xl:justify-start">
-                <div class="mt-18 text-center xl:text-center">
-                        <h1 class="font-semibold text-5xl md:text-6xl lg:text-5xl primario leading-normal mb-10">Calendario</h1>
+            <div class="flex items-center justify-center">
+                <div class="xl:mt-40 text-center xl:text-center">
+                        <h1 class="font-semibold mt-50 text-4xl md:text-6©xl lg:text-7xl primario leading-normal mb-10">Calendario</h1>
                 </div>
             </div>
         </div> <!-- container.// -->
     </section>
-    <div class="formActivity">
-        <ul>
-            <li id="option_action" onclick="clickOption('action')">Accion</li>
-            <li id="option_object" onclick="clickOption('object')">Objeto</li>
-            <li id="option_game" onclick="clickOption('game')">Juego</li>
-            <li id="option_music" onclick="clickOption('music')">Musica</li>
-        </ul>
-        <form method="POST" class="formAction" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="date" name="date" id="id_date" required>
-            <input type="time" name="time" id="id_time" required>
-            {{formAction}}
-            <input type="submit" value="Enviar" name="formAction">
-        </form>
-        <form method="POST" class="formObject" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="date" name="date" id="id_date" required>
-            <input type="time" name="time" id="id_time" required>
-            {{formObject}}
-            <input type="submit" value="Enviar" name="formObject">
-        </form>
-        <form method="POST" class="formGame">
-            {% csrf_token %}
-            <input type="date" name="date" id="id_date" required>
-            <input type="time" name="time" id="id_time" required>
-            <select name="game">
-                {% for g in games %}
-                    <option>{{g.name}}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Enviar" name="formGame">
-        </form>
-        <form method="POST" class="formMusic">
-            {% csrf_token %}
-            <input type="date" name="date" id="id_date" required>
-            <input type="time" name="time" id="id_time" required>
-            <div class="input_name_music">
-                {{formMusic.name_music}}
-            </div>
-            <div class="input_id_music">
-                {{formMusic.id_music}}
-            </div>
-            <div class="input_category_music">
-                {{formMusic.category_music}}
-            </div>
-            <p class="search_music">Buscar cancion</p>
 
-            {% include 'spotify/spotify.html' %}
+    <div class="formActivity grid grid-cols-1 md:grid-cols-3">
+        <div>
+            <div class="mt-20">
+                <h1 class="flex justify-center font-semibold mt-50 text-4xl md:text-4xl lg:text-4xl primario leading-normal mb-10">
+                    Agrega una actividad
+                </h1>
+            </div>
+            <div class="flex justify-center my-5 md:my-20 grid grid-rows-2">
+                <div>
+                    <button id="option_action" onclick="clickOption('action')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 " style="background-color:#4E84A6;">Accion</button>
+                    <button id="option_object" onclick="clickOption('object')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5" style="background-color:#4E84A6;">Objeto</button>
+                </div>
+                <div>
+                    <button id="option_game" onclick="clickOption('game')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5" style="background-color:#4E84A6;">Juego</button>
+                    <button id="option_music" onclick="clickOption('music')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5" style="background-color:#4E84A6;">Musica</button>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <form method="POST" class="formAction grid grid-rows-5" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <input type="date" class="border border-black rounded-lg p-2 m-1" name="date" id="id_date" required>
+                        <input type="time" class="border border-black rounded-lg p-2 m-1" name="time" id="id_time" required>
+                    </div>
+                    <div>
+                        <label for="id_name" class="m-1">Name:</label>
+                        <input type="text" class="border border-black m-1" name="name" maxlength="100" required="" id="id_name">
+                    </div>
+                    <div>
+                        <label for="id_description" class="m-1">Description:</label>
+                        <textarea name="description" class="border border-black m-1" cols="40" rows="10" required="" id="id_description" style="height: 17px;"></textarea>
+                    </div>
+                    <div>
+                        <label for="id_video" class="m-2">Video:</label>
+                        <input type="file" name="video" class="m-1" id="id_video" accept="video/mp4,video/x-m4v,video/*">
+                    </div>
+                    <div>
+                        <input type="submit" class="rounded-lg p-1 border border-black m-2 bg-gray-800 hover:bg-gray-400 text-white" value="Enviar" name="formAction">
+                    </div>
+    
+                </form>
+                <form method="POST" class="formObject grid grid-rows-5" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <input type="date" class="border border-black rounded-lg p-2 m-1" name="date" id="id_date" required>
+                        <input type="time" class="border border-black rounded-lg p-2 m-1" name="time" id="id_time" required>
+                    </div>
+                    <div>
+                        <label for="id_name" class="m-1">Name:</label>
+                        <input type="text" class="border border-black m-1" name="name" maxlength="100" required="" id="id_name">
+                    </div>
+                    <div>
+                        <label for="id_description" class="m-1">Description:</label>
+                        <textarea name="description" class="border border-black m-1" cols="40" rows="10" required="" id="id_description" style="height: 17px;"></textarea>
+                    </div>
+                    <div>
+                        <label for="id_image" class="m-1">Image:</label>
+                        <input type="file" class="m-1" name="image" accept="image/*" required="" id="id_image">
+                    </div>
+                    <div>
+                        <input type="submit" class="rounded-lg p-1 border border-black m-1 bg-gray-800 hover:bg-gray-400 text-white" value="Enviar" name="formObject">
+                    </div>
 
-            <input type="submit" value="Enviar" name="formMusic">
-        </form>
+                </form>
+                <form method="POST" class="formGame">
+                    {% csrf_token %}
+                    <input type="date" class="border border-black rounded-lg p-2 m-2" name="date" id="id_date" required>
+                    <input type="time" class="border border-black rounded-lg p-2 m-2" name="time" id="id_time" required>
+                    <select name="game" class="border border-black p-2 m-2">
+                        <option class="hover:bg-blue-100">Memory</option>
+                        <option class="hover:bg-blue-100">Tetris</option>
+                        <option class="hover:bg-blue-100">Sopa de letras</option>
+                    </select>
+                    <input type="submit" class="rounded-lg p-1 border border-black m-2 bg-gray-800 hover:bg-gray-400 text-white" value="Enviar" name="formGame">
+                </form>
+                <form method="POST" class="formMusic">
+                    {% csrf_token %}
+                    <input type="date" class="border border-black rounded-lg p-2 m-2" name="date" id="id_date" required>
+                    <input type="time" class="border border-black rounded-lg p-2 m-2" name="time" id="id_time" required>
+                    <div class="input_name_music">
+                        {{formMusic.name}}
+                    </div>
+                    <div class="input_id_music">
+                        {{formMusic.id_music}}
+                    </div>
+                    <div class="input_category_music">
+                        {{formMusic.category}}
+                    </div>
+                    <div>
+                        <p class="search_music">Buscar cancion</p>
+    
+                        {% include 'spotify/spotify.html' %}
+                    </div>
+    
+                    <input type="submit" value="Enviar" class="rounded-lg p-1 border border-black m-2 bg-gray-800 hover:bg-gray-400 text-white" name="formMusic">
+                </form>
+            </div>
+        </div>
+    
+        <div class="calendar mx-25 md:m-50 sombra mt-20 col-span-2" style="max-width: 800px; background-color: white; color: black;">
+            <div class="header">
+                <button id="prevButton">&lt;</button>
+                <h2 id="monthYear"></h2>
+                <button id="nextButton">&gt;</button>
+            </div>
+            <div class="weekdays bg-white">
+                <div class="text-red-800">Domingo</div>
+                <div>Lunes</div>
+                <div>Martes</div>
+                <div>Miércoles</div>
+                <div>Jueves</div>
+                <div>Viernes</div>
+                <div>Sábado</div>
+            </div>
+            <div class="days rounded rounded-md" id="calendarDays">
+    
+            </div>
+    
+        </div>
+        
     </div>
+
+    <div class="window_day" style="display: none; flex-direction: column; background-color: grey; padding:5px; width: 50%; height: 50%; margin:auto; align-items: center; justify-content: center; position:fixed; top:0;bottom:0;left:0; right:0;">
+        <div class="close_window" onclick="closeWindowActivities()">
+            <span class="material-symbols-outlined close_window" style="width:50%; text-align:right; margin:auto; cursor: pointer">
+              close
+            </span>
+        </div>
+    </div>
+
     <p id="id_user" style="display:none">{{request.user.id}}</p>
-    <div class="calendar">
-        <div class="header">
-            <button id="prevButton">&lt;</button>
-            <h2 id="monthYear"></h2>
-            <button id="nextButton">&gt;</button>
-        </div>
-        <div class="weekdays">
-            <div>Domingo</div>
-            <div>Lunes</div>
-            <div>Martes</div>
-            <div>Miércoles</div>
-            <div>Jueves</div>
-            <div>Viernes</div>
-            <div>Sábado</div>
-        </div>
-        <div class="days" id="calendarDays"></div>
-
-    </div>
 
     <div class="reproductor"></div>
 
     <script src="{%static 'js/calender/calenderr.js'%}"></script>
 </body>
 {% endblock %}
-
-

@@ -1,7 +1,6 @@
-const url = "https://accounts.spotify.com/api/token";
+const url = "https://accounts.spotify.com/api/token"
 const client_id = "6f6a277ceb024282bd6b71a5ec18d995";
 const client_secret = "67038f5e05ec4e13873b3cc68ff2d52d";
-
 const data = new URLSearchParams();
 data.append("grant_type", "client_credentials");
 data.append("client_id", client_id);
@@ -9,11 +8,11 @@ data.append("client_secret", client_secret);
 
 document.querySelector(".search").style.display = 'none'
 
-document.querySelector(".form_spotify").addEventListener('submit', (e) => {
+document.querySelector(".enter_music").addEventListener('click', (e) => {
   document.querySelector(".search").style.display = 'flex'
 
   e.preventDefault()
-  value = e.target[0].value
+  value = document.querySelector(".input_music").value
   fetch(url, {
     method: "POST",
     headers: {
@@ -23,9 +22,9 @@ document.querySelector(".form_spotify").addEventListener('submit', (e) => {
   })
     .then(response => response.json())
     .then(data => {
-      const url = `https://api.spotify.com/v1/search?q=${value}&type=album%2Cartist%2Cplaylist%2Ctrack&limit=4`
+      url = `https://api.spotify.com/v1/search?q=${value}&type=album%2Cartist%2Cplaylist%2Ctrack&limit=4`
 
-    fetch(url, {
+      fetch(url, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${data.access_token}`
@@ -47,7 +46,6 @@ document.querySelector(".form_spotify").addEventListener('submit', (e) => {
         }
         document.querySelectorAll(".track").forEach((e) => {
           e.addEventListener("click", () => {
-            console.log(e)
             document.querySelector(".reproductor").innerHTML = ''
             document.querySelector(".reproductor").insertAdjacentHTML('beforeend', `
             <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/${e.id}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>          `)
