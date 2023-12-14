@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'calender',
     'api',
     'games',
-    'lilly'
+    'lilly',
+    'detect_object'
 ]
 
 MIDDLEWARE = [
