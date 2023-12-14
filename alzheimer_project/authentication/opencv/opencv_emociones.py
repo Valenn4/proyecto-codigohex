@@ -2,8 +2,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 
-# Cargar el modelo de detección de emociones
-dict_emociones = {0: 'Ira', 1: 'Asco', 2: 'Tristeza', 3: 'Felicidad', 4: 'Miedo'}
+dict_emociones = {0: 'Ira', 1: 'Asco', 2: 'Tristeza', 3: 'Felicidad', 4: 'Sorpresa'}
 
 # Cargar el clasificador de rostros
 loaded_model = tf.keras.models.load_model(r'C:\Users\mati\Desktop\proyecto-codigohex\alzheimer_project\authentication\opencv\Modelocompleto_deteccionEmociones01.h5')
@@ -40,56 +39,65 @@ def detectar_rostros(imagen):
     return rostros
 
 def detectar_emociones_en_rostro(imagen):
-    # Aplicar la detección de rostros
-    rostros = detectar_rostros(imagen)
+    net = cv2.dnn.readNetFromCaffe("C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/authentication/opencv/opencv_face_detector.prototxt", 'C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/authentication/opencv/res10_300x300_ssd_iter_140000.caffemodel')
 
-    # Iterar sobre los rostros detectados y aplicar la detección de emociones
-    for (x, y, w, h) in rostros:
-        # Extraer la región de la cara de la imagen
-        cara = imagen[y:y+h, x:x+w]
-        imagen_gris = cv2.cvtColor(cara, cv2.COLOR_BGR2GRAY)
-        imagen_redimensionada = cv2.resize(imagen_gris, (96, 96))
-        # Aplicar la detección de emociones en la región de la cara
-        emocion = detectar_emociones(imagen_redimensionada)
+    # Parametros del modelo
+    # Tamaño
+    anchonet = 300
+    altonet = 300
+    # Valores medios de los canales de color
+    media = [104, 117, 123]
+    umbral = 0.7
 
-        print(emocion)
-        return emocion
-    return 'caca'
+    frame = cv2.flip(imagen, 1)
 
-# Iniciar la captura de video
-cap = cv2.VideoCapture(0)
+       # Extraemos info de los frames
+    altoframe = frame.shape[0]
+    anchoframe = frame.shape[1]
 
-while True:
-    ret, frame = cap.read()
+    # Preprocesamos la imagen
+    # Images - Factor de escala - tamaño - media de color - Formato de color(BGR-RGB) - Recorte
+    blob = cv2.dnn.blobFromImage(frame, 1.0, (anchonet, altonet), media, swapRB = False, crop = False)
 
-    if not ret:
-        break
+    # Corremos el modelo
+    net.setInput(blob)
+    detecciones = net.forward()
 
-    # Aplicar la detección de emociones en rostros
-    frame_con_emociones = detectar_emociones_en_rostro(frame)
+    # Iteramos
+    for i in range(detecciones.shape[2]):
+        # Extraemos la confianza de esa deteccion
+        conf_detect = detecciones[0,0,i,2]
+        # Si superamos el umbral (70% de probabilidad de que sea un rostro)
+        if conf_detect > umbral:
 
-    # Salir si se presiona 'q'
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+            # Extraemos las coordenadas
+            xmin = int(detecciones[0, 0, i, 3] * anchoframe)
+            ymin = int(detecciones[0, 0, i, 4] * altoframe)
+            xmax = int(detecciones[0, 0, i, 5] * anchoframe)
+            ymax = int(detecciones[0, 0, i, 6] * altoframe)
 
-# Liberar la captura y cerrar la ventana
-cap.release()
-cv2.destroyAllWindows()
+            # Dibujamos el rectangulo
+            cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0,0,255), 2)
+            # Texto que vamos a mostrar
+            label = "Confianza de deteccion: %.4f" % conf_detect
+            # Tamaño del fondo del label
+            label_size, base_line = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
+            # Colocamos fondo al texto
+            cv2.rectangle(frame, (xmin, ymin - label_size[1]), (xmin + label_size[0], ymin + base_line),
+                          (0,0,0), cv2.FILLED)
+            # Colocamps el texto
+            cv2.putText(frame, label, (xmin, ymin), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1)
 
-while True:
-    ret, frame = cap.read()
+            rostros = detectar_rostros(imagen)
+            emociones = []
 
-    if not ret:
-        break
+            for (x, y, w, h) in rostros:
+                cara_color = imagen[y:y + h, x:x + w]
+                cara_gris = cv2.cvtColor(cara_color, cv2.COLOR_BGR2GRAY)
+                cara_redimensionada = cv2.resize(cara_gris, (96, 96))
+                emocion = detectar_emociones(cara_redimensionada)
+                emociones.append(emocion)
 
-    # Aplicar la detección de emociones en rostros
-    frame_con_emociones = detectar_emociones_en_rostro(frame)
 
-    cv2.imshow('Deteccion de Emociones en vivo', frame_con_emociones)
-
-    # Salir si se presiona 'q'
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+            return emociones
+        return 'No hay rostro'

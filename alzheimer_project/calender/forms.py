@@ -1,11 +1,6 @@
 from django import forms
-from .models import Activity, Object, Action, Game, Music
+from .models import Activity, Action, Game, Music
 
-
-class FormObject(forms.ModelForm):
-    class Meta:
-        model = Object
-        fields = '__all__'
 
 class FormAction(forms.ModelForm):
     class Meta:

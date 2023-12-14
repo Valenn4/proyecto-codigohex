@@ -8,11 +8,17 @@
         <h3 class="font-semibold primario text-5xl px-6">Detección de objetos </h3>
     </div> 
     {% if object %}
-    <p class="text-center pb-6 font-normal text-gray-400 text-xl md:text-xl ">El objeto es un/a {{object}}</p>
+    <img style="display: flex; margin: auto;" src="../media/objects/{{imagen}}" alt="">
+    <p class="text-center pt-6 pb-6 font-normal text-gray-400 text-xl md:text-xl">El objeto es un/a {{object}}</p>
     {% endif %}
     <form method="post" enctype="multipart/form-data" style="display:flex; margin: auto; justify-content: center; align-items: center;">
         {% csrf_token %}
-        {{form.imagen}}
+        <div>
+            <span class="material-symbols-outlined" style="width: 40%; height: 200px; text-align: center; background-color: grey; padding: 10px; color: white;">
+                image
+            </span>
+            {{form.imagen}}
+        </div>
         <input type="submit" class="px-2 py-2 bg-gray-800 text-white font-semibold text-lg rounded-xl hover:bg-gray-400 transition ease-in-out duration-500" value="Encontrar">
     </form>
 </body>

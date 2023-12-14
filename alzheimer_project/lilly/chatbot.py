@@ -41,16 +41,12 @@ pares = [
         ["Aún tengo que ajustar esta función",]
     ],
      [
-        r"Quiero jugar un juego",
-        ["../juegos"]
-    ],
-     [
         r"Dónde guardo mis llaves generalmente",
         ["Aún tengo que ajustar esta función",]
     ],
     
     [
-        r"(.*) Spotify ?|Quiero escuchar música|Quiero escuchar musica",
+        r"(.*) Spotify ?|(.*) Quiero escuchar música|Quiero escuchar musica",
         ["Quieres escuchar un artista, canción, playlist o album?",]
     ],
     [
@@ -90,19 +86,31 @@ pares = [
         ["La mejor orientadora del mundo",]
     ],
     [
-        r"Quiero ver el calendario",
+        r"(.*) Quiero ver el calendario|Quiero ver el calendario",
         ["../calendario"]
     ],
+     [
+        r"(.*) Quiero jugar un juego",
+        ["../juegos"]
+    ],
     [
-        r"Quién es mi contacto de emergencia|Quien es mi contacto de emergencia",
+        r"(.*) Quiero mi perfil|(.*) Quiero ver mi perfil",
+        ["../perfil"]
+    ],
+    [
+        r"(.*) Quién es mi contacto de emergencia|Quien es mi contacto de emergencia",
         ["contacto de emergencia"]
     ],
     [
-        r"qué día es hoy",
-        [f'Hoy es día {datetime.now().day} de {datetime.now().month} del {datetime.now().year}']
+        r"(.*) Tengo una emergencia|ayuda|auxilio",
+        ["Policia: 8989. Quiere que llame a uno de estos contactos?"]
     ],
     [
-        r"qué hora es",
+        r"(.*) qué día es hoy",
+        [f'Hoy es día {datetime.now().day} del {datetime.now().month} del {datetime.now().year}']
+    ],
+    [
+        r"(.*) qué hora es",
         [f'Son las {datetime.now().hour}:{datetime.now().minute}']
     ],
     [

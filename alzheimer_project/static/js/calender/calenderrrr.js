@@ -5,12 +5,9 @@ const data_account = new URLSearchParams();
 data_account.append("grant_type", "client_credentials");
 data_account.append("client_i_accountd", client_id_account);
 data_account.append("client_secret", client_secret_account);
-
 const formAction = document.querySelector(".formAction")
-const formObject = document.querySelector(".formObject")
 const formGame = document.querySelector(".formGame")
 const formMusic = document.querySelector(".formMusic")
-formObject.style.display = 'none'
 formMusic.style.display = 'none'
 formGame.style.display = 'none'
 
@@ -33,25 +30,16 @@ function clickOption(option){
   switch(option){
     case 'action':
       formAction.style.display = 'block'
-      formObject.style.display = 'none'
-      formGame.style.display = 'none'
-      formMusic.style.display = 'none'
-      break;
-    case 'object':
-      formAction.style.display = 'none'
-      formObject.style.display = 'block'
       formGame.style.display = 'none'
       formMusic.style.display = 'none'
       break;
     case 'game':
       formAction.style.display = 'none'
-      formObject.style.display = 'none'
       formGame.style.display = 'block'
       formMusic.style.display = 'none'
       break;
     case 'music':
       formAction.style.display = 'none'
-      formObject.style.display = 'none'
       formGame.style.display = 'none'
       formMusic.style.display = 'block'
       break;
@@ -292,15 +280,7 @@ function renderCalendar() {
               document.getElementById(a.id).addEventListener("click", (e) => {
                 location.href = `../juegos/${activity.name.toLowerCase()}`
               })
-            } else if(a.id_object!=null){
-              activity = a.id_object
-              activities_day.insertAdjacentHTML("beforeend", `
-                <div class="activity">
-                  <p>${a.time}${activity.name}</p>
-                  <img width='50%' src="..${activity.image}">
-                </div>
-              `)
-            }
+            } 
           }
         })
         day.insertAdjacentHTML('beforeend', `<h1>&#128075</h1>`)

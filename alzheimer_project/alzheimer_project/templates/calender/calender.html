@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/calender/calender.css' %}">
+<link rel="stylesheet" href="{% static 'css/calender/calenderr.css' %}">
 <body class="font-body">
     <p class="error" style="display:none; position: fixed; top: 15px; left: 15px; background-color: red; color: white; padding: 5px;">{{error}}</p>
     
@@ -23,12 +23,10 @@
                     Agrega una actividad
                 </h1>
             </div>
-            <div class="flex justify-center my-5 md:my-20 grid grid-rows-2">
+            <div class="flex justify-center my-5 md:my-20 grid grid-rows-1">
+
                 <div>
                     <button id="option_action" onclick="clickOption('action')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 custom-button" >Accion</button>
-                    <button id="option_object" onclick="clickOption('object')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 custom-button">Objeto</button>
-                </div>
-                <div>
                     <button id="option_game" onclick="clickOption('game')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 custom-button">Juego</button>
                     <button id="option_music" onclick="clickOption('music')" class="border border-blue-800 py-5 px-10 rounded-lg text-white text-xl font-semibold m-5 custom-button">Musica</button>
                 </div>
@@ -56,29 +54,6 @@
                         <input type="submit" class="rounded-lg p-1 border border-black m-2 bg-gray-800 hover:bg-gray-400 text-white" value="Enviar" name="formAction">
                     </div>
     
-                </form>
-                <form method="POST" class="formObject grid grid-rows-5" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div>
-                        <input type="date" class="border border-black rounded-lg p-2 m-1" name="date" id="id_date" required>
-                        <input type="time" class="border border-black rounded-lg p-2 m-1" name="time" id="id_time" required>
-                    </div>
-                    <div>
-                        <label for="id_name" class="m-1">Name:</label>
-                        <input type="text" class="border border-black m-1" name="name" maxlength="100" required="" id="id_name">
-                    </div>
-                    <div>
-                        <label for="id_description" class="m-1">Description:</label>
-                        <textarea name="description" class="border border-black m-1" cols="40" rows="10" required="" id="id_description" style="height: 17px;"></textarea>
-                    </div>
-                    <div>
-                        <label for="id_image" class="m-1">Image:</label>
-                        <input type="file" class="m-1" name="image" accept="image/*" required="" id="id_image">
-                    </div>
-                    <div>
-                        <input type="submit" class="rounded-lg p-1 border border-black m-1 bg-gray-800 hover:bg-gray-400 text-white" value="Enviar" name="formObject">
-                    </div>
-
                 </form>
                 <form method="POST" class="formGame">
                     {% csrf_token %}
@@ -115,7 +90,7 @@
             </div>
         </div>
     
-        <div class="calendar mx-25 md:m-50 sombra mt-20 col-span-2" style="max-width: 800px; background-color: white; color: black; margin: 10%; ">
+        <div class="calendar mx-25 md:m-50 sombra mt-20 col-span-2" >
             <div class="header">
                 <button id="prevButton">&lt;</button>
                 <h2 id="monthYear"></h2>
@@ -163,7 +138,7 @@
 
     <div class="reproductor"></div>
 
-    <script src="{%static 'js/calender/calenderr.js'%}"></script>
+    <script src="{%static 'js/calender/calenderrrr.js'%}"></script>
 
 </body>
 {% endblock %}

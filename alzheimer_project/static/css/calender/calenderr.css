@@ -9,7 +9,10 @@ body {
 
   
 .calendar {
-  max-width: 800px;
+  width: 80%; 
+  height: auto; 
+  background-color: white; 
+  color: black;
   margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 5px;

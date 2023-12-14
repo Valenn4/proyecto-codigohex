@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from calender.models import Activity
 from authentication.models import User, Contact
-from calender.models import Action, Music, Game, Object
+from calender.models import Action, Music, Game
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,11 +23,6 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         fields = '__all__'
 
-class ObjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Object
-        fields = '__all__'
-
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,7 +40,6 @@ class ActivitySerializer(serializers.ModelSerializer):
     id_action = ActionSerializer()
     id_music = MusicSerializer()
     id_game = GameSerializer()
-    id_object = ObjectSerializer()
     
     class Meta:
         model = Activity

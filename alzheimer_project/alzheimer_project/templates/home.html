@@ -102,7 +102,7 @@
 
     {% if request.user.is_authenticated %}
         {% if visible_chatbot %}
-        <div style="position:fixed; right: 10px; bottom:0; width:25%;" class="  bg-gray-100 flex flex-col">
+        <div style="position:fixed; z-index: 5; right: 10px; bottom:0; width:25%;" class="flex flex-col">
             <span class="material-symbols-outlined i-chatbot bg-gray-700 " style="display:none; background-color:#4E84A6; padding:10px; color:white; bottom: 15px; right: 15px; position:fixed; border-radius: 5px; cursor: pointer; font-size:30px">
                 smart_toy
             </span>
@@ -159,7 +159,7 @@
             </div>
         </div>
         {% else %}
-        <div style="position:fixed; right: 10px; bottom:0; width:25%;" class="  bg-gray-100 flex flex-col">
+        <div style="position:fixed; z-index: 5; right: 10px; bottom:0; width:25%;" class="bg-gray-100 flex flex-col">
             <span class="material-symbols-outlined i-chatbot bg-gray-700 " style="display:flex; background-color:#4E84A6; padding:10px; color:white; bottom: 15px; right: 15px; position:fixed; border-radius: 5px; cursor: pointer; font-size:30px">
                 smart_toy
             </span>
@@ -172,7 +172,7 @@
                     </span>
                 </div>
         
-                <div id="conversation" style="height: 250px;overflow-y:scroll; bottom: 0;" class="flex-1 p-4 bg-white mt-4 rounded">
+                <div id="conversation" style="height: 250px;overflow-y:scroll; bottom: 0;" class="flex-1 p-4 bg-white rounded">
                     <div class="items-start mb-2">
                         <div class="bg-gray-200 p-2 rounded-tl rounded-tr rounded-br">
                             <p class="text-gray-800">Hola soy Lilly, escribe algo para comenzar...</p>
@@ -216,6 +216,13 @@
             </div>
         </div>
         {% endif %}
+
+        <a href="{% url 'detect_object' %}">
+            <span style="position:fixed; right: 15px; bottom:80px;background-color:#4E84A6; padding:10px; color:white; border-radius: 5px; cursor: pointer; font-size:30px" class="bg-gray-100 flex flex-col material-symbols-outlined">
+                search
+            </span>
+        </a>
+        
     {% endif %}
 
     <script>

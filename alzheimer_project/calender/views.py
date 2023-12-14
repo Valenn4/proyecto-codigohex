@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Activity, Game
-from .forms import FormAction, FormObject, FormMusic
+from .forms import FormAction, FormMusic
 # Create your views here.
 
 @login_required(redirect_field_name=None, login_url='login')
@@ -9,13 +9,11 @@ def calender(request):
     if request.method == 'POST':
         if 'formAudio' not in request.POST and Activity.objects.filter(date=request.POST["date"], time=request.POST["time"]).count()>0:
             formAction = FormAction()
-            formObject = FormObject()
             formMusic = FormMusic()
             context = {
                 "activities": Activity.objects.filter(user=request.user),
                 'games': Game.objects.all(),
                 'formAction': formAction,
-                'formObject': formObject,
                 'formMusic': formMusic,
                 'error':'Ya hay cargada una tarea en el mismo horario.'
             }
@@ -29,14 +27,6 @@ def calender(request):
                                         date=formAction.data["date"], 
                                         time=formAction.data["time"],
                                         id_action=id)
-        elif 'formObject' in request.POST:
-                formObject = FormObject(request.POST, request.FILES)
-                if formObject.is_valid():
-                    id = formObject.save()
-                    Activity.objects.create(user=request.user, 
-                                            date=formObject.data["date"], 
-                                            time=formObject.data["time"],
-                                            id_object=id)  
         elif 'formGame' in request.POST:
                 
                 game = Game.objects.get(name=request.POST["game"])
@@ -55,17 +45,14 @@ def calender(request):
                                             id_music=id)  
                     return redirect('calender')
         formAction = FormAction()
-        formObject = FormObject()
         formMusic = FormMusic()
     else:
         formAction = FormAction()
-        formObject = FormObject()
         formMusic = FormMusic()
     context = {
         "activities": Activity.objects.filter(user=request.user),
         'games': Game.objects.all(),
         'formAction': formAction,
-        'formObject': formObject,
         'formMusic': formMusic
     }
     return render(request,'calender/calender.html', context)
