@@ -22,7 +22,7 @@ def home(request):
                 '''
                 try:
                     #texto_grabado = recognizer.recognize_google(audio, language='es-ES') 
-                    texto_grabado = 'hola'
+                    texto_grabado = 'Quiero escuchar musica'
                     respuesta = chatear(texto_grabado)
                     sintetizar_voz(respuesta)
                     if respuesta == '../juegos':
@@ -40,10 +40,7 @@ def home(request):
                 except sr.RequestError as e:
                     texto_grabado = f"Error en la solicitud a Google Speech Recognition; {e}"
                     return render(request, 'home.html', {'texto_grabado': texto_grabado})
-    
 
-
-    
     return render(request, 'home.html')
 
 @login_required(redirect_field_name=None, login_url="login")
