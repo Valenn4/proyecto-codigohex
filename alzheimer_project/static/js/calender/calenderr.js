@@ -228,7 +228,7 @@ function renderCalendar() {
               activities_day.insertAdjacentHTML("beforeend", `
                 <div class="activity">
                   <p>${a.time}${activity.name}</p>
-                  <video width="50%" height="50%" controls>
+                  <video width="100%" height="100%" controls>
                     <source src="..${activity.video}" type="video/mp4">
                   </video>
                 </div>
@@ -257,9 +257,8 @@ function renderCalendar() {
                     <div class="activity" id="${activity.id_music}">
                       <p>${time}</p>
                       <p style="display:none;">${activity.category}</p>
-                      <img width="50%" src="${json["album"]["images"][0].url}">
-                      <p>Escuchar:</p>
-                      <p>${activity.name}</p>
+                      <img width="100%" src="${json["album"]["images"][0].url}">
+                      <p>Escuchar: ${activity.name}</p>
                     </div>`)
                   } else {
                     activities_day.insertAdjacentHTML("beforeend", `
@@ -283,7 +282,7 @@ function renderCalendar() {
             } else if(a.id_game!=null){
               let activity = a.id_game
               activities_day.insertAdjacentHTML("beforeend", `
-                <div class="activity inline-block bg-cover bg-center border border-blue-800 m-4 relative text-black font-bold py-6 px-20 text-lg rounded" id=${a.id} style="background-image: url('../../../static/img/mando.jpg'); width:auto; height: 80%;">
+                <div class="activity inline-block bg-cover bg-center border border-blue-800 relative text-black font-bold py-6 px-20 text-lg rounded" id=${a.id} style="background-image: url('../../../static/img/mando.jpg'); width:100%; height: 50%;">
                   <p>${a.time}</p>
                   <p>Jugar:</p>
                   <p>${activity.name}</p>
