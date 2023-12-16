@@ -1,0 +1,25 @@
+{% load static %}
+<div class="list_spotify" style="display: none; grid-template-rows: repeat(5, 1fr); overflow: auto; margin: auto; width: 50%; height: auto; align-items: center; background-color: rgb(27, 146, 27); flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; right: 0; justify-content: center;">
+    <div class="form_spotify" style="grid-row: 1/1;">
+        <input type="text" class="input_music" placeholder="Buscar cancion, artista, album o playlist">
+        <button class="enter_music">Buscar</button>
+    </div>
+    <div class="spotify_track" style="grid-row: 2/3;">
+        <p>Tracks</p>
+        <div class="tracks" style="display: flex;"></div>
+    </div>
+    <div class="spotify_artist" style="grid-row: 3/4;">
+        <p>Artistas</p>
+        <div class="artists" style="display: flex;"></div>
+    </div>
+    <div class="spotify_albums" style="grid-row: 4/5;">
+        <p>Albums</p>
+        <div class="albums" style="display: flex;"></div>
+    </div>
+    <div class="spotify_playlist" style="grid-row: 5/6;">
+        <p>Playlist</p>
+        <div class="playlists" style="display: flex;"></div>
+    </div>
+</div>
+
+<script src="{%static 'js/spotify/spotifyy.js'%}"></script>

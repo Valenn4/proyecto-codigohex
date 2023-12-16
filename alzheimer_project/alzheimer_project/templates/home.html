@@ -1,0 +1,279 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<body class="font-body">
+                <!-- home section -->
+    <section class="bg-white mt-20 mb-20 md:mb-52 xl:mb-65">
+        <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="flex items-center justify-center xl:justify-start">
+                <div class="lg:mt-28  ml-16 text-center xl:text-left">
+                    <h1 class="font-semibold text-4xl md:text-6xl lg:text-7xl primario leading-normal mb-6">Tu aliado virtual</h1>
+                        <p class="font-normal text-xl text-gray-400 leading-relaxed mb-12">Únete a nosotros en este viaje hacia el bienestar<br> emocional y la conexión significativa. Estamos listos <br>para ser ese compañero confiable que transforma cada día<br> 
+                            en una historia llena de emociones y recuerdos preciosos</p>
+                        <p class="font-normal text-l text-gray-400 leading-relaxed mb-12">¡Descúbrelo ahora y haz que cada momento cuente!</p>
+                        {%if request.user.is_authenticated%}
+                        <button class="px-6 py-4 bg-gray-800 text-white font-semibold text-lg rounded-xl hover:bg-gray-400 transition ease-in-out duration-500"><a href="{%url 'logout'%}">Salir</a></button>
+                        {% else %}
+                        <button class="px-6 py-4 bg-gray-800 text-white font-semibold text-lg rounded-xl hover:bg-gray-400 transition ease-in-out duration-500"><a href="{% url 'register' %}">Registrate</a></button>
+                        {% endif %}
+
+                </div>
+                <div class="hidden xl:block xl:absolute z-0 top-0 right-0">
+                    <img src="{% static 'img/principal1.png'%} " alt="Home img">
+                </div>
+            </div>
+        </div> <!-- container.// -->
+    </section>
+    <!-- home section //nd -->
+
+    <!-- content section -->
+    <section class="bg-white py-5 md:py-16 xl:relative">
+
+        <div class="container max-w-screen-xl mx-auto">
+
+        <div class="flex flex-col xl:flex-row justify-end">
+
+                <div class="hidden xl:block xl:absolute left-0 bottom-0 w-full">
+                    <img src="{% static 'img/principal2.png'%} " alt="señora">
+                </div>
+                <div class="">
+                    <h1 class="font-semibold primario text-4xl md:text-5xl text-center leading-normal mb-20">Te brindamos numerosas 
+                        <br>facilidades </h1>
+                    <p class="font-normal text-gray-400 text-md md:text-xl text-center mb-16">Tu Asistente Virtual ajustará sus interacciones para ofrecerte consuelo y entretenimiento, <br>
+                        por supuesto, los recuerdos son tesoros que atesoramos con cariño</p>
+                    <div class="flex flex-col md:flex-row justify-center xl:justify-start space-x-4 mb-20">
+                        <div class="px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0">
+                            <img src="{% static 'img/calendario.png'%}" alt="calendario img" class="w-20">
+                        </div>
+                        
+                        <div class="text-center md:text-left">
+                            <h4 class="font-semibold secundario text-2xl mb-2">Recordatorio de Tareas Diarias</h4>
+                            <p class="font-normal text-gray-400 text-l leading-relaxed">El asistente virtual ayuda a las personas con Alzheimer a recordar
+                                y realizar<br> sus tareas diarias, proporcionando orientación y recordatorios personalizados.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-center xl:justify-start space-x-4 mb-20">
+                        <div class="px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0">
+                            <img src="{% static 'img/felicidad.png'%}" alt="Felicidad" class="w-20">
+                        </div>
+
+                        <div class="text-center md:text-left">
+                            <h4 class="font-semibold secundario text-2xl mb-2">Detección Emocional</h4>
+                            <p class="font-normal text-gray-400 text-l leading-relaxed">Utilizando la tecnología de identificación facial, el asistente puede reconocer 
+                                <br>las emociones de los usuarios. Si detecta tristeza, puede ofrecer actividades<br> y juegos diseñados para mejorar el estado de ánimo.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-center xl:justify-start space-x-4">
+                        <div class="px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0">
+                            <img src="{% static 'img/entretenimiento.png'%}" alt="entretenimiento" class="w-20">
+                        </div>
+
+                        <div class="text-center md:text-left">
+                            <h4 class="font-semibold secundario text-2xl mb-2">Entretenimiento Terapéutico</h4>
+                            <p class="font-normal text-gray-400 text-l leading-relaxed">El proyecto incluye funciones de entretenimiento, como juegos interactivos y la 
+                                <br>reproducción de música seleccionada para mejorar el bienestar emocional <br>de los usuarios.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+        </div>
+
+        </div> <!-- container.// -->
+
+    </section>
+    <!-- content section //end -->
+
+    <!-- video section -->
+    <section>
+        <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="flex items-center justify-center ">
+                <div class="  mt-10 text-center ">
+                        <h1 class="font-semibold mb-20  text-4xl md:text-6xl lg:text-6xl primario leading-normal mb-10">¿Por que?</h1>
+                        <iframe width="960" height="615" src="https://www.youtube.com/embed/GYvLNE0Hhak?si=FEx0SqRzmvm4IIpb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div> <!-- container.// -->
+    </section>
+        <!-- video section/end  -->
+
+    <div style="position:fixed; right: 10px; bottom:0; width:25%;" class="  bg-gray-100 flex flex-col">
+        <span class="material-symbols-outlined i-chatbot bg-gray-700 " style="background-color:#4E84A6; padding:10px; color:white; bottom: 15px; right: 15px; position:fixed; border-radius: 5px; cursor: pointer; font-size:30px">
+            smart_toy
+        </span>
+    
+        <div class="chatbot" style="display:none">
+            <div style="display:flex; width:100%" class="bg-gray-700 font-semibold text-4xl text-white p-4 text-center rounded">
+                <h1 class="lilly">Lilly</h1>
+                <span class="material-symbols-outlined close-chatbot" style="width:50%; text-align:right; margin:auto; cursor: pointer">
+                    close
+                </span>
+            </div>
+    
+            <div id="conversation" style="height: 250px;overflow-y:scroll; bottom: 0;" class="flex-1 p-4 bg-white mt-4 rounded">
+                <div class="items-start mb-2">
+                    <div class="bg-gray-200 p-2 rounded-tl rounded-tr rounded-br">
+                        <p class="text-gray-800">Hola soy Lilly, escribe algo para comenzar...</p>
+                    </div>
+                    {% if texto_grabado %}
+                    <div class="flex items-end mb-2">
+                        <div class="bg-gray-800 text-white p-2 rounded-tl rounded-tr rounded-bl self-end">
+                            <p>{{texto_grabado}}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-2">
+                        <div class="bg-gray-300 p-2 rounded-tl rounded-tr rounded-br">
+                            <p class="text-gray-800">Lilly: {{respuesta}}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="pl-4 flex">
+                <form method="post" class="formText">
+                {% csrf_token %}
+                    <input type="text" class="input_message " name="message" placeholder="Escribe un mensaje">
+                    <button type="submit" name="submit_message" value="Mandar" class="bg-gray-800 hover:bg-gray-400  text-white p-2 rounded transition duration-300">
+                        <span class="material-symbols-outlined">
+                        send
+                        </span>
+                    </button>
+                </form>
+                <form method="post" id="formAudio" class="pl-3">
+                        {% csrf_token %}
+                        <button name="formAudio" type="submit" class="bg-gray-800 hover:bg-gray-400 text-white p-2 rounded transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                                Grabar Mensaje
+                            </svg>
+                        </button>
+                    </form>
+
+            </div>
+            
+        </div>
+    
+    
+    
+        <script>
+            document.querySelector(".i-chatbot").addEventListener("click", () => {
+                document.querySelector(".i-chatbot").style.display = 'none'
+                document.querySelector(".chatbot").style.display = 'block'
+            })
+            document.querySelector(".close-chatbot").addEventListener("click", () => {
+                document.querySelector(".i-chatbot").style.display = 'block'
+                document.querySelector(".chatbot").style.display = 'none'
+            })
+    
+    
+            document.querySelector(".formText").addEventListener("submit", (e) => {
+                e.preventDefault();
+                let message = e.target.message
+                fetch(`http://127.0.0.1:8000/api/chatbot/${message.value}`)
+                .then(response => response.json())
+                .then(json => {
+                    respuesta = json["respuesta"]
+                    if (respuesta == '../juegos'){
+                        location.href = '../juegos'
+                    } else if (respuesta == '../calendario'){
+                        location.href = '../calendario'
+                    } else if (respuesta.includes("http://127.0.0.1:8000/api/spotify/")) {
+                        let category = respuesta.substr(0, respuesta.indexOf(":"))
+                        let link_music = respuesta.substr(respuesta.indexOf(":")+1)
+    
+                        const url = "https://accounts.spotify.com/api/token";
+                        const client_id = "6f6a277ceb024282bd6b71a5ec18d995";
+                        const client_secret = "67038f5e05ec4e13873b3cc68ff2d52d";
+    
+                        const data = new URLSearchParams();
+                        data.append("grant_type", "client_credentials");
+                        data.append("client_id", client_id);
+                        data.append("client_secret", client_secret);
+    
+                        fetch(url, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                            },
+                            body: data,
+                            })
+                        .then(response => response.json())
+                        .then(data => {
+                            fetch(link_music, {
+                                method: "GET",
+                                headers: {
+                                    "Authorization": `Bearer ${data.access_token}`
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(respuesta => { 
+                                document.getElementById("conversation").insertAdjacentHTML('beforeend', `
+                                    <div class="flex items-start mb-2" style="display:flex; flex-direction:column">
+                                        <div class="flex items-end mb-2">
+                                            <div class="bg-gray-800 text-white p-2 rounded-tl rounded-tr rounded-bl self-end">
+                                                <p>${json["message"]}</p>
+                                            </div>
+                                        </div>
+                                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/${category}/${respuesta[`${category}s`]["items"][0].id}?utm_source=generator" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>     
+                                        <p>¡Inicia sesión en Spotify para escuchar la pista completa!</p>       
+                                    </div>
+                                `)
+                            })
+                        })
+                    } else if (respuesta == 'contacto de emergencia'){
+                        fetch('http://127.0.0.1:8000/api/contact/')
+                        .then(response => response.json())
+                        .then(contact => {
+                            if (contact == 'No has cargado a ningún contacto'){
+                                contact_json = contact
+                            } else {
+                                contact_json = `
+                                </br>
+                                    Nombre: ${contact["firstname"]} </br>
+                                    Apellido: ${contact["lastname"]} </br>
+                                    Teléfono: ${contact["number_phone"]} </br>
+                                    Dirección: ${contact["address"]} </br>
+                                    Email: ${contact["email"]}
+                                `
+                            }
+                        
+                            document.getElementById("conversation").insertAdjacentHTML('beforeend', `
+                            <div class="flex items-end mb-2">
+                                <div class="bg-gray-800 text-white p-2 rounded-tl rounded-tr rounded-bl self-end">
+                                    <p>${json["message"]}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-2">
+                                <div class="bg-gray-300 p-2 rounded-tl rounded-tr rounded-br">
+                                    <p class="text-gray-800">Lilly: ${contact_json}</p>
+                                </div>
+                            </div>
+                        `)
+                        })
+                    } else {
+                        document.getElementById("conversation").insertAdjacentHTML('beforeend', `
+                            <div class="flex items-end mb-2">
+                                <div class="bg-gray-800 text-white p-2 rounded-tl rounded-tr rounded-bl self-end">
+                                    <p>${json["message"]}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-2">
+                                <div class="bg-gray-300 p-2 rounded-tl rounded-tr rounded-br">
+                                    <p class="text-gray-800">Lilly: ${json["respuesta"]}</p>
+                                </div>
+                            </div>
+                        `)
+                    }
+                    message.focus()
+                    e.target.submit_message.blur()
+                    e.target.reset()
+                })
+            });
+            
+        </script>
+    </div>
+</body>
+{% endblock %}

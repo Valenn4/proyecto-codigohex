@@ -1,0 +1,138 @@
+{% extends 'index.html' %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-MrNyZJ01eAPop4GgmiHExO+gsr1i+A8nqJ7iwl5u8Zf/DJU86qF9XT7It+bivFV6" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECUERDA ME/TE</title>
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+</head>
+
+{% block content %}
+<body class="font-body">
+
+    <div class="centrado mb-20 md:mt-30 lg:mt-40">
+        <h3 class="font-semibold primario text-6xl px-6 ">Datos de usuario</h3>
+    </div> 
+    <div class="container pl-20 max-w-screen-xl mx-auto px-4"> 
+        <div class=" ">
+                    <form name="form_user" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+ 
+                        <div class="flex pl-20 md:flex-row flex-col mt-30 ">
+                            <div class=" w-1/3  md:w-1/2 ">
+                                <img style="width:200px" src="../media/{{request.user.avatar}}">
+                                <input type="file" class="mt-10 px-2 py-2 bg-gray-800 text-white font-semibold text-l rounded-xl hover:bg-gray-400 transition ease-in-out duration-500 " id="avatar" name="avatar" accept="image/*">
+                            </div>
+                            <div class="w-1/3  md:w-1/2">
+                                    <p>
+                                    <label for="nombre" class="block font-semibold secundario text-xl mt-10 lg:mt-0">Nombre:</label>
+                                    <input type="text" id="nombre" name="first_name" value="{{request.user.first_name}}" disabled class=" py-2 px-4 mt-2 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="apellido" class="block font-semibold secundario text-xl mt-10">Apellido:</label>
+                                    <input type="text" id="apellido" name="last_name" value="{{request.user.last_name}}" disabled class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="fecha" class="block font-semibold secundario text-xl mt-10">Fecha de nacimiento:</label>
+                                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    <p class="value_fecha" style="display:none">{{request.user.fecha_nacimiento}}</p>
+                                    </p>
+                                    <p>
+                                        <label for="direccion" class="block font-semibold secundario mt-10 text-xl">Dirección:</label>
+                                        <input type="text" id="direccion" name="direccion" value="{{request.user.direccion}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                        <label for="codigo_postal" class="block font-semibold secundario mt-10 text-xl">Codigo postal:</label>
+                                        <input type="text" id="codigo_postal" name="codigo_postal" value="{{request.user.codigo_postal}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                            </div>
+                            <div class="w-1/3 md:w-1/2 "> 
+                                   
+                                    <p>
+                                    <label for="medicacion" class="block font-semibold secundario mt-10 lg:mt-0 text-xl">Medicación:</label>
+                                    <input type="text" id="medicacion" name="medicacion" value="{{request.user.medicacion}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="telefono" class="block font-semibold secundario text-xl mt-10">Número de telefono:</label>
+                                    <input type="number" id="telefono" name="numero_telefono" value="{{request.user.numero_telefono}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="opciones" class="block font-semibold secundario text-xl mt-10">Selecciona una opción:</label>
+                                    <select id="etapa" name="etapa" class="rounded-md py-2 px-4 mt-3 border focus:outline-none focus:border-blue-500" >
+                                        {% for el in etapas_alzheimer %}
+                                            {% if el == request.user.etapa %}
+                                                {% if request.user.etapa != None %}
+                                                <option value="{{request.user.etapa}}" selected>{{request.user.etapa}}</option>
+                                                {% endif %}
+                                            {% else %}
+                                            <option value="{{el}}">{{el}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    </p>
+                                    <p>
+                                    <label for="email"class="block font-semibold secundario text-xl mt-10">Correo Electrónico:</label>
+                                    <input type="email" id="email" name="email" value="{{request.user.email}}" disabled class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                            </div>
+                        </div>
+                        <div class="centrado my-20">
+                            <h3 class="font-semibold primario text-6xl "> Datos de contacto </h3>
+                        </div>
+                        <div class="flex pl-20 md:flex-row flex-col  mt-30">
+                            <div class=" w-1/3 md:w-1/2">
+                                {% if contact_user == '' %}
+                                <img style="width:200px" src="../media/avatar/contacts/user.jpg">
+                                {% else %}
+                                    {% if contact_user.avatar != '' %}
+                                    <img style="width:200px" src="../media/{{contact_user.avatar}}">
+                                    {% else %}
+                                    <img style="width:200px" src="../media/avatar/contacts/user.jpg">
+                                    {% endif %}
+                                {% endif %}
+                                <input type="file" class=" mt-10 px-2 py-2 bg-gray-800 text-white font-semibold text-l rounded-xl hover:bg-gray-400 transition ease-in-out duration-500 " id="avatar_contact" name="avatar_contact" accept="image/*">
+                            </div>
+                            <div class="w-1/3 md:w-1/2">
+                                <p>
+                                <label for="nombrecontscto" class="block font-semibold secundario text-xl mt-10 lg:mt-0">Nombre:
+                                </label>
+                                <input type="text" id="firstname_contact" name="firstname_contact" value="{{contact_user.firstname}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500"> 
+                                </p>
+                                <p>
+                                <label for="apellidocontacto" class="block font-semibold secundario text-xl mt-10">Apellido:</label>
+                                <input type="text" id="lastname_contact" name="lastname_contact" value="{{contact_user.lastname}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                </p>
+                                <p>
+                                <label for="telefonocontacto" class="block font-semibold secundario text-xl mt-10">Número de telefono:</label>
+                                <input type="number" id="phone_contact" name="phone_contact" pattern="[0-9]+" value="{{contact_user.number_phone}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                </p>
+                                
+                            </div>
+                            <div class="w-1/3 md:w-1/2 ">
+                                <p>
+                                    <label for="direccioncontacto" class="block font-semibold secundario mt-10 lg:mt-0 text-xl">Dirección:</label>
+                                    <input type="text" id="address_contact" name="address_contact" value="{{contact_user.address}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                                    <p>
+                                    <label for="emailcontacto" class="block font-semibold secundario text-xl mt-10">Correo Electrónico:</label>
+                                    <input type="email" id="email_contact" name="email_contact" value="{{contact_user.email}}" class=" py-2 px-4 mt-3 border rounded-md focus:outline-none focus:border-blue-500">
+                                    </p>
+                            </div>
+                        </div>
+                    <div class="centrado my-20">
+                    <input type="submit" class=" bg-gray-800 font-semibold text-white text-2xl py-4 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:border-blue-700 mt-10 " value="Actualizar">
+                    </div>
+                </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fecha_nacimiento').valueAsDate = new Date(document.querySelector(".value_fecha").innerHTML);
+    </script>
+</body>
+{% endblock %}

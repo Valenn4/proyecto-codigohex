@@ -1,0 +1,43 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RECUERDA ME/TE</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://unpkg.com/feather-icons/dist/feather.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    </head>
+<style>
+    .alert_activity{
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 15px;
+        background-color: tomato;
+        color: white;
+        font-family: sans-serif;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
+<body>
+    
+    {% include 'core/header.html' %}
+    <p class="id_user" style="display: none;">{{request.user.id}}</p>
+    <p class="alert_feeling" style="display: none; position: fixed; top: 20px; left: 20px; background-color: tomato; color: white; padding: 10px;"></p>
+    <div class="alert_activity"></div>
+    {% block content %}
+    
+    {% endblock %}
+    {% include 'core/footer.html' %}
+
+    <script src="{% static 'js/indexx.js' %}"></script>
+</body>
+</html>
