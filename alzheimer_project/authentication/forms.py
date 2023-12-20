@@ -1,15 +1,15 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from authentication.models import User
+from django.contrib.auth.models import User
 
 
 class FormRegister(UserCreationForm):
     error_messages = {
         'exists_user': 'Ya existe un usuario con el mismo nombre',
-        "password_mismatch": "Las contraseñas no coinciden"
+        "password_mismatch": "Las contraseñas nocoinciden"
     }
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['username', 'password1', 'password2', 'email']
 
 class FormLogin(AuthenticationForm):
     error_messages = {
