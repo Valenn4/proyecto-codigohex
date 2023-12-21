@@ -6,7 +6,11 @@ import tensorflow as tf
 
 
 def object(obj):
+<<<<<<< Updated upstream
     loaded_model = tf.keras.models.load_model('C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/detect_object/Cargas_modelo_Objetos.h5')
+=======
+    loaded_model = tf.keras.models.load_model(r'C:\Users\grazi\proyecto-codigohex\alzheimer_project\detect_object\Cargas_modelo_Objetos.h5')
+>>>>>>> Stashed changes
 
     # Cargar la imagen
     ruta_imagen = obj

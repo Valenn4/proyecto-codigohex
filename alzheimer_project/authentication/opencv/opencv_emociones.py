@@ -5,7 +5,11 @@ import tensorflow as tf
 dict_emociones = {0: 'Ira', 1: 'Asco', 2: 'Tristeza', 3: 'Felicidad', 4: 'Sorpresa'}
 
 # Cargar el clasificador de rostros
+<<<<<<< Updated upstream
 loaded_model = tf.keras.models.load_model(r'C:\Users\mati\Desktop\proyecto-codigohex\alzheimer_project\authentication\opencv\Modelocompleto_deteccionEmociones01.h5')
+=======
+loaded_model = tf.keras.models.load_model(r'C:\Users\grazi\proyecto-codigohex\alzheimer_project\authentication\opencv\Modelocompleto_deteccionEmociones01.h5')
+>>>>>>> Stashed changes
 cascada_rostro = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 def detectar_emociones(imagen):
@@ -39,7 +43,7 @@ def detectar_rostros(imagen):
     return rostros
 
 def detectar_emociones_en_rostro(imagen):
-    net = cv2.dnn.readNetFromCaffe("C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/authentication/opencv/opencv_face_detector.prototxt", 'C:/Users/mati/Desktop/proyecto-codigohex/alzheimer_project/authentication/opencv/res10_300x300_ssd_iter_140000.caffemodel')
+    net = cv2.dnn.readNetFromCaffe(r"C:\Users\grazi\proyecto-codigohex\alzheimer_project\authentication\opencv\opencv_face_detector.prototxt", r'C:\Users\grazi\proyecto-codigohex\alzheimer_project\authentication\opencv\res10_300x300_ssd_iter_140000.caffemodel')
 
     # Parametros del modelo
     # Tamaño
